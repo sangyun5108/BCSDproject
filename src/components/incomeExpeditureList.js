@@ -6,7 +6,7 @@ const IncomeExpeditureList = ({lists}) => {
     const mapToList = () => {
         return lists.map((list,index)=>{
             if(index>0){
-                return (
+                return(
                     <li key={index}>{list.label} {list.amount}</li>
                 );
             }
@@ -14,7 +14,7 @@ const IncomeExpeditureList = ({lists}) => {
     }
 
     return(
-        <>
+        <>  
             <h3>income and expediture List</h3>
             {mapToList()}
         </>
