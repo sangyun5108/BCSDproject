@@ -52,7 +52,7 @@ const ShowList = ({sumIncome,sumExpediture}) => {
     return(
         <>
             <button onClick={clickBlueBtn}>+{sumIncome}</button>
-            <button onClick={clickRedBtn}>{sumExpediture==0?`-${sumExpediture}`:`${sumExpediture}`}</button>
+            <button onClick={clickRedBtn}>{sumExpediture===0?`-${sumExpediture}`:`${sumExpediture}`}</button>
             <div>{showRightList()}</div>
         </>
     )

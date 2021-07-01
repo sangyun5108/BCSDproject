@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-const ExpeditureList = ({sum,lists}) => {
+const ExpeditureList = ({lists}) => {
 
     const newlists = lists.filter((list)=>{
         return list.kind==='expediture';
@@ -22,7 +22,6 @@ const ExpeditureList = ({sum,lists}) => {
 
 const mapStateToProps = ({sumExpediture,list}) => {
     return{
-        sum:sumExpediture,
         lists:list
     }
 }
