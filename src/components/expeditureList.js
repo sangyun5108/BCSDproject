@@ -1,10 +1,13 @@
-import React from 'react';
+import React,{useContext} from 'react';
 import {connect} from 'react-redux';
+import {monthContext} from './monthList';
 
 const ExpeditureList = ({lists}) => {
 
+    const month = useContext(monthContext);
+
     const newlists = lists.filter((list)=>{
-        return list.kind==='expediture';
+        return list.kind==='expediture' && list.month===month;
     })
 
     const mapToList = () => {
@@ -14,13 +17,14 @@ const ExpeditureList = ({lists}) => {
     } 
     return(
         <>
+            <h3>{month}</h3>
             <h3>ExpeditureList</h3>
             {mapToList()}
         </>
     );
 }
 
-const mapStateToProps = ({sumExpediture,list}) => {
+const mapStateToProps = ({list}) => {
     return{
         lists:list
     }

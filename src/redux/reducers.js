@@ -7,7 +7,8 @@ const initialState = {
         {
             amount:0,
             label:'',
-            kind:''
+            kind:'',
+            month:''
         }
     ]
 }
@@ -23,7 +24,8 @@ export const incomeExpeditureReducer = (state=initialState,action) => {
                     {
                         amount:action.amount,
                         label:action.label,
-                        kind:action.kind
+                        kind:action.kind,
+                        month:action.month
                     }
                 ]
             }
@@ -37,7 +39,8 @@ export const incomeExpeditureReducer = (state=initialState,action) => {
                         {
                             amount:-1*Number(action.amount),
                             label:action.label,
-                            kind:action.kind
+                            kind:action.kind,
+                            month:action.month
                         }
                     ]
                 }

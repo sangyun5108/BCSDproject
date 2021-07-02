@@ -4,11 +4,11 @@ import ExpeditureList from './expeditureList';
 import IncomeExpeditureList from './incomeExpeditureList';
 import { connect } from 'react-redux';
 
-const ShowList = ({sumIncome,sumExpediture,month}) => {
+const ShowList = ({sumIncome,sumExpediture}) => {
 
     const [blueBtn,setBlueBtn] = useState(false);
     const [redBtn,setRedBtn] = useState(false);
-
+    
     const clickBlueBtn = () => {
         setBlueBtn(true);
         setRedBtn(false);
@@ -50,7 +50,7 @@ const ShowList = ({sumIncome,sumExpediture,month}) => {
     }
 
     return(
-        <>  {console.log(month)}
+        <>  
             <button onClick={clickBlueBtn}>+{sumIncome}</button>
             <button onClick={clickRedBtn}>{sumExpediture===0?`-${sumExpediture}`:`${sumExpediture}`}</button>
             <div>{showRightList()}</div>

@@ -1,5 +1,7 @@
-import React,{useState,useEffect} from 'react';
+import React,{useState,createContext} from 'react';
 import ShowList from './showList';
+
+export const monthContext = createContext('Hello');
 
 const MonthList = () => {
 
@@ -16,7 +18,6 @@ const MonthList = () => {
             setMonth(months[index+1]);
         }else{
             if(direction==='Left'){
-                console.log('Left');
                 if(index===0){
                     index=months.length;
                 }
@@ -26,11 +27,14 @@ const MonthList = () => {
     }
 
     return(
-        <>
+        <>  
+            {console.log(monthContext)}
             <button onClick={showMonth}>Left</button>
             <span>{month}</span>
             <button onClick={showMonth}>Right</button>
-            <div><ShowList month={month}/></div>
+            <monthContext.Provider value={month}>
+                <div><ShowList/></div>
+            </monthContext.Provider>
         </>
     );
 }
