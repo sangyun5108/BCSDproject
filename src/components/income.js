@@ -9,6 +9,7 @@ const Income = ({income}) => {
     const[amount,setAmount] = useState(0);
     const[label,setLabel] = useState('');
     const kind = 'income';
+    const month = 'July';
 
     const showDate = () => {
         const date = new Date();
@@ -28,7 +29,7 @@ const Income = ({income}) => {
 
     const clickDone = (e) =>{
         e.preventDefault();
-        income(amount,label,kind);
+        income(amount,label,kind,month);
         console.log(store.getState())
     }
 
@@ -47,7 +48,7 @@ const Income = ({income}) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        income: (amount,label,kind) => dispatch(income(amount,label,kind))
+        income: (amount,label,kind,month) => dispatch(income(amount,label,kind,month))
     }
 }
 

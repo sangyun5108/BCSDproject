@@ -9,6 +9,7 @@ const Expediture = ({expediture}) => {
     const[amount,setAmount] = useState(0);
     const[label,setLabel] = useState('');
     const kind = "expediture";
+    const month = "July";
 
     const showDate = () => {
         const date = new Date();
@@ -28,7 +29,7 @@ const Expediture = ({expediture}) => {
 
     const clickDone = (e) =>{
         e.preventDefault();
-        expediture(amount,label,kind);
+        expediture(amount,label,kind,month);
         console.log(store.getState());
     }
 
@@ -47,7 +48,7 @@ const Expediture = ({expediture}) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        expediture: (amount,label,kind) => dispatch(expediture(amount,label,kind))
+        expediture: (amount,label,kind,month) => dispatch(expediture(amount,label,kind,month))
     }
 }
 

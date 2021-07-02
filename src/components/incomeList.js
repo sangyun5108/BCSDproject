@@ -1,11 +1,17 @@
-import React from 'react';
+import React,{useContext} from 'react';
 import {connect} from 'react-redux';
+import { monthContext } from './monthList';
 
-const IncomeList = ({sum,lists}) => {
+const IncomeList = ({lists}) => {
 
+    const month = useContext(monthContext);
+
+    console.log(lists);
     const newlists = lists.filter((list)=>{
-        return list.kind==='income';
+        return list.kind==='income'&&list.month===month;
     })
+
+    console.log(newlists);
 
     const mapToList = () => {
         return newlists.map((list,index)=>{
@@ -17,17 +23,17 @@ const IncomeList = ({sum,lists}) => {
     }
 
     return(
-        <>
+        <>  
+            <h3>{month}</h3>
             <h3>Income List</h3>
             {mapToList()}
         </>
     );
 }
 
-const mapStateToProps = ({sumIncome,list}) => {
+const mapStateToProps = ({list}) => {
     return {
-        lists:list,
-        sum:sumIncome
+        lists:list
     }
 }
 
