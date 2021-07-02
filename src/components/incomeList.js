@@ -5,13 +5,9 @@ import { monthContext } from './monthList';
 const IncomeList = ({lists}) => {
 
     const month = useContext(monthContext);
-
-    console.log(lists);
     const newlists = lists.filter((list)=>{
         return list.kind==='income'&&list.month===month;
     })
-
-    console.log(newlists);
 
     const mapToList = () => {
         return newlists.map((list,index)=>{

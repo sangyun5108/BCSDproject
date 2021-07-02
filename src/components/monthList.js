@@ -28,7 +28,6 @@ const MonthList = () => {
 
     return(
         <>  
-            {console.log(monthContext)}
             <button onClick={showMonth}>Left</button>
             <span>{month}</span>
             <button onClick={showMonth}>Right</button>

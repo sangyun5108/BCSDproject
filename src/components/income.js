@@ -1,8 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import { useState } from 'react';
-import {income,} from '../redux/actions';
-import store from '../redux/store';
+import {income} from '../redux/actions';
 
 const Income = ({income}) => {
 
@@ -30,7 +29,6 @@ const Income = ({income}) => {
     const clickDone = (e) =>{
         e.preventDefault();
         income(amount,label,kind,month);
-        console.log(store.getState())
     }
 
     return(
