@@ -2,7 +2,6 @@ import React from 'react';
 import {connect} from 'react-redux';
 import { useState } from 'react';
 import {expediture} from '../redux/actions';
-import store from '../redux/store';
 
 const Expediture = ({expediture}) => {
 
@@ -30,7 +29,6 @@ const Expediture = ({expediture}) => {
     const clickDone = (e) =>{
         e.preventDefault();
         expediture(amount,label,kind,month);
-        console.log(store.getState());
     }
 
     return(

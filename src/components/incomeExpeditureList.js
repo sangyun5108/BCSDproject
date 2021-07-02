@@ -7,7 +7,6 @@ const IncomeExpeditureList = ({lists}) => {
     const month = useContext(monthContext);
 
     const newlists = lists.filter((list)=>list.month===month)
-    console.log(newlists);
     const mapToList = () => {
         return newlists.map((list,index)=>{
                 return(
