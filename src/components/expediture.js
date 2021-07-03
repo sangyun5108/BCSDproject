@@ -10,6 +10,7 @@ const Expediture = ({expediture}) => {
     const nowmonth = date.getMonth()<10?`0${date.getMonth()+1}`:`${date.getMonth()}`;
     const nowdate = date.getDate()<10?`0${date.getDate()}`:`${date.getDate()}`;
     const months = ['Jan','Feb','Mar','Apr','May','Jun','July','Aug','Sep','Oct','Nov','Dec'];
+    let id = 100;
 
     const[amount,setAmount] = useState(0);
     const[label,setLabel] = useState('');
@@ -42,7 +43,8 @@ const Expediture = ({expediture}) => {
     const clickDone = (e) =>{
         e.preventDefault();
         const exchangeMonth = months[Number(inputMonth)-1];
-        expediture(amount,label,KIND,inputYear,exchangeMonth,inputDate);
+        expediture(amount,label,KIND,inputYear,exchangeMonth,inputDate,id);
+        id++;
     }
 
     return(
@@ -62,7 +64,7 @@ const Expediture = ({expediture}) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        expediture: (amount,label,kind,year,month,date) => dispatch(expediture(amount,label,kind,year,month,date))
+        expediture: (amount,label,kind,year,month,date,id) => dispatch(expediture(amount,label,kind,year,month,date,id))
     }
 }
 

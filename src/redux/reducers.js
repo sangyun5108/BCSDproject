@@ -8,7 +8,8 @@ const initialState = {
             kind:'',
             year:'',
             month:'',
-            date:''
+            date:'',
+            id:0
         }
     ]
 }
@@ -25,8 +26,8 @@ export const incomeExpeditureReducer = (state=initialState,action) => {
                         kind:action.kind,
                         year:action.year,
                         month:action.month,
-                        date:action.date
-
+                        date:action.date,
+                        id:action.id
                     }
                 ]
             }
@@ -41,7 +42,8 @@ export const incomeExpeditureReducer = (state=initialState,action) => {
                             kind:action.kind,
                             year:action.year,
                             month:action.month,
-                            date:action.date
+                            date:action.date,
+                            id:action.id
                         }
                     ]
                 }

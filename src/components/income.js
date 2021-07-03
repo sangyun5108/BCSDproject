@@ -10,6 +10,7 @@ const Income = ({income}) => {
     const nowmonth = date.getMonth()<10?`0${date.getMonth()+1}`:`${date.getMonth()}`;
     const nowdate = date.getDate()<10?`0${date.getDate()}`:`${date.getDate()}`;
     const months = ['Jan','Feb','Mar','Apr','May','Jun','July','Aug','Sep','Oct','Nov','Dec'];
+    let id = 0;
 
     const[amount,setAmount] = useState(0);
     const[label,setLabel] = useState('');
@@ -42,7 +43,8 @@ const Income = ({income}) => {
     const clickDone = (e) =>{
         e.preventDefault();
         const exchangeMonth = months[Number(inputMonth)-1];
-        income(amount,label,KIND,inputYear,exchangeMonth,Number(inputDate));
+        income(amount,label,KIND,inputYear,exchangeMonth,Number(inputDate),id);
+        id++;
     }
 
     return(
@@ -62,7 +64,7 @@ const Income = ({income}) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        income: (amount,label,kind,year,month,date) => dispatch(income(amount,label,kind,year,month,date))
+        income: (amount,label,kind,year,month,date,id) => dispatch(income(amount,label,kind,year,month,date,id))
     }
 }
 

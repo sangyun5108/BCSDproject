@@ -1,6 +1,6 @@
 import {INCOME, EXPEDITURE} from './types';
 
-export const income = (amount,label,kind,year,month,date) => {
+export const income = (amount,label,kind,year,month,date,id) => {
     return {
         type:INCOME,
         amount,
@@ -12,7 +12,7 @@ export const income = (amount,label,kind,year,month,date) => {
     }
 }
 
-export const expediture = (amount,label,kind,year,month,date) => {
+export const expediture = (amount,label,kind,year,month,date,id) => {
     return {
         type:EXPEDITURE,
         amount,

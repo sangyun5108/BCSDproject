@@ -1,15 +1,10 @@
-import React,{useState,useContext} from 'react';
-import IncomeList from './incomeList';
-import ExpeditureList from './expeditureList';
-import IncomeExpeditureList from './incomeExpeditureList';
+import React,{useState} from 'react';
 import { connect } from 'react-redux';
-import { monthContext } from './monthList';
 
-const ShowList = ({lists}) => {
+const ShowList = ({lists,month}) => {
 
     const [blueBtn,setBlueBtn] = useState(false);
     const [redBtn,setRedBtn] = useState(false);
-    const month = useContext(monthContext);
     
     const clickBlueBtn = () => {
         setBlueBtn(true);
@@ -29,27 +24,35 @@ const ShowList = ({lists}) => {
         }
     }
 
+    const makeList = (type) => {
+        let newLists;
+        if(type==='income'||type==='expediture'){
+            newLists = lists.filter((list)=>list.kind===type&&list.month===month)
+        }else{
+            newLists = lists.filter((list)=>list.month===month)
+        }
+        return (
+              <>
+                <h2>{month}</h2>
+                <h3>{type}</h3>
+                {newLists.map((list,index)=>{
+                    return(
+                        <li key={index}>{list.label} {list.amount}</li>
+                    )
+                })}
+              </>
+           );
+    }//종류에따른 다른 리스트를 return해주는 함수
+
     const showRightList = () => {
         if(blueBtn===true){
-            return(
-                <>
-                    <IncomeList/>
-                </>
-            )
+            return makeList('income')
         }else if(redBtn===true){
-            return(
-                <>
-                    <ExpeditureList/>
-                </>
-            )
+            return makeList('expediture');
         }else if(blueBtn===false && redBtn===false){
-            return(
-                <>
-                    <IncomeExpeditureList/>
-                </>
-            )
+            return makeList('incomeExpediture');
         }
-    }
+    }//버튼에 따른 필요한 함수 실행
 
     const sumIncome = () => {
 
@@ -83,8 +86,10 @@ const ShowList = ({lists}) => {
 
     return(
         <> 
-            <button onClick={clickBlueBtn}>+{sumIncome()}</button>
-            <button onClick={clickRedBtn}>-{sumExpediture()}</button>
+            <div>
+                <button onClick={clickBlueBtn}>+{sumIncome()}</button>
+                <button onClick={clickRedBtn}>-{sumExpediture()}</button>
+            </div>
             <div>{showRightList()}</div>
         </>
     )
