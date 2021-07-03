@@ -3,8 +3,8 @@ import {connect} from 'react-redux';
 import { monthContext } from './monthList';
 
 const IncomeList = ({lists}) => {
-
     const month = useContext(monthContext);
+
     const newlists = lists.filter((list)=>{
         return list.kind==='income'&&list.month===month;
     })
@@ -13,7 +13,9 @@ const IncomeList = ({lists}) => {
         return newlists.map((list,index)=>{
             
                 return(
-                    <li key={index}>{list.label} {list.amount}</li>
+                   <div>
+                        <li key={index}>{list.label} {list.amount}</li>
+                   </div>
                 )
         })
     }

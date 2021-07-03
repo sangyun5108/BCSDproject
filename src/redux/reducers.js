@@ -6,7 +6,9 @@ const initialState = {
             amount:0,
             label:'',
             kind:'',
-            month:''
+            year:'',
+            month:'',
+            date:''
         }
     ]
 }
@@ -18,10 +20,13 @@ export const incomeExpeditureReducer = (state=initialState,action) => {
                 list:[
                         ...state.list,
                     {
-                        amount:action.amount,
+                        amount:Number(action.amount),
                         label:action.label,
                         kind:action.kind,
-                        month:action.month
+                        year:action.year,
+                        month:action.month,
+                        date:action.date
+
                     }
                 ]
             }
@@ -34,7 +39,9 @@ export const incomeExpeditureReducer = (state=initialState,action) => {
                             amount:Number(action.amount),
                             label:action.label,
                             kind:action.kind,
-                            month:action.month
+                            year:action.year,
+                            month:action.month,
+                            date:action.date
                         }
                     ]
                 }

@@ -5,7 +5,7 @@ export const monthContext = createContext('Hello');
 
 const MonthList = () => {
 
-    const months = ['Jan','Feb','Mar','Apr','Jun','July','Aug','Sep','Oct','Nov','Dec'];
+    const months = ['Jan','Feb','Mar','Apr','May','Jun','July','Aug','Sep','Oct','Nov','Dec'];
     const [month,setMonth] = useState('Jan');
 
     const showMonth = (e) => {

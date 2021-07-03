@@ -1,22 +1,35 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import { useState } from 'react';
+import { useState} from 'react';
 import {income} from '../redux/actions';
 
 const Income = ({income}) => {
 
+    const date = new Date();
+    const nowyear = date.getFullYear();
+    const nowmonth = date.getMonth()<10?`0${date.getMonth()+1}`:`${date.getMonth()}`;
+    const nowdate = date.getDate()<10?`0${date.getDate()}`:`${date.getDate()}`;
+    const months = ['Jan','Feb','Mar','Apr','May','Jun','July','Aug','Sep','Oct','Nov','Dec'];
+
     const[amount,setAmount] = useState(0);
     const[label,setLabel] = useState('');
-    const kind = 'income';
-    const month = 'July';
+    const[inputYear,setInputYear] = useState(nowyear);
+    const[inputMonth,setInputMonth] = useState(nowmonth);
+    const[inputDate,setInputDate] = useState(nowdate);
+    
+    const KIND= 'income';
 
-    const showDate = () => {
-        const date = new Date();
-        const year = date.getFullYear();
-        const month = date.getMonth()<10?`0${date.getMonth()+1}`:`${date.getMonth()}`;
-        const nowdate = date.getDate()<10?`0${date.getDate()+1}`:`${date.getDate()}`;
-        return `${year}.${month}.${nowdate}`;
-    }
+    const changeYear = (e) => {
+        setInputYear(e.target.value);
+    }//연도 입력시 inputyear state 변경시켜주는 함수
+
+    const changeMonth = (e) => {
+        setInputMonth(e.target.value);
+    }//월 입력시 inputmonth state 변경시켜주는 함수
+
+    const changeDate = (e) => {
+        setInputDate(e.target.value);
+    }//날짜 입력시 inputDate state 변경시켜주는 함수
 
     const changeAmount = (e) => {
         setAmount(e.target.value);
@@ -28,14 +41,17 @@ const Income = ({income}) => {
 
     const clickDone = (e) =>{
         e.preventDefault();
-        income(amount,label,kind,month);
+        const exchangeMonth = months[Number(inputMonth)-1];
+        income(amount,label,KIND,inputYear,exchangeMonth,Number(inputDate));
     }
 
     return(
         <>
             <form>
                 <div>income</div>
-                <div>{showDate()}</div>
+                <input onChange={changeYear} value={inputYear}></input>
+                <input onChange={changeMonth} value={inputMonth}></input>
+                <input onChange={changeDate} value={inputDate}></input>
                 <div><input placeholder="Label" onChange={changeLabel}></input></div>
                 <div><input placeholder="Amount" onChange={changeAmount}></input></div>
                 <button onClick={clickDone}>Done</button>
@@ -46,7 +62,7 @@ const Income = ({income}) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        income: (amount,label,kind,month) => dispatch(income(amount,label,kind,month))
+        income: (amount,label,kind,year,month,date) => dispatch(income(amount,label,kind,year,month,date))
     }
 }
 

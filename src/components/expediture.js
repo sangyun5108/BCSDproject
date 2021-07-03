@@ -5,18 +5,31 @@ import {expediture} from '../redux/actions';
 
 const Expediture = ({expediture}) => {
 
+    const date = new Date();
+    const nowyear = date.getFullYear();
+    const nowmonth = date.getMonth()<10?`0${date.getMonth()+1}`:`${date.getMonth()}`;
+    const nowdate = date.getDate()<10?`0${date.getDate()}`:`${date.getDate()}`;
+    const months = ['Jan','Feb','Mar','Apr','May','Jun','July','Aug','Sep','Oct','Nov','Dec'];
+
     const[amount,setAmount] = useState(0);
     const[label,setLabel] = useState('');
-    const kind = "expediture";
-    const month = "July";
+    const[inputYear,setInputYear] = useState(nowyear);
+    const[inputMonth,setInputMonth] = useState(nowmonth);
+    const[inputDate,setInputDate] = useState(nowdate);
 
-    const showDate = () => {
-        const date = new Date();
-        const year = date.getFullYear();
-        const month = date.getMonth()<10?`0${date.getMonth()+1}`:`${date.getMonth()}`;
-        const nowdate = date.getDate()<10?`0${date.getDate()+1}`:`${date.getDate()}`;
-        return `${year}.${month}.${nowdate}`;
-    }
+    const KIND = 'expediture';
+
+    const changeYear = (e) => {
+        setInputYear(e.target.value);
+    }//연도 입력시 inputyear state 변경시켜주는 함수
+
+    const changeMonth = (e) => {
+        setInputMonth(e.target.value);
+    }//월 입력시 inputmonth state 변경시켜주는 함수
+
+    const changeDate = (e) => {
+        setInputDate(e.target.value);
+    }//날짜 입력시 inputDate state 변경시켜주는 함수
 
     const changeAmount = (e) => {
         setAmount(e.target.value);
@@ -28,14 +41,17 @@ const Expediture = ({expediture}) => {
 
     const clickDone = (e) =>{
         e.preventDefault();
-        expediture(amount,label,kind,month);
+        const exchangeMonth = months[Number(inputMonth)-1];
+        expediture(amount,label,KIND,inputYear,exchangeMonth,inputDate);
     }
 
     return(
         <>
             <form>
                 <div>expediture</div>
-                <div>{showDate()}</div>
+                <input onChange={changeYear} value={inputYear}></input>
+                <input onChange={changeMonth} value={inputMonth}></input>
+                <input onChange={changeDate} value={inputDate}></input>
                 <div><input placeholder="Label" onChange={changeLabel}></input></div>
                 <div><input placeholder="Amount" onChange={changeAmount}></input></div>
                 <button onClick={clickDone}>Done</button>
@@ -46,7 +62,7 @@ const Expediture = ({expediture}) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        expediture: (amount,label,kind,month) => dispatch(expediture(amount,label,kind,month))
+        expediture: (amount,label,kind,year,month,date) => dispatch(expediture(amount,label,kind,year,month,date))
     }
 }
 
