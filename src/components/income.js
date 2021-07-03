@@ -1,8 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import { useState, useEffect} from 'react';
+import { useState} from 'react';
 import {income} from '../redux/actions';
-import store from '../redux/store';
 
 const Income = ({income}) => {
 
@@ -44,12 +43,7 @@ const Income = ({income}) => {
         e.preventDefault();
         const exchangeMonth = months[Number(inputMonth)-1];
         income(amount,label,KIND,inputYear,exchangeMonth,Number(inputDate));
-        console.log(store.getState());
     }
-
-    useEffect(()=>{
-        console.log('랜더링');
-    })
 
     return(
         <>
