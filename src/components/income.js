@@ -3,8 +3,6 @@ import {useDispatch} from 'react-redux';
 import { useState} from 'react';
 import {income} from '../redux/actions';
 
-let id = 1;
-
 const Income = () => {
 
     const date = new Date();
@@ -46,8 +44,7 @@ const Income = () => {
     const clickDone = (e) =>{
         e.preventDefault();
         const exchangeMonth = months[Number(inputMonth)-1];
-        incomeDispatch(income(amount,label,KIND,inputYear,exchangeMonth,Number(inputDate),id));
-        id++;
+        incomeDispatch(income(amount,label,KIND,inputYear,exchangeMonth,Number(inputDate)));
     }
 
     return(

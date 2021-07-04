@@ -3,7 +3,6 @@ import {useDispatch} from 'react-redux';
 import { useState } from 'react';
 import {expediture} from '../redux/actions';
 
-let id = 1000;
 
 const Expediture = () => {
 
@@ -46,8 +45,7 @@ const Expediture = () => {
     const clickDone = (e) =>{
         e.preventDefault();
         const exchangeMonth = months[Number(inputMonth)-1];
-        expeditureDispatch(expediture(amount,label,KIND,inputYear,exchangeMonth,inputDate,id));
-        id++;
+        expeditureDispatch(expediture(amount,label,KIND,inputYear,exchangeMonth,inputDate));
     }
 
     return(
