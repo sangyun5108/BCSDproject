@@ -1,10 +1,13 @@
 import React,{useState} from 'react';
-import { connect } from 'react-redux';
+import {useSelector} from 'react-redux';
+import MakeList from './makeList';
 
-const ShowList = ({lists,month}) => {
+const ShowList = ({month}) => {
 
     const [blueBtn,setBlueBtn] = useState(false);
     const [redBtn,setRedBtn] = useState(false);
+
+    const lists = useSelector((state)=>state.list)
     
     const clickBlueBtn = () => {
         setBlueBtn(true);
@@ -24,33 +27,25 @@ const ShowList = ({lists,month}) => {
         }
     }
 
-    const makeList = (type) => {
-        let newLists;
-        if(type==='income'||type==='expediture'){
-            newLists = lists.filter((list)=>list.kind===type&&list.month===month)
-        }else{
-            newLists = lists.filter((list)=>list.month===month)
-        }
-        return (
-              <>
-                <h2>{month}</h2>
-                <h3>{type}</h3>
-                {newLists.map((list,index)=>{
-                    return(
-                        <li key={index}>{list.label} {list.amount}</li>
-                    )
-                })}
-              </>
-           );
-    }//종류에따른 다른 리스트를 return해주는 함수
-
     const showRightList = () => {
         if(blueBtn===true){
-            return makeList('income')
+            return (
+                <>
+                    <MakeList type={'income'} lists={lists} month={month}/>
+                </>
+            );
         }else if(redBtn===true){
-            return makeList('expediture');
+            return (
+                <>
+                    <MakeList type={'expediture'} lists={lists} month={month}/>
+                </>
+            );
         }else if(blueBtn===false && redBtn===false){
-            return makeList('incomeExpediture');
+            return (
+                <>
+                    <MakeList type={'incomeExpediture'} lists={lists} month={month}/>
+                </>
+            );
         }
     }//버튼에 따른 필요한 함수 실행
 
@@ -88,17 +83,11 @@ const ShowList = ({lists,month}) => {
         <> 
             <div>
                 <button onClick={clickBlueBtn}>+{sumIncome()}</button>
-                <button onClick={clickRedBtn}>-{sumExpediture()}</button>
+                <button onClick={clickRedBtn}>{sumExpediture()}</button>
             </div>
             <div>{showRightList()}</div>
         </>
     )
 }
 
-const mapStateToProps = ({list}) => {
-    return {
-        lists:list
-    }
-}
-
-export default connect(mapStateToProps)(ShowList);
+export default ShowList;

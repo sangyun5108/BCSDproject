@@ -1,22 +1,25 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import { useState } from 'react';
 import {expediture} from '../redux/actions';
 
-const Expediture = ({expediture}) => {
+let id = 1000;
+
+const Expediture = () => {
 
     const date = new Date();
     const nowyear = date.getFullYear();
     const nowmonth = date.getMonth()<10?`0${date.getMonth()+1}`:`${date.getMonth()}`;
     const nowdate = date.getDate()<10?`0${date.getDate()}`:`${date.getDate()}`;
     const months = ['Jan','Feb','Mar','Apr','May','Jun','July','Aug','Sep','Oct','Nov','Dec'];
-    let id = 100;
 
     const[amount,setAmount] = useState(0);
     const[label,setLabel] = useState('');
     const[inputYear,setInputYear] = useState(nowyear);
     const[inputMonth,setInputMonth] = useState(nowmonth);
     const[inputDate,setInputDate] = useState(nowdate);
+
+    const expeditureDispatch = useDispatch();
 
     const KIND = 'expediture';
 
@@ -43,7 +46,7 @@ const Expediture = ({expediture}) => {
     const clickDone = (e) =>{
         e.preventDefault();
         const exchangeMonth = months[Number(inputMonth)-1];
-        expediture(amount,label,KIND,inputYear,exchangeMonth,inputDate,id);
+        expeditureDispatch(expediture(amount,label,KIND,inputYear,exchangeMonth,inputDate,id));
         id++;
     }
 
@@ -62,10 +65,4 @@ const Expediture = ({expediture}) => {
     )
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        expediture: (amount,label,kind,year,month,date,id) => dispatch(expediture(amount,label,kind,year,month,date,id))
-    }
-}
-
-export default connect(null,mapDispatchToProps)(Expediture);
+export default Expediture;

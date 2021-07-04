@@ -8,7 +8,8 @@ export const income = (amount,label,kind,year,month,date,id) => {
         kind,
         year,
         month,
-        date
+        date,
+        id
     }
 }
 
@@ -20,6 +21,7 @@ export const expediture = (amount,label,kind,year,month,date,id) => {
         kind,
         year,
         month,
-        date
+        date,
+        id
     }
 }

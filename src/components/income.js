@@ -1,16 +1,17 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import { useState} from 'react';
 import {income} from '../redux/actions';
 
-const Income = ({income}) => {
+let id = 1;
+
+const Income = () => {
 
     const date = new Date();
     const nowyear = date.getFullYear();
     const nowmonth = date.getMonth()<10?`0${date.getMonth()+1}`:`${date.getMonth()}`;
     const nowdate = date.getDate()<10?`0${date.getDate()}`:`${date.getDate()}`;
     const months = ['Jan','Feb','Mar','Apr','May','Jun','July','Aug','Sep','Oct','Nov','Dec'];
-    let id = 0;
 
     const[amount,setAmount] = useState(0);
     const[label,setLabel] = useState('');
@@ -18,6 +19,8 @@ const Income = ({income}) => {
     const[inputMonth,setInputMonth] = useState(nowmonth);
     const[inputDate,setInputDate] = useState(nowdate);
     
+    const incomeDispatch = useDispatch();
+
     const KIND= 'income';
 
     const changeYear = (e) => {
@@ -43,7 +46,7 @@ const Income = ({income}) => {
     const clickDone = (e) =>{
         e.preventDefault();
         const exchangeMonth = months[Number(inputMonth)-1];
-        income(amount,label,KIND,inputYear,exchangeMonth,Number(inputDate),id);
+        incomeDispatch(income(amount,label,KIND,inputYear,exchangeMonth,Number(inputDate),id));
         id++;
     }
 
@@ -62,10 +65,4 @@ const Income = ({income}) => {
     )
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        income: (amount,label,kind,year,month,date,id) => dispatch(income(amount,label,kind,year,month,date,id))
-    }
-}
-
-export default connect(null,mapDispatchToProps)(Income);
+export default Income;

@@ -37,7 +37,7 @@ export const incomeExpeditureReducer = (state=initialState,action) => {
                 list:[
                         ...state.list,
                         {
-                            amount:Number(action.amount),
+                            amount:-1*Number(action.amount),
                             label:action.label,
                             kind:action.kind,
                             year:action.year,
