@@ -1,7 +1,7 @@
 const MakeList = ({type,lists,month}) => {
     let newLists;
-    if(type==='income'||type==='expediture'){
-        newLists = lists.filter((list)=>list.kind===type&&list.month===month)
+    if(type==='INCOME'||type==='EXPEDITURE'){
+        newLists = lists.filter((list)=>list.type===type&&list.month===month)
     }else{
         newLists = lists.filter((list)=>list.month===month)
     }

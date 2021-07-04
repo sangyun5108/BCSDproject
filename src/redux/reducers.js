@@ -1,19 +1,10 @@
 import { INCOME, EXPEDITURE } from "./types";
 
-const initialState = {
+const initialState={
     list:[
-        {
-            amount:0,
-            label:'',
-            kind:'',
-            year:'',
-            month:'',
-            date:'',
-            id:0
-        }
+
     ]
 }
-
 export const incomeExpeditureReducer = (state=initialState,action) => {
     switch(action.type){
         case INCOME:

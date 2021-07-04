@@ -31,13 +31,13 @@ const ShowList = ({month}) => {
         if(blueBtn===true){
             return (
                 <>
-                    <MakeList type={'income'} lists={lists} month={month}/>
+                    <MakeList type={'INCOME'} lists={lists} month={month}/>
                 </>
             );
         }else if(redBtn===true){
             return (
                 <>
-                    <MakeList type={'expediture'} lists={lists} month={month}/>
+                    <MakeList type={'EXPEDITURE'} lists={lists} month={month}/>
                 </>
             );
         }else if(blueBtn===false && redBtn===false){
