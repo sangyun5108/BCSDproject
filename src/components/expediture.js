@@ -20,8 +20,6 @@ const Expediture = () => {
 
     const expeditureDispatch = useDispatch();
 
-    const KIND = 'expediture';
-
     const changeYear = (e) => {
         setInputYear(e.target.value);
     }//연도 입력시 inputyear state 변경시켜주는 함수
@@ -45,7 +43,7 @@ const Expediture = () => {
     const clickDone = (e) =>{
         e.preventDefault();
         const exchangeMonth = months[Number(inputMonth)-1];
-        expeditureDispatch(expediture(amount,label,KIND,inputYear,exchangeMonth,inputDate));
+        expeditureDispatch(expediture(amount,label,inputYear,exchangeMonth,inputDate));
     }
 
     return(

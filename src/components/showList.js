@@ -51,7 +51,7 @@ const ShowList = ({month}) => {
 
     const sumIncome = () => {
 
-        const newlists = lists.filter((list)=>list.month===month&&list.kind==='income');
+        const newlists = lists.filter((list)=>list.month===month&&list.type==='INCOME');
         const incomeList = [];
         newlists.forEach((list)=>{
             incomeList.push(Number(list.amount));
@@ -66,7 +66,7 @@ const ShowList = ({month}) => {
 
     const sumExpediture = () => {
 
-        const newlists = lists.filter((list)=>list.month===month&&list.kind==='expediture');
+        const newlists = lists.filter((list)=>list.month===month&&list.type==='EXPEDITURE');
         const expeditureList = [];
         newlists.forEach((list)=>{
             expeditureList.push(Number(list.amount));

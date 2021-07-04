@@ -18,9 +18,7 @@ const Income = () => {
     const[inputDate,setInputDate] = useState(nowdate);
     
     const incomeDispatch = useDispatch();
-
-    const KIND= 'income';
-
+    
     const changeYear = (e) => {
         setInputYear(e.target.value);
     }//연도 입력시 inputyear state 변경시켜주는 함수
@@ -44,7 +42,7 @@ const Income = () => {
     const clickDone = (e) =>{
         e.preventDefault();
         const exchangeMonth = months[Number(inputMonth)-1];
-        incomeDispatch(income(amount,label,KIND,inputYear,exchangeMonth,Number(inputDate)));
+        incomeDispatch(income(amount,label,inputYear,exchangeMonth,Number(inputDate)));
     }
 
     return(
