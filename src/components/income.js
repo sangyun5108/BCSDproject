@@ -1,6 +1,6 @@
 import React from 'react';
 import {useDispatch} from 'react-redux';
-import { useState} from 'react';
+import {useState} from 'react';
 import {income} from '../redux/actions';
 
 const Income = () => {
@@ -33,11 +33,38 @@ const Income = () => {
 
     const changeAmount = (e) => {
         setAmount(e.target.value);
-    }
+    }//가격 입력
 
     const changeLabel = (e) => {
         setLabel(e.target.value);
-    }
+    }//내용 입력
+
+    const checkYearType = (e) => {
+        const value = Number(e.target.value);
+        if(isNaN(value)){
+            setInputYear(nowyear);
+        }
+    }//연도가 올바르게 입력되었는지 체크해주는 함수
+
+    const checkMonthType = (e) => {
+        let value = Number(e.target.value);
+        if(isNaN(value)){
+            setInputMonth(nowmonth);
+        }else{
+            value = value<10?`0${value}`:value;
+            setInputMonth(value);
+        }
+    }//month가 올바르게 입력되었는지 체크해주는 함수
+
+    const checkDateType = (e) => {
+        let value = Number(e.target.value);
+        if(isNaN(value)){
+            setInputDate(nowdate);
+        }else{
+            value = value<10?`0${value}`:value;
+            setInputDate(value);
+        }
+    }//date가 올바르게 입력되었는지 체크하는 함수
 
     const clickDone = (e) =>{
         e.preventDefault();
@@ -49,9 +76,9 @@ const Income = () => {
         <>
             <form>
                 <div>income</div>
-                <input onChange={changeYear} value={inputYear}></input>
-                <input onChange={changeMonth} value={inputMonth}></input>
-                <input onChange={changeDate} value={inputDate}></input>
+                <input className='inputYear' onChange={changeYear} onBlur={checkYearType} value={inputYear}></input>
+                <input className='inputMonth' onChange={changeMonth} onBlur={checkMonthType} value={inputMonth}></input>
+                <input className='inputDate' onChange={changeDate} onBlur={checkDateType} value={inputDate}></input>
                 <div><input placeholder="Label" onChange={changeLabel}></input></div>
                 <div><input placeholder="Amount" onChange={changeAmount}></input></div>
                 <button onClick={clickDone}>Done</button>

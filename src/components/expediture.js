@@ -40,6 +40,33 @@ const Expediture = () => {
         setLabel(e.target.value);
     }
 
+    const checkYearType = (e) => {
+        const value = Number(e.target.value);
+        if(isNaN(value)){
+            setInputYear(nowyear);
+        }
+    }//연도가 올바르게 입력되었는지 체크해주는 함수
+
+    const checkMonthType = (e) => {
+        let value = Number(e.target.value);
+        if(isNaN(value)){
+            setInputMonth(nowmonth);
+        }else{
+            value = value<10?`0${value}`:value;
+            setInputMonth(value);
+        }
+    }//month가 올바르게 입력되었는지 체크해주는 함수
+
+    const checkDateType = (e) => {
+        let value = Number(e.target.value);
+        if(isNaN(value)){
+            setInputDate(nowdate);
+        }else{
+            value = value<10?`0${value}`:value;
+            setInputDate(value);
+        }
+    }//date가 올바르게 입력되었는지 체크하는 함수
+
     const clickDone = (e) =>{
         e.preventDefault();
         const exchangeMonth = months[Number(inputMonth)-1];
@@ -50,9 +77,9 @@ const Expediture = () => {
         <>
             <form>
                 <div>expediture</div>
-                <input onChange={changeYear} value={inputYear}></input>
-                <input onChange={changeMonth} value={inputMonth}></input>
-                <input onChange={changeDate} value={inputDate}></input>
+                <input onChange={changeYear} onBlur={checkYearType} value={inputYear}></input>
+                <input onChange={changeMonth} onBlur={checkMonthType} value={inputMonth}></input>
+                <input onChange={changeDate} onBlur={checkDateType} value={inputDate}></input>
                 <div><input placeholder="Label" onChange={changeLabel}></input></div>
                 <div><input placeholder="Amount" onChange={changeAmount}></input></div>
                 <button onClick={clickDone}>Done</button>
