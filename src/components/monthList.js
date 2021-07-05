@@ -1,7 +1,5 @@
-import React,{useState,createContext} from 'react';
+import React,{useState} from 'react';
 import ShowList from './showList';
-
-export const monthContext = createContext('Hello');
 
 const MonthList = () => {
 
@@ -31,9 +29,7 @@ const MonthList = () => {
             <button onClick={showMonth}>Left</button>
             <span>{month}</span>
             <button onClick={showMonth}>Right</button>
-            <monthContext.Provider value={month}>
-                <div><ShowList/></div>
-            </monthContext.Provider>
+            <ShowList month={month}/>
         </>
     );
 }

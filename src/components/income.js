@@ -1,9 +1,9 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import { useState} from 'react';
 import {income} from '../redux/actions';
 
-const Income = ({income}) => {
+const Income = () => {
 
     const date = new Date();
     const nowyear = date.getFullYear();
@@ -17,8 +17,8 @@ const Income = ({income}) => {
     const[inputMonth,setInputMonth] = useState(nowmonth);
     const[inputDate,setInputDate] = useState(nowdate);
     
-    const KIND= 'income';
-
+    const incomeDispatch = useDispatch();
+    
     const changeYear = (e) => {
         setInputYear(e.target.value);
     }//연도 입력시 inputyear state 변경시켜주는 함수
@@ -42,7 +42,7 @@ const Income = ({income}) => {
     const clickDone = (e) =>{
         e.preventDefault();
         const exchangeMonth = months[Number(inputMonth)-1];
-        income(amount,label,KIND,inputYear,exchangeMonth,Number(inputDate));
+        incomeDispatch(income(amount,label,inputYear,exchangeMonth,Number(inputDate)));
     }
 
     return(
@@ -60,10 +60,4 @@ const Income = ({income}) => {
     )
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        income: (amount,label,kind,year,month,date) => dispatch(income(amount,label,kind,year,month,date))
-    }
-}
-
-export default connect(null,mapDispatchToProps)(Income);
+export default Income;

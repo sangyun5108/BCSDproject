@@ -16,27 +16,11 @@ const AddHistory = () => {
         setList(false);
     }
 
-    const showList = () => {
-        const income = (
-            <>
-                <Income/>
-            </>
-        );
-
-        const expediture = (
-            <>
-                <Expediture/>
-            </>
-        );
-
-        return list?income:expediture;
-    }
-
     return (
         <>
             <button onClick={onClickIncome}>income</button>
             <button onClick={onClickExpediture}>expediture</button>
-            {showList()}
+            {list?<Income/>:<Expediture/>}
         </>
     )
 }

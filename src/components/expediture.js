@@ -1,9 +1,10 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import { useState } from 'react';
 import {expediture} from '../redux/actions';
 
-const Expediture = ({expediture}) => {
+
+const Expediture = () => {
 
     const date = new Date();
     const nowyear = date.getFullYear();
@@ -17,7 +18,7 @@ const Expediture = ({expediture}) => {
     const[inputMonth,setInputMonth] = useState(nowmonth);
     const[inputDate,setInputDate] = useState(nowdate);
 
-    const KIND = 'expediture';
+    const expeditureDispatch = useDispatch();
 
     const changeYear = (e) => {
         setInputYear(e.target.value);
@@ -42,7 +43,7 @@ const Expediture = ({expediture}) => {
     const clickDone = (e) =>{
         e.preventDefault();
         const exchangeMonth = months[Number(inputMonth)-1];
-        expediture(amount,label,KIND,inputYear,exchangeMonth,inputDate);
+        expeditureDispatch(expediture(amount,label,inputYear,exchangeMonth,inputDate));
     }
 
     return(
@@ -60,10 +61,4 @@ const Expediture = ({expediture}) => {
     )
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        expediture: (amount,label,kind,year,month,date) => dispatch(expediture(amount,label,kind,year,month,date))
-    }
-}
-
-export default connect(null,mapDispatchToProps)(Expediture);
+export default Expediture;
