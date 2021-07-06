@@ -2,6 +2,7 @@ import React from 'react';
 import {useDispatch} from 'react-redux';
 import { useState } from 'react';
 import {expediture} from '../redux/actions';
+import store from '../redux/store';
 
 
 const Expediture = () => {
@@ -71,10 +72,11 @@ const Expediture = () => {
         e.preventDefault();
         const exchangeMonth = months[Number(inputMonth)-1];
         expeditureDispatch(expediture(amount,label,inputYear,exchangeMonth,inputDate));
+        localStorage.setItem('lists',JSON.stringify(store.getState().list));
     }
 
     return(
-        <>
+        <>  
             <form>
                 <div>expediture</div>
                 <input onChange={changeYear} onBlur={checkYearType} value={inputYear}></input>
