@@ -2,6 +2,7 @@ import React from 'react';
 import {useDispatch} from 'react-redux';
 import {useState} from 'react';
 import {income} from '../redux/actions';
+import store from '../redux/store';
 
 const Income = () => {
 
@@ -70,6 +71,7 @@ const Income = () => {
         e.preventDefault();
         const exchangeMonth = months[Number(inputMonth)-1];
         incomeDispatch(income(amount,label,inputYear,exchangeMonth,Number(inputDate)));
+        localStorage.setItem('lists',JSON.stringify(store.getState().list));
     }
 
     return(

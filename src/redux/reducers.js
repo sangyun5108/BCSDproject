@@ -1,10 +1,12 @@
 import { INCOME, EXPEDITURE } from "./types";
 
-const initialState={
-    list:[
+const data = JSON.parse(localStorage.getItem('lists'));
+const list = data?data:[];
 
-    ]
+const initialState={
+    list
 }
+
 export const incomeExpeditureReducer = (state=initialState,action) => {
     switch(action.type){
         case INCOME:
