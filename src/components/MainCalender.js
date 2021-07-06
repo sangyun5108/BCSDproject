@@ -55,7 +55,7 @@ function MainCalender({date}){
 
     let moneyArray = JSON.parse(localStorage.getItem('lists'))
     if(moneyArray){
-        moneyArray.filter(money => money.year === today.getFullYear() && money.month === 'July').forEach(money => {
+        moneyArray.filter(money => money.year === today.getFullYear() && money.month === today.getMonth()).forEach(money => {
             if(money.type === 'INCOME'){
                 thisArray[money.date - 1].Income += money.amount
             }else if(money.type === 'EXPEDITURE'){
