@@ -1,35 +1,31 @@
 import React,{useState} from 'react'
-import ShowCalender from './ShowCalender'
-function ShowDate({date, setDate}){//날짜 출력
-    const month = date.getMonth()  
-    const onIncrease = () =>{
-        setDate(new Date(date.getFullYear(),month + 1,date.getDate()))
-    }
-    const onDecrease = () =>{
-        setDate(new Date(date.getFullYear(),month - 1,date.getDate()))
-    }
-    return(
-        <>
-            <div>
-                오늘은 {date.getFullYear()}/{date.getMonth()+1}
-            </div>
-            <button onClick={()=>onDecrease()}>&lt;</button>{date.getMonth()+1}<button onClick={()=>onIncrease()}>&gt;</button>
-        </>
-    )
-}
-
-
+import styled from'styled-components'
+import MainCalender from './MainCalender'
+import DateViewer from './DateViewer'
+import CalenderHeader from './CalenderHeader'
+const TotalContainer = styled.div`
+    display : flex;
+    flex-direction : column;
+    justify-content : center;
+    background : green;
+`
+const CalenderContainer = styled.div`
+    background : blue;
+`
 function Calender(){
     const today = new Date()
     const [date,setDate] = useState(today)
     return (
-        <>
-            <ShowDate
+        <TotalContainer>
+            <DateViewer
                 date = {date}
                 setDate = {setDate}
             />
-            <ShowCalender date = {date}/>
-        </>
+            <CalenderContainer>
+                <CalenderHeader/>
+                <MainCalender date = {date}/>
+            </CalenderContainer>   
+        </TotalContainer>
     )
 }
 
