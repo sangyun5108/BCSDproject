@@ -1,4 +1,5 @@
 const MakeList = ({type,lists,month}) => {
+    const months = ['Jan','Feb','Mar','Apr','May','Jun','July','Aug','Sep','Oct','Nov','Dec'];
     let newLists;
     if(type==='INCOME'||type==='EXPEDITURE'){
         newLists = lists.filter((list)=>list.type===type&&list.month===month)
@@ -7,7 +8,7 @@ const MakeList = ({type,lists,month}) => {
     }
     return (
           <>
-            <h2>{month}</h2>
+            <h2>{months[month]}</h2>
             <h3>{type}</h3>
             {newLists.map((list)=>{
                 return(
