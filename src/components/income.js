@@ -10,7 +10,6 @@ const Income = () => {
     const nowyear = date.getFullYear();
     const nowmonth = date.getMonth()<10?`0${date.getMonth()+1}`:`${date.getMonth()}`;
     const nowdate = date.getDate()<10?`0${date.getDate()}`:`${date.getDate()}`;
-    const months = ['Jan','Feb','Mar','Apr','May','Jun','July','Aug','Sep','Oct','Nov','Dec'];
 
     const[amount,setAmount] = useState(0);
     const[label,setLabel] = useState('');
@@ -69,8 +68,8 @@ const Income = () => {
 
     const clickDone = (e) =>{
         e.preventDefault();
-        const exchangeMonth = months[Number(inputMonth)-1];
-        incomeDispatch(income(amount,label,inputYear,exchangeMonth,Number(inputDate)));
+        const monthIndex = Number(inputMonth)-1;
+        incomeDispatch(income(amount,label,inputYear,monthIndex,Number(inputDate)));
         localStorage.setItem('lists',JSON.stringify(store.getState().list));
     }
 
