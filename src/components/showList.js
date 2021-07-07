@@ -71,7 +71,7 @@ const ShowList = ({month}) => {
         <> 
             <div>
                 <button onClick={clickBlueBtn}>+{sumIncome(lists,month)}</button>
-                <button onClick={clickRedBtn}>{sumExpediture(lists,month)}</button>
+                <button onClick={clickRedBtn}>{sumExpediture(lists,month)===0?`-${sumExpediture(lists,month)}`:sumExpediture(lists,month)}</button>
             </div>
             <div><MakeList type={type} lists={lists} month={month}/></div>
         </>

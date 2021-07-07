@@ -23,9 +23,11 @@ const MonthList = () => {
 
     return(
         <>  
-            <button onClick={showMonth}>Left</button>
-            <span>{months[month]}</span>
-            <button onClick={showMonth}>Right</button>
+            <div>
+                <button onClick={showMonth}>Left</button>
+                <span>{months[month]}</span>
+                <button onClick={showMonth}>Right</button>
+            </div>
             <ShowList month={month}/>
         </>
     );
