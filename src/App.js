@@ -17,6 +17,7 @@ function App() {
             <button>account</button>
             <button>calender</button>
           </BtnWrapper>
+            <AddHistory/>
           <MonthList/>
         </Provider>
       </>

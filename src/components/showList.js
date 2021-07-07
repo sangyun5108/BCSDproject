@@ -4,15 +4,14 @@ import MakeList from './makeList';
 
 const sumIncome = (lists,month) => {
 
-    const newlists = lists.
-    filter((list)=>list.month===month&&list.type==='INCOME');
-    const incomeList = [];
-    newlists.forEach((list)=>{
-        incomeList.push(Number(list.amount));
+    const income = lists
+    .filter((list)=>list.month===month&&list.type==='INCOME')
+    .map((list)=>{
+        return Number(list.amount);
     })
-    const income = incomeList.reduce((acc,cur)=>{
+    .reduce((acc,cur)=>{
         return acc+cur;
-    },0)
+    },0);
 
     return income;
 
@@ -20,12 +19,12 @@ const sumIncome = (lists,month) => {
 
 const sumExpediture = (lists,month) => {
 
-    const newlists = lists.filter((list)=>list.month===month&&list.type==='EXPEDITURE');
-    const expeditureList = [];
-    newlists.forEach((list)=>{
-        expeditureList.push(Number(list.amount));
+    const expediture = lists
+    .filter((list)=>list.month===month&&list.type==='EXPEDITURE')
+    .map((list)=>{
+        return Number(list.amount);
     })
-    const expediture = expeditureList.reduce((acc,cur)=>{
+    .reduce((acc,cur)=>{
         return acc+cur;
     },0)
 
