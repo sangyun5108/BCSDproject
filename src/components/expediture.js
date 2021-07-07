@@ -4,13 +4,12 @@ import { useState } from 'react';
 import {expediture} from '../redux/actions';
 import store from '../redux/store';
 
+const date = new Date();
+const nowyear = date.getFullYear();
+const nowmonth = date.getMonth()<10?`0${date.getMonth()+1}`:`${date.getMonth()}`;
+const nowdate = date.getDate()<10?`0${date.getDate()}`:`${date.getDate()}`;
 
 const Expediture = () => {
-
-    const date = new Date();
-    const nowyear = date.getFullYear();
-    const nowmonth = date.getMonth()<10?`0${date.getMonth()+1}`:`${date.getMonth()}`;
-    const nowdate = date.getDate()<10?`0${date.getDate()}`:`${date.getDate()}`;
 
     const[amount,setAmount] = useState(0);
     const[label,setLabel] = useState('');
@@ -19,6 +18,7 @@ const Expediture = () => {
     const[inputDate,setInputDate] = useState(nowdate);
 
     const expeditureDispatch = useDispatch();
+
 
     const changeYear = (e) => {
         setInputYear(e.target.value);

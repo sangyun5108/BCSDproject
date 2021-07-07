@@ -1,9 +1,9 @@
 import React,{useState} from 'react';
 import ShowList from './showList';
 
-const MonthList = () => {
+const months = ['Jan','Feb','Mar','Apr','May','Jun','July','Aug','Sep','Oct','Nov','Dec'];
 
-    const months = ['Jan','Feb','Mar','Apr','May','Jun','July','Aug','Sep','Oct','Nov','Dec'];
+const MonthList = () => {
     const [month,setMonth] = useState(0);
 
     const showMonth = (e) => {

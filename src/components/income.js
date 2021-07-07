@@ -4,19 +4,19 @@ import {useState} from 'react';
 import {income} from '../redux/actions';
 import store from '../redux/store';
 
-const Income = () => {
+const date = new Date();
+const nowyear = date.getFullYear();
+const nowmonth = date.getMonth()<10?`0${date.getMonth()+1}`:`${date.getMonth()}`;
+const nowdate = date.getDate()<10?`0${date.getDate()}`:`${date.getDate()}`;
 
-    const date = new Date();
-    const nowyear = date.getFullYear();
-    const nowmonth = date.getMonth()<10?`0${date.getMonth()+1}`:`${date.getMonth()}`;
-    const nowdate = date.getDate()<10?`0${date.getDate()}`:`${date.getDate()}`;
+const Income = () => {
 
     const[amount,setAmount] = useState(0);
     const[label,setLabel] = useState('');
     const[inputYear,setInputYear] = useState(nowyear);
     const[inputMonth,setInputMonth] = useState(nowmonth);
     const[inputDate,setInputDate] = useState(nowdate);
-    
+
     const incomeDispatch = useDispatch();
     
     const changeYear = (e) => {
