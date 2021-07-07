@@ -7,8 +7,8 @@ const MonthList = () => {
     const [month,setMonth] = useState(0);
 
     const showMonth = (e) => {
-        const direction = e.target.innerText;
-        if(direction==='Right'){
+        const direction = e.target.value;
+        if(direction==='right'){
             setMonth(month+1);
             if(month===11){
                 setMonth(0);
@@ -24,9 +24,9 @@ const MonthList = () => {
     return(
         <>  
             <div>
-                <button onClick={showMonth}>Left</button>
+                <button onClick={showMonth} value='left'>Left</button>
                 <span>{months[month]}</span>
-                <button onClick={showMonth}>Right</button>
+                <button onClick={showMonth} value='right'>Right</button>
             </div>
             <ShowList month={month}/>
         </>
