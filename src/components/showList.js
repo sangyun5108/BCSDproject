@@ -4,7 +4,8 @@ import MakeList from './makeList';
 
 const sumIncome = (lists,month) => {
 
-    const newlists = lists.filter((list)=>list.month===month&&list.type==='INCOME');
+    const newlists = lists.
+    filter((list)=>list.month===month&&list.type==='INCOME');
     const incomeList = [];
     newlists.forEach((list)=>{
         incomeList.push(Number(list.amount));

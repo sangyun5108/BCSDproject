@@ -8,8 +8,9 @@ const Container = styled.div`
   height:100%;
   display:flex;
   flex-direction:column;
-  text-align:center;
-  min-height:100vh;
+  align-items:center;
+  min-height:80vh;
+  margin-top:30px;
 `;
 
 ReactDOM.render(
