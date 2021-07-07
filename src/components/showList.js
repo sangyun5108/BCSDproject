@@ -26,7 +26,7 @@ const sumExpediture = (lists,month) => {
     })
     .reduce((acc,cur)=>{
         return acc+cur;
-    },0)
+    },0);
 
     return expediture;
 
@@ -34,44 +34,33 @@ const sumExpediture = (lists,month) => {
 
 const ShowList = ({month}) => {
 
-    const [blueBtn,setBlueBtn] = useState(false);
-    const [redBtn,setRedBtn] = useState(false);
     const [type,setType] = useState('incomeExpediture');
 
     const lists = useSelector((state)=>state.list);
 
-    const clickBlueBtn = () => {
+    const clickPlusBtn = () => {
 
-        if(blueBtn===true){
-            
-            setBlueBtn(!blueBtn);
+        if(type ==='INCOME'){
             setType('incomeExpediture');
             return;
         }
-
-        setBlueBtn(true);
-        setRedBtn(false);
         setType('INCOME');
     }
 
-    const clickRedBtn = () => {
-
-        if(redBtn===true){
-            setRedBtn(!redBtn);
-            setType('incomExpediture');
+    const clickMinusBtn = () => {
+        
+        if(type==='EXPEDITURE'){
+            setType('incomeExpediture');
             return;
         }
-
-        setRedBtn(true);
-        setBlueBtn(false);
         setType('EXPEDITURE');
     }
     
     return(
         <> 
             <div>
-                <button onClick={clickBlueBtn}>+{sumIncome(lists,month)}</button>
-                <button onClick={clickRedBtn}>{sumExpediture(lists,month)===0?`-${sumExpediture(lists,month)}`:sumExpediture(lists,month)}</button>
+                <button onClick={clickPlusBtn}>+{sumIncome(lists,month)}</button>
+                <button onClick={clickMinusBtn}>{sumExpediture(lists,month)===0?`-${sumExpediture(lists,month)}`:sumExpediture(lists,month)}</button>
             </div>
             <div><MakeList type={type} lists={lists} month={month}/></div>
         </>
