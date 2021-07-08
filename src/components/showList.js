@@ -1,6 +1,7 @@
 import React,{useState} from 'react';
 import {useSelector} from 'react-redux';
-import MakeList from './makeList';
+import MakeList from './MakeList';
+import styled from 'styled-components';
 
 const sumIncome = (lists,month,year) => {
 
@@ -58,13 +59,44 @@ const ShowList = ({month,year}) => {
     
     return(
         <> 
-            <div>
-                <button onClick={clickPlusBtn}>+{sumIncome(lists,month,year)}</button>
-                <button onClick={clickMinusBtn}>{sumExpediture(lists,month,year)===0?`-${sumExpediture(lists,month)}`:sumExpediture(lists,month)}</button>
-            </div>
+            <Wrapper>
+                <BlueButton active={type} onClick={clickPlusBtn}>+{sumIncome(lists,month,year)}</BlueButton>
+                <RedButton active={type} onClick={clickMinusBtn}>{sumExpediture(lists,month,year)===0?`-${sumExpediture(lists,month)}`:sumExpediture(lists,month)}</RedButton>
+            </Wrapper>
             <div><MakeList type={type} lists={lists} month={month} year={year}/></div>
         </>
     )
 }
+
+const Wrapper = styled.div`
+    width:100%;
+    height:20vh;
+    margin-top:40px;
+    display:flex;
+    justify-content:center;
+`;
+
+const BlueButton = styled.button`
+    border:2px solid green;
+    font-size:25px;
+    font-weight:800;
+    border-radius:12px;
+    width:20%;
+    height:6vh;
+    margin-right:15px;
+    background:${props=>props.active==='INCOME'?"green":"white"};
+    color:${props=>props.active==='INCOME'?"white":"green"};
+`;
+
+const RedButton = styled.button`
+    border:2px solid red;
+    font-size:25px;
+    font-weight:800;
+    border-radius:12px;
+    width:20%;
+    height:6vh;
+    background:${props=>props.active==='EXPEDITURE'?"red":"white"};
+    color:${props=>props.active==='EXPEDITURE'?"white":"red"};
+`;
 
 export default ShowList;

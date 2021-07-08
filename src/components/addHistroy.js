@@ -1,7 +1,7 @@
 import React from 'react';
 import {useState} from 'react';
-import Income from './income';
-import Expediture from './expediture';
+import Income from './Income';
+import Expediture from './Expediture';
 import styled from 'styled-components';
 
 const BtnWrapper = styled.div`
