@@ -1,14 +1,19 @@
-import { INCOME, EXPEDITURE } from "./types";
-
-const data = JSON.parse(localStorage.getItem('lists'));
-const list = data?data:[];
+import { INCOME, EXPEDITURE, INIT } from "./types";
 
 const initialState={
-    list
+    list:[
+
+    ]
 }
 
 export const incomeExpeditureReducer = (state=initialState,action) => {
+    
     switch(action.type){
+        case INIT:
+            const list = JSON.parse(localStorage.getItem('lists'));
+            return {
+                list
+            }
         case INCOME:
             return {
                 list:[

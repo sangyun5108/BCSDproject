@@ -1,4 +1,4 @@
-import {INCOME, EXPEDITURE} from './types';
+import {INCOME, EXPEDITURE, INIT} from './types';
 
 let incomeId=0;
 let expeditureId=100;
@@ -24,5 +24,11 @@ export const expediture = (amount,label,year,month,date) => {
         month,
         date,
         id:expeditureId++
+    }
+}
+
+export const init = ()=>{
+    return {
+        type:INIT
     }
 }

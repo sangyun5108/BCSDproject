@@ -1,8 +1,10 @@
 import AddHistory from './components/addHistroy';
-import {Provider} from 'react-redux';
+import {Provider,useDispatch} from 'react-redux';
 import store from './redux/store';
 import MonthList from './components/monthList';
+import {init} from './redux/actions';
 import styled from 'styled-components';
+import {useEffect} from 'react';
 
 const BtnWrapper = styled.div`
   display:flex;
@@ -10,18 +12,31 @@ const BtnWrapper = styled.div`
 `;
 
 function App() {
+
+  const dispatch = useDispatch();
+
+  useEffect(()=>{
+    dispatch(init());
+  },[dispatch]);
+
   return (
       <> 
-        <Provider store={store}>
           <BtnWrapper>
             <button>account</button>
             <button>calender</button>
           </BtnWrapper>
             <AddHistory/>
           <MonthList/>
-        </Provider>
       </>
   );
 }
 
-export default App;
+const AppWrapper = () => {
+  return(
+    <Provider store={store}>
+      <App/>
+    </Provider>
+  );
+}
+
+export default AppWrapper;
