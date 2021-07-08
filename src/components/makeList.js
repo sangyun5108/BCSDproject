@@ -1,11 +1,11 @@
 const months = ['Jan','Feb','Mar','Apr','May','Jun','July','Aug','Sep','Oct','Nov','Dec'];
 
-const MakeList = ({type,lists,month}) => {
+const MakeList = ({type,lists,month,year}) => {
     let newLists;
     if(type==='INCOME'||type==='EXPEDITURE'){
-        newLists = lists.filter((list)=>list.type===type&&list.month===month)
+        newLists = lists.filter((list)=>list.type===type&&list.month===month&&Number(list.year)===year)
     }else{
-        newLists = lists.filter((list)=>list.month===month)
+        newLists = lists.filter((list)=>list.month===month&&Number(list.year)===year)
     }
     return (
           <>

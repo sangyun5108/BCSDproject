@@ -2,10 +2,10 @@ import React,{useState} from 'react';
 import {useSelector} from 'react-redux';
 import MakeList from './makeList';
 
-const sumIncome = (lists,month) => {
+const sumIncome = (lists,month,year) => {
 
     const income = lists
-    .filter((list)=>list.month===month&&list.type==='INCOME')
+    .filter((list)=>list.month===month&&list.type==='INCOME'&&list.year===year)
     .map((list)=>{
         return Number(list.amount);
     })
@@ -17,10 +17,10 @@ const sumIncome = (lists,month) => {
 
 }//월별 수입 합계를 구해주는 함수
 
-const sumExpediture = (lists,month) => {
+const sumExpediture = (lists,month,year) => {
 
     const expediture = lists
-    .filter((list)=>list.month===month&&list.type==='EXPEDITURE')
+    .filter((list)=>list.month===month&&list.type==='EXPEDITURE'&&list.year===year)
     .map((list)=>{
         return Number(list.amount);
     })
@@ -32,7 +32,7 @@ const sumExpediture = (lists,month) => {
 
 }//월별 지출 합계를 구해주는 함수
 
-const ShowList = ({month}) => {
+const ShowList = ({month,year}) => {
 
     const [type,setType] = useState('incomeExpediture');
 
@@ -59,10 +59,10 @@ const ShowList = ({month}) => {
     return(
         <> 
             <div>
-                <button onClick={clickPlusBtn}>+{sumIncome(lists,month)}</button>
-                <button onClick={clickMinusBtn}>{sumExpediture(lists,month)===0?`-${sumExpediture(lists,month)}`:sumExpediture(lists,month)}</button>
+                <button onClick={clickPlusBtn}>+{sumIncome(lists,month,year)}</button>
+                <button onClick={clickMinusBtn}>{sumExpediture(lists,month,year)===0?`-${sumExpediture(lists,month)}`:sumExpediture(lists,month)}</button>
             </div>
-            <div><MakeList type={type} lists={lists} month={month}/></div>
+            <div><MakeList type={type} lists={lists} month={month} year={year}/></div>
         </>
     )
 }

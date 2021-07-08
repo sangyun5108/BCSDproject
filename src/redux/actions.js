@@ -15,7 +15,7 @@ const getIncomeId = () => {
 
 const getExpeditureId = () => {
     const expediture = JSON.parse(localStorage.getItem('lists'))
-    .filter((list)=>list.type==='INCOME');
+    .filter((list)=>list.type==='EXPEDITURE');
     
    if(expediture) {
        expeditureId = ++expediture[expediture.length-1].id;
