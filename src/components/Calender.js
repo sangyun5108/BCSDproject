@@ -23,7 +23,7 @@ function Calender(){
             />
             <CalenderContainer>
                 <CalenderHeader/>
-                <MainCalender date = {date}/>
+                <MainCalender today = {date}/>
             </CalenderContainer>   
         </TotalContainer>
     )
