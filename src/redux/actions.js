@@ -7,7 +7,7 @@ const getIncomeId = () => {
     const income = JSON.parse(localStorage.getItem('lists'))
     .filter((list)=>list.type==='INCOME');
     
-    if(income){
+    if(income.length!==0){
         incomeId = ++income[income.length-1].id;
     }
     return;
@@ -16,14 +16,13 @@ const getIncomeId = () => {
 const getExpeditureId = () => {
     const expediture = JSON.parse(localStorage.getItem('lists'))
     .filter((list)=>list.type==='EXPEDITURE');
-    
-   if(expediture) {
+   if(expediture.length!==0) {
        expeditureId = ++expediture[expediture.length-1].id;
    }
    return;
 }//localStorage expediture id값을 받아오는 함수
 
-const checklocal  = () => {
+const checkLocal  = () => {
     if(localStorage.getItem('lists')){
         getIncomeId();
         getExpeditureId();
@@ -31,7 +30,7 @@ const checklocal  = () => {
     return;
 }
 
-checklocal();
+checkLocal();
 
 export const income = (amount,label,year,month,date) => {
     return {
@@ -58,7 +57,11 @@ export const expediture = (amount,label,year,month,date) => {
 }
 
 export const init = ()=>{
+    const getlist = JSON.parse(localStorage.getItem('lists'));
+    const list = getlist?getlist:[];
+
     return {
-        type:INIT
+        type:INIT,
+        list
     }
 }

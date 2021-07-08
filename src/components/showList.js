@@ -6,14 +6,13 @@ import styled from 'styled-components';
 const sumIncome = (lists,month,year) => {
 
     const income = lists
-    .filter((list)=>list.month===month&&list.type==='INCOME'&&list.year===year)
+    .filter((list)=>list.month===month&&list.type==='INCOME'&&Number(list.year)===year)
     .map((list)=>{
         return Number(list.amount);
     })
     .reduce((acc,cur)=>{
         return acc+cur;
     },0);
-
     return income;
 
 }//월별 수입 합계를 구해주는 함수
@@ -21,7 +20,7 @@ const sumIncome = (lists,month,year) => {
 const sumExpediture = (lists,month,year) => {
 
     const expediture = lists
-    .filter((list)=>list.month===month&&list.type==='EXPEDITURE'&&list.year===year)
+    .filter((list)=>list.month===month&&list.type==='EXPEDITURE'&&Number(list.year)===year)
     .map((list)=>{
         return Number(list.amount);
     })
@@ -29,7 +28,8 @@ const sumExpediture = (lists,month,year) => {
         return acc+cur;
     },0);
 
-    return expediture;
+    console.log(expediture);
+    return -1*expediture;
 
 }//월별 지출 합계를 구해주는 함수
 
@@ -61,7 +61,7 @@ const ShowList = ({month,year}) => {
         <> 
             <Wrapper>
                 <BlueButton active={type} onClick={clickPlusBtn}>+{sumIncome(lists,month,year)}</BlueButton>
-                <RedButton active={type} onClick={clickMinusBtn}>{sumExpediture(lists,month,year)===0?`-${sumExpediture(lists,month)}`:sumExpediture(lists,month)}</RedButton>
+                <RedButton active={type} onClick={clickMinusBtn}>-{sumExpediture(lists,month,year)}</RedButton>
             </Wrapper>
             <div><MakeList type={type} lists={lists} month={month} year={year}/></div>
         </>

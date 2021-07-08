@@ -8,10 +8,8 @@ export const incomeExpeditureReducer = (state=initialState,action) => {
     
     switch(action.type){
         case INIT:
-            const getlist = JSON.parse(localStorage.getItem('lists'));
-            const list = getlist===null?[]:getlist;
             return {
-                list
+                list:action.list
             }
         case INCOME:
             return {

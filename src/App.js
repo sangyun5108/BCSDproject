@@ -1,4 +1,4 @@
-// import AddHistory from './components/addHistroy';
+import AddHistory from './components/AddHistroy';
 import {Provider,useDispatch} from 'react-redux';
 import store from './redux/store';
 import MonthList from './components/MonthList';
@@ -15,6 +15,7 @@ function App() {
 
   return (
       <> 
+        <AddHistory/>
         <MonthList/>
         <button>Add History</button>
       </>
