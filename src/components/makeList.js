@@ -1,4 +1,36 @@
-const months = ['Jan','Feb','Mar','Apr','May','Jun','July','Aug','Sep','Oct','Nov','Dec'];
+import React from 'react';
+import styled from 'styled-components';
+import transformation from '../skill/transformation';
+
+const ListWrapper = styled.div`
+    width:500px;
+    height:9vh;
+    border-radius:15px;
+    background:#efefef;
+    margin-bottom:15px;
+`;
+
+const List = styled.li`
+    width:100%;
+    height:100%;
+    list-style:none;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+`;
+
+const Label = styled.div`
+    font-weight:700;
+    margin-left:20px;
+    font-size:20px;
+`;
+
+const Amount = styled.div`
+    color:${props=>props.active>=0?"green":"red"};
+    font-weight:700;
+    margin-right:20px;
+    font-size:20px;
+`;
 
 const MakeList = ({type,lists,month,year}) => {
     let newLists;
@@ -9,11 +41,16 @@ const MakeList = ({type,lists,month,year}) => {
     }
     return (
           <>
-            <h2>{months[month]}</h2>
-            <h3>{type}</h3>
             {newLists.map((list)=>{
                 return(
-                    <li key={list.id}>{list.label} {list.amount}</li>
+                    <>
+                        <ListWrapper>
+                            <List key={list.id}>
+                                <Label>{list.label}</Label>
+                                <Amount active={list.amount}>{list.amount>0?`+${transformation(list.amount)}`:transformation(list.amount)}</Amount>
+                            </List>
+                        </ListWrapper>
+                    </>
                 )
             })}
           </>

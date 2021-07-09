@@ -2,6 +2,38 @@ import React,{useState} from 'react';
 import {useSelector} from 'react-redux';
 import MakeList from './MakeList';
 import styled from 'styled-components';
+import transformation from '../skill/transformation';
+
+const Wrapper = styled.div`
+    width:100%;
+    height:20vh;
+    margin-top:40px;
+    display:flex;
+    justify-content:center;
+`;
+
+const BlueButton = styled.button`
+    border:2px solid green;
+    font-size:25px;
+    font-weight:800;
+    border-radius:12px;
+    width:15%;
+    height:6vh;
+    margin-right:15px;
+    background:${props=>props.active==='INCOME'?"green":"white"};
+    color:${props=>props.active==='INCOME'?"white":"green"};
+`;
+
+const RedButton = styled.button`
+    border:2px solid red;
+    font-size:25px;
+    font-weight:800;
+    border-radius:12px;
+    width:15%;
+    height:6vh;
+    background:${props=>props.active==='EXPEDITURE'?"red":"white"};
+    color:${props=>props.active==='EXPEDITURE'?"white":"red"};
+`;
 
 const sumIncome = (lists,month,year) => {
 
@@ -13,13 +45,13 @@ const sumIncome = (lists,month,year) => {
     .reduce((acc,cur)=>{
         return acc+cur;
     },0);
-    return income;
+    return transformation(income);
 
 }//월별 수입 합계를 구해주는 함수
 
 const sumExpediture = (lists,month,year) => {
 
-    const expediture = lists
+    let expediture = lists
     .filter((list)=>list.month===month&&list.type==='EXPEDITURE'&&Number(list.year)===year)
     .map((list)=>{
         return Number(list.amount);
@@ -27,7 +59,10 @@ const sumExpediture = (lists,month,year) => {
     .reduce((acc,cur)=>{
         return acc+cur;
     },0);
-    return -1*expediture;
+    if(expediture===0){
+        expediture = -1*expediture;
+    }
+    return transformation(-1*expediture);
 
 }//월별 지출 합계를 구해주는 함수
 
@@ -65,36 +100,5 @@ const ShowList = ({month,year}) => {
         </>
     )
 }
-
-const Wrapper = styled.div`
-    width:100%;
-    height:20vh;
-    margin-top:40px;
-    display:flex;
-    justify-content:center;
-`;
-
-const BlueButton = styled.button`
-    border:2px solid green;
-    font-size:25px;
-    font-weight:800;
-    border-radius:12px;
-    width:15%;
-    height:6vh;
-    margin-right:15px;
-    background:${props=>props.active==='INCOME'?"green":"white"};
-    color:${props=>props.active==='INCOME'?"white":"green"};
-`;
-
-const RedButton = styled.button`
-    border:2px solid red;
-    font-size:25px;
-    font-weight:800;
-    border-radius:12px;
-    width:15%;
-    height:6vh;
-    background:${props=>props.active==='EXPEDITURE'?"red":"white"};
-    color:${props=>props.active==='EXPEDITURE'?"white":"red"};
-`;
 
 export default ShowList;

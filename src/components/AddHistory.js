@@ -6,17 +6,18 @@ import styled from 'styled-components';
 import store from '../redux/store';
 
 const Wrapper = styled.div`
-    border:1px solid black;
+    border-bottom:0px;
     position:absolute;
     bottom:0;
     width:45%;
     height:94vh;
     background-color:white;
     z-index:0;
-    border-radius:20px;
+    border-radius:25px 25px 0px 0px;
     display:flex;
     flex-direction:column;
     align-items:center;
+    box-shadow:0px 0px 20px grey;
 `;
 
 const BtnWrapper = styled.div`  
@@ -230,9 +231,9 @@ const AddHistory = ({setAddHistory}) => {
         e.preventDefault();
         const monthIndex = Number(monthRef.current.value)-1;
         if(type===true){
-            incomeDispatch(income(amountRef.current.value,labelRef.current.value,yearRef.current.value,monthIndex,Number(dateRef.current.value)));
+            incomeDispatch(income(amountRef.current.value,labelRef.current.value,Number(yearRef.current.value),monthIndex,Number(dateRef.current.value)));
         }else{
-            incomeDispatch(expediture(amountRef.current.value,labelRef.current.value,yearRef.current.value,monthIndex,Number(dateRef.current.value)));
+            incomeDispatch(expediture(amountRef.current.value,labelRef.current.value,Number(yearRef.current.value),monthIndex,Number(dateRef.current.value)));
         }
         localStorage.setItem('lists',JSON.stringify(store.getState().list));
     }
@@ -248,27 +249,26 @@ const AddHistory = ({setAddHistory}) => {
     },[]) //input태그 안에 기본값
 
     return(
-        <>  
-            {close?<></>: 
-                <Wrapper>
+        <>   
+            <Wrapper>
                     <BtnWrapper>
                         <IncomeBtn active={type} onClick={onClickIncome}>Income</IncomeBtn>
                         <ExpeditureBtn active={type} onClick={onClickExpediture}>Expediture</ExpeditureBtn>
                     </BtnWrapper>
                         <Xbutton onClick={onClickXbutton}>X</Xbutton>
-                        <form onSubmit={onSubmit}>
+                    <form onSubmit={onSubmit}>
                         <InputDayWrapper>
                             <InputYear ref={yearRef} maxLength="4" onBlur={checkYearType}></InputYear>
                             <InputDay ref={monthRef} maxLength="2" onBlur={checkMonthType}></InputDay>
                             <InputDay ref={dateRef} maxLength="2" onBlur={checkDateType}></InputDay>
                         </InputDayWrapper>
                         <InputLabelAmountWrapper>
-                            <InputLabel ref={labelRef} onBlur={getLabel} placeholder="Label"></InputLabel>
-                            <InputAmount ref={amountRef} onBlur={checkAmountType} placeholder="Amount"></InputAmount>
+                            <InputLabel ref={labelRef} onBlur={getLabel} placeholder="Label" required></InputLabel>
+                            <InputAmount ref={amountRef} onBlur={checkAmountType} placeholder="Amount" required></InputAmount>
                             <DoneButton active={type} type="submit">Done</DoneButton>
                         </InputLabelAmountWrapper>
-                        </form>
-                </Wrapper>}
+                    </form>
+            </Wrapper>
         </>
     );
 }
