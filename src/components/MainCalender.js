@@ -1,15 +1,17 @@
 import React from 'react'
 import styled from 'styled-components'
+import {useSelector } from 'react-redux'
+
 const Week = styled.div`
     display : flex;
 `
 const Day = styled.div`
-    background : ${day => day.date !== -1 ? 'white':'lightgray'};
+    background : ${day => day.show ? 'white':'lightgray'};
     border : black 1px solid;
     width : 13.855%;
     flex-grow : 1;
     height : 50px;
-    color : ${day => day.date !== -1 ? 'black': 'gray'}
+    color : ${day => day.show ? 'black': 'gray'}
 `
 const Dates = styled.div`
     font-size : 10px;
@@ -27,7 +29,10 @@ const Expediture = styled.div`
     visibility : ${day => day.amount < 0 ? 'visible' : 'collapse'};
 `
 
+
 function MainCalender({today}){
+    const lists = useSelector((state)=>state.list);
+    console.log(lists)
     let thisMonth = new Date(today.getFullYear(), today.getMonth(),1)
     let dayOfFirstDate = thisMonth.getDay()
     let startDate = new Date(thisMonth)
@@ -44,23 +49,36 @@ function MainCalender({today}){
         return (thisMonth.getTime() >= startDateTime && thisMonth.getTime() < endDateTime)?
         {
             date : thisMonth.getDate(),
-            IN_id : [],
-            EX_id : []
+            IN_total : lists.filter(account => 
+                    account.type === 'INCOME' && 
+                    account.year === thisMonth.getFullYear() &&
+                    account.month === thisMonth.getMonth() &&
+                    account.date === thisMonth.getDate()
+                    ).map(account => account.amount).reduce((a,b)=>a+b,0),
+            EX_total : lists.filter(account => 
+                account.type === 'EXPEDITURE' && 
+                account.year === thisMonth.getFullYear() &&
+                account.month === thisMonth.getMonth() &&
+                account.date === thisMonth.getDate()
+            ).map(account => account.amount).reduce((a,b)=>a+b,0),
+            show : true
         }:
         {
-            date : -1
+            date : thisMonth.getDate(),
+            show : false
+
         }
     }))
-
+    console.log(weekArray)
     return (
         <div>
             {weekArray.map((week,index) =>
             <Week key={index}>
                 {week.map((day,index) =>
-                    <Day date = {day.date} key={index} >
+                    <Day show = {day.show} key={index} >
                         <Dates>{day.date}</Dates>
-                        <Income amount = {day.Income}>{day.Income}</Income>
-                        <Expediture amount = {day.Expediture}>{day.Expediture}</Expediture>
+                        <Income amount = {day.IN_total}>{day.IN_total}</Income>
+                        <Expediture amount = {day.EX_total}>{day.EX_total}</Expediture>
                     </Day>)}
             </Week>)}
         </div>

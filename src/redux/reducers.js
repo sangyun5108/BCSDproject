@@ -1,4 +1,4 @@
-import { INCOME, EXPEDITURE } from "./types";
+import { INCOME, EXPEDITURE} from "./types";
 
 const data = JSON.parse(localStorage.getItem('lists'));
 const list = data?data:[];
