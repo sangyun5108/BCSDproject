@@ -7,8 +7,8 @@ import Calender from './components/Calender'
 function App() {
   return (
     <Provider store={store}>
-      <AddHistory/>
-      <MonthList/>
+      {/* <AddHistory/>
+      <MonthList/> */}
       <Calender/>
     </Provider>
   );

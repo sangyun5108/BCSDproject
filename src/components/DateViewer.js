@@ -5,8 +5,9 @@ const Controler = styled.div`
     justify-content : center;
 `
 const DateSetContainer = styled.div`
-    background : red;
-    text-align:center;
+    background : white;
+    border : lightgray solid 1px;
+    text-align : center;
 `
 function DateViewer({date, setDate}){//날짜 출력
     const month = date.getMonth()  

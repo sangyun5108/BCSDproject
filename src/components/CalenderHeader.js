@@ -4,8 +4,9 @@ const Header = styled.div`
     display : flex;
 `
 const DOW = styled.div`
-    background : lightgray;
-    border : red 1px solid;
+    background : wight;
+    border-bottom : lightgray 1px solid;
+    border-left : lightgray 1px solid;
     width : 13.855%;
     flex-grow : 1;
     text-align : center;

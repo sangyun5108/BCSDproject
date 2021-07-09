@@ -7,11 +7,15 @@ const Week = styled.div`
 `
 const Day = styled.div`
     background : ${day => day.show ? 'white':'lightgray'};
-    border : black 1px solid;
+    border-left : lightgray 1px solid;
+    border-bottom : lightgray 1px solid;
+    text-align :right;
     width : 13.855%;
     flex-grow : 1;
     height : 50px;
-    color : ${day => day.show ? 'black': 'gray'}
+    color : ${day => day.show ? 'black': 'gray'};
+    
+    
 `
 const Dates = styled.div`
     font-size : 10px;
@@ -19,13 +23,11 @@ const Dates = styled.div`
 const Income = styled.div`
     color : red;
     font-size : 5px;
-    text-align : right;
     visibility : ${day => day.amount > 0 ? 'visible' : 'collapse'};
 `
 const Expediture = styled.div`
     color : blue;
     font-size : 5px;
-    text-align : right;
     visibility : ${day => day.amount < 0 ? 'visible' : 'collapse'};
 `
 
