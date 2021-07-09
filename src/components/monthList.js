@@ -8,6 +8,7 @@ const Wrapper = styled.div`
     flex-direction:column;
     align-items:center;
     font-size : 50px;
+    margin-top:20px;
 `;
 
 const MonthWrapper = styled.div`

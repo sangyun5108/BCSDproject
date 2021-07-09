@@ -27,8 +27,6 @@ const sumExpediture = (lists,month,year) => {
     .reduce((acc,cur)=>{
         return acc+cur;
     },0);
-
-    console.log(expediture);
     return -1*expediture;
 
 }//월별 지출 합계를 구해주는 함수
@@ -81,7 +79,7 @@ const BlueButton = styled.button`
     font-size:25px;
     font-weight:800;
     border-radius:12px;
-    width:20%;
+    width:15%;
     height:6vh;
     margin-right:15px;
     background:${props=>props.active==='INCOME'?"green":"white"};
@@ -93,7 +91,7 @@ const RedButton = styled.button`
     font-size:25px;
     font-weight:800;
     border-radius:12px;
-    width:20%;
+    width:15%;
     height:6vh;
     background:${props=>props.active==='EXPEDITURE'?"red":"white"};
     color:${props=>props.active==='EXPEDITURE'?"white":"red"};
