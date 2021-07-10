@@ -54,8 +54,6 @@ const MakeList = ({type,lists,month,year}) => {
         return a.date-b.date;
     })
 
-    console.log(newLists);
-
     const checkDate = (date) => {
         if(date!==listdate){
             listdate = date;
@@ -66,23 +64,23 @@ const MakeList = ({type,lists,month,year}) => {
     }
 
     return (
-          <>
+        <>
             {newLists.map((list)=>{
                 return(
-                    <>
-                        <Datelist key={list.id+100}>
+                    <div key={list.id}>
+                        <Datelist>
                                 {checkDate(list.date)?`${list.day}, ${list.date}th`:''}
                         </Datelist>
                         <ListWrapper> 
-                            <List key={list.id}>
+                            <List>
                                 <Label>{list.label}</Label>
                                 <Amount active={list.amount}>{list.amount>0?`+${transformation(list.amount)}`:transformation(list.amount)}</Amount>
                             </List>
                         </ListWrapper>
-                    </>
+                    </div>
                 );
             })}
-          </>
+        </>
        );
 }//종류에따른 다른 리스트를 return해주는 함수
 

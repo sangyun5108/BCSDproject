@@ -32,7 +32,7 @@ const Month = styled.span`
 
 const Button = styled.button`
     font-size:50px;
-    height:60px;
+    padding:0px;
     outline:none;
     border:none;
     background-color:white;
@@ -48,8 +48,8 @@ const MonthList = () => {
     const [year,setYear] = useState(2021);
     
     const showMonth = (e) => {
-        const direction = e.target.className;
-        if(direction==='fas fa-angle-right'){
+        const direction = e.target.parentNode.value;
+        if(direction==='right'){
             setMonth(month+1);
             if(month===11){
                 setMonth(0);
