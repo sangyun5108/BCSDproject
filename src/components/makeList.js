@@ -50,6 +50,12 @@ const MakeList = ({type,lists,month,year}) => {
         newLists = lists.filter((list)=>list.month===month&&Number(list.year)===year)
     }
 
+    newLists.sort((a,b)=>{
+        return a.date-b.date;
+    })
+
+    console.log(newLists);
+
     const checkDate = (date) => {
         if(date!==listdate){
             listdate = date;

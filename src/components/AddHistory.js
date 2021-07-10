@@ -234,12 +234,10 @@ const AddHistory = ({setAddHistory}) => {
         const dayOfWeek = WEEK[new Date(`${yearRef.current.value}-${monthRef.current.value}-${dateRef.current.value}`).getDay()];
 
         if(type===true){
-            console.log(dayOfWeek);
             Dispatch(income(amountRef.current.value,labelRef.current.value,Number(yearRef.current.value),monthIndex,Number(dateRef.current.value),dayOfWeek));
         }else{
             Dispatch(expediture(amountRef.current.value,labelRef.current.value,Number(yearRef.current.value),monthIndex,Number(dateRef.current.value),dayOfWeek));
         }
-        console.log(store.getState().list);
         localStorage.setItem('lists',JSON.stringify(store.getState().list));
     }
 
