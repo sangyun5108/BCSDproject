@@ -7,7 +7,7 @@ import {useEffect,useState} from 'react';
 import styled from 'styled-components';
 
 const AddHistoryBtn = styled.button`
-  position:absolute;
+  position:fixed;
   bottom:7%;
   width:12%;
   height:5%;

@@ -22,6 +22,7 @@ export const incomeExpeditureReducer = (state=initialState,action) => {
                         year:action.year,
                         month:action.month,
                         date:action.date,
+                        day:action.day,
                         id:action.id
                     }
                 ]
@@ -38,6 +39,7 @@ export const incomeExpeditureReducer = (state=initialState,action) => {
                             year:action.year,
                             month:action.month,
                             date:action.date,
+                            day:action.day,
                             id:action.id
                         }
                     ]

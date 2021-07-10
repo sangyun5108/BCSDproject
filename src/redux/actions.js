@@ -30,9 +30,7 @@ const checkLocal  = () => {
     return;
 }
 
-checkLocal();
-
-export const income = (amount,label,year,month,date) => {
+export const income = (amount,label,year,month,date,day) => {
     return {
         type:INCOME,
         amount,
@@ -40,11 +38,12 @@ export const income = (amount,label,year,month,date) => {
         year,
         month,
         date,
+        day,
         id:incomeId++
     }
 }
 
-export const expediture = (amount,label,year,month,date) => {
+export const expediture = (amount,label,year,month,date,day) => {
     return {
         type:EXPEDITURE,
         amount,
@@ -52,11 +51,13 @@ export const expediture = (amount,label,year,month,date) => {
         year,
         month,
         date,
+        day,
         id:expeditureId++
     }
 }
 
 export const init = ()=>{
+    checkLocal();
     const getlist = JSON.parse(localStorage.getItem('lists'));
     const list = getlist?getlist:[];
 

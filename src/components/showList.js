@@ -2,7 +2,7 @@ import React,{useState} from 'react';
 import {useSelector} from 'react-redux';
 import MakeList from './MakeList';
 import styled from 'styled-components';
-import transformation from '../skill/transformation';
+import transformation from '../customModules/transformation';
 
 const Wrapper = styled.div`
     width:100%;
@@ -10,6 +10,7 @@ const Wrapper = styled.div`
     margin-top:40px;
     display:flex;
     justify-content:center;
+    overflow:hidden;
 `;
 
 const BlueButton = styled.button`
@@ -22,6 +23,9 @@ const BlueButton = styled.button`
     margin-right:15px;
     background:${props=>props.active==='INCOME'?"green":"white"};
     color:${props=>props.active==='INCOME'?"white":"green"};
+    &:hover{
+        cursor:pointer;
+    }
 `;
 
 const RedButton = styled.button`
@@ -33,6 +37,9 @@ const RedButton = styled.button`
     height:6vh;
     background:${props=>props.active==='EXPEDITURE'?"red":"white"};
     color:${props=>props.active==='EXPEDITURE'?"white":"red"};
+    &:hover{
+        cursor:pointer;
+    }
 `;
 
 const sumIncome = (lists,month,year) => {
@@ -96,7 +103,7 @@ const ShowList = ({month,year}) => {
                 <BlueButton active={type} onClick={clickPlusBtn}>+{sumIncome(lists,month,year)}</BlueButton>
                 <RedButton active={type} onClick={clickMinusBtn}>-{sumExpediture(lists,month,year)}</RedButton>
             </Wrapper>
-            <div><MakeList type={type} lists={lists} month={month} year={year}/></div>
+            <MakeList type={type} lists={lists} month={month} year={year}/>
         </>
     )
 }

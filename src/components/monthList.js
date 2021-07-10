@@ -36,6 +36,10 @@ const Button = styled.button`
     outline:none;
     border:none;
     background-color:white;
+    padding:10px;
+    &:hover{
+        cursor:pointer;
+    }
 `;
 
 const months = ['Jan','Feb','Mar','Apr','May','Jun','July','Aug','Sep','Oct','Nov','Dec'];

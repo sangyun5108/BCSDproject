@@ -7,7 +7,7 @@ import store from '../redux/store';
 
 const Wrapper = styled.div`
     border-bottom:0px;
-    position:absolute;
+    position:fixed;
     bottom:0;
     width:45%;
     height:94vh;
@@ -159,6 +159,7 @@ const date = new Date();
 const nowyear = date.getFullYear();
 const nowmonth = date.getMonth()<10?`0${date.getMonth()+1}`:`${date.getMonth()}`;
 const nowdate = date.getDate()<10?`0${date.getDate()}`:`${date.getDate()}`;
+const WEEK = ['SUN','MON','TUE','WEN','THU','FRI','SAT'];
 
 const AddHistory = ({setAddHistory}) => {
 
@@ -170,7 +171,7 @@ const AddHistory = ({setAddHistory}) => {
     const amountRef = useRef(null);
     const labelRef = useRef(null);
 
-    const incomeDispatch = useDispatch();
+    const Dispatch = useDispatch();
 
     const onClickIncome = (e) => {
         e.preventDefault();
@@ -230,11 +231,15 @@ const AddHistory = ({setAddHistory}) => {
         setAddHistory(false);
         e.preventDefault();
         const monthIndex = Number(monthRef.current.value)-1;
+        const dayOfWeek = WEEK[new Date(`${yearRef.current.value}-${monthRef.current.value}-${dateRef.current.value}`).getDay()];
+
         if(type===true){
-            incomeDispatch(income(amountRef.current.value,labelRef.current.value,Number(yearRef.current.value),monthIndex,Number(dateRef.current.value)));
+            console.log(dayOfWeek);
+            Dispatch(income(amountRef.current.value,labelRef.current.value,Number(yearRef.current.value),monthIndex,Number(dateRef.current.value),dayOfWeek));
         }else{
-            incomeDispatch(expediture(amountRef.current.value,labelRef.current.value,Number(yearRef.current.value),monthIndex,Number(dateRef.current.value)));
+            Dispatch(expediture(amountRef.current.value,labelRef.current.value,Number(yearRef.current.value),monthIndex,Number(dateRef.current.value),dayOfWeek));
         }
+        console.log(store.getState().list);
         localStorage.setItem('lists',JSON.stringify(store.getState().list));
     }
 
