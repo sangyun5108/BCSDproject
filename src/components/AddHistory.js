@@ -9,7 +9,7 @@ const Wrapper = styled.div`
     border-bottom:0px;
     position:fixed;
     bottom:0;
-    width:45%;
+    width:600px;
     height:94vh;
     background-color:white;
     z-index:0;
@@ -29,8 +29,8 @@ const BtnWrapper = styled.div`
 `;
 
 const IncomeBtn = styled.button`
-    width:40%;
-    height:100%;
+    width:210px;
+    height:50px;
     margin-right:5%;
     text-align:center;
     font-size:25px;
@@ -43,8 +43,8 @@ const IncomeBtn = styled.button`
 `;
 
 const ExpeditureBtn = styled.button`
-    width:40%;
-    height:100%;
+    width:210px;
+    height:50px;
     text-align:center;
     font-size:25px;
     font-weight:bold;
@@ -63,7 +63,7 @@ const InputDayWrapper = styled.div`
 const InputYear = styled.input`
     border:none;
     text-align:center;
-    width:10%;
+    width:70px;
     outline:none;
     font-size:25px;
     font-weight:650;
@@ -76,7 +76,7 @@ const InputYear = styled.input`
 const InputDay = styled.input`
     border:none;
     text-align:center;
-    width:6%;
+    width:40px;
     outline:none;
     font-size:25px;
     font-weight:650;
@@ -87,8 +87,8 @@ const InputDay = styled.input`
 `;
 
 const InputLabel = styled.input`
-    width:80%;
-    height:8vh;
+    width:450px;
+    height:65px;
     border-radius:12px;
     outline:none;
     border:none;
@@ -98,8 +98,8 @@ const InputLabel = styled.input`
     padding-left:25px;
 `
 const InputAmount = styled.input`
-    width:80%;
-    height:8vh;
+    width:450px;
+    height:65px;
     border-radius:12px;
     outline:none;
     border:none;
