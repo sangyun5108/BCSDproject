@@ -2,6 +2,7 @@ import React from 'react';
 import {useDispatch} from 'react-redux';
 import {useRef, useEffect, useState} from 'react';
 import {income,expediture} from '../redux/actions';
+import {useHistory} from 'react-router-dom';
 import styled from 'styled-components';
 import store from '../redux/store';
 
@@ -161,7 +162,7 @@ const nowmonth = date.getMonth()<10?`0${date.getMonth()+1}`:`${date.getMonth()}`
 const nowdate = date.getDate()<10?`0${date.getDate()}`:`${date.getDate()}`;
 const WEEK = ['SUN','MON','TUE','WEN','THU','FRI','SAT'];
 
-const AddHistory = ({setAddHistory}) => {
+const AddHistory = () => {
 
     const [type,setType] = useState(true); //income,Expediture 선택
     const [close,setClose] = useState(false);
@@ -171,6 +172,7 @@ const AddHistory = ({setAddHistory}) => {
     const amountRef = useRef(null);
     const labelRef = useRef(null);
 
+    const history = useHistory();
     const Dispatch = useDispatch();
 
     const onClickIncome = (e) => {
@@ -228,8 +230,8 @@ const AddHistory = ({setAddHistory}) => {
     }
 
     const onSubmit = (e) =>{
-        setAddHistory(false);
         e.preventDefault();
+        history.push('/');
         const monthIndex = Number(monthRef.current.value)-1;
         const dayOfWeek = WEEK[new Date(`${yearRef.current.value}-${monthRef.current.value}-${dateRef.current.value}`).getDay()];
 
@@ -243,7 +245,7 @@ const AddHistory = ({setAddHistory}) => {
 
     const onClickXbutton = (e) => {
         setClose(!close);
-        setAddHistory(false);//자식컴포넌트에서 부모컴포넌트에게 상태전달
+        history.push('/');
     }    
     useEffect(()=>{
         yearRef.current.value = nowyear;

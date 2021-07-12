@@ -2,9 +2,10 @@ import React from 'react';
 import AddHistory from '../components/AddHistory';
 import ShowList from '../components/ShowList';
 import styled from 'styled-components';
-import { useState,useEffect } from 'react';
+import {useEffect} from 'react';
 import { useDispatch} from 'react-redux';
 import {init} from '../redux/actions';
+import {Route, Switch, useHistory} from 'react-router-dom';
 
 const AddHistoryBtn = styled.button`
   position:fixed;
@@ -27,10 +28,10 @@ const AddHistoryBtn = styled.button`
 const AccountBook = () => {
 
   const dispatch = useDispatch();
-  const [addHistory,setAddHistory] = useState(false);
+  const history = useHistory();
 
   const onClickAdd = () => {
-    setAddHistory(true);
+    history.push('/addHistory');
   }
 
   useEffect(()=>{
@@ -40,9 +41,15 @@ const AccountBook = () => {
 
     return (
         <>
-            <ShowList/>
-            <AddHistoryBtn onClick={onClickAdd}>Add History</AddHistoryBtn>
-            {addHistory?<AddHistory setAddHistory={setAddHistory}/>:<></>}
+            <Switch>
+                <Route exact path='/'>
+                    <ShowList/>
+                    <AddHistoryBtn onClick={onClickAdd}>Add History</AddHistoryBtn>
+                </Route>
+                <Route path='/addHistory'>
+                    <AddHistory/>
+                </Route>
+            </Switch>
         </>     
     );
 }
