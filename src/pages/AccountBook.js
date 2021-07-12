@@ -1,11 +1,10 @@
 import React from 'react';
-import AddHistory from '../components/AddHistory';
 import ShowList from '../components/ShowList';
 import styled from 'styled-components';
 import {useEffect} from 'react';
 import { useDispatch} from 'react-redux';
 import {init} from '../redux/actions';
-import {Route, Switch, useHistory} from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
 
 const AddHistoryBtn = styled.button`
   position:fixed;
@@ -41,15 +40,8 @@ const AccountBook = () => {
 
     return (
         <>
-            <Switch>
-                <Route exact path='/'>
-                    <ShowList/>
-                    <AddHistoryBtn onClick={onClickAdd}>Add History</AddHistoryBtn>
-                </Route>
-                <Route path='/addHistory'>
-                    <AddHistory/>
-                </Route>
-            </Switch>
+            <ShowList/>
+            <AddHistoryBtn onClick={onClickAdd}>Add History</AddHistoryBtn>
         </>     
     );
 }

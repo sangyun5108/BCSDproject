@@ -1,11 +1,11 @@
 import {Provider} from 'react-redux';
 import store from './redux/store';
-import AccountBook from '../src/pages/AccountBook';
+import MainPage from '../src/pages/MainPage';
 
 const App = () => {
   return(
     <Provider store={store}>
-      <AccountBook/>
+      <MainPage/>
     </Provider>
   );
 }
