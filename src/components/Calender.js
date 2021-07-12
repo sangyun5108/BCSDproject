@@ -3,52 +3,62 @@ import styled from'styled-components'
 import MainCalender from './MainCalender'
 import DateViewer from './DateViewer'
 import CalenderHeader from './CalenderHeader'
-const TotalContainer = styled.div`
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
+import TotalAmounts from './TotalAmounts'
+const Wrap = styled.div`
     display : flex;
     flex-direction : column;
+    width : 100%
+    align-items : center;
+    overflow-x : hidden;
+    min-height : 100vh;
+`
+const Header = styled.div`
+    display : flex;
+    width : 100%
+    overflow-x : hidden;
+    flex-direction : column;
+    align-items : center;
     justify-content : center;
-    display:table-row;
-    border : black solid 1px;
+    font-size: 100%;
+    font: inherit;
 `
-const CalenderContainer = styled.div`
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    border : black solid 1px;
+
+const ContentContainer = styled.div`
+    display : flex;
+    align-items : center;
+    justify-content : center;
+    width : 100%;
 `
-const View = styled.div`
+
+const CalenderWrap = styled.div`
+    padding-bottom: 1.5rem;
+    margin-top : 2.0625rem;
+    padding-left : 0.5rem;
+    padding-right : 0.5rem;
+    display : flex;
+    flex-direction : column;
+    border-radius: 0.875rem;
+    box-shadow : 0 0.3125rem 3.125rem rgb(0 0 0 / 10%);
+    max-width : 500px;
+    width : 100%;
     
-    position: relative;
-    width: 75%;
-    &:before{
-        content: "";
-        display: block;
-        padding-top: 100%;
-    }
 `
 function Calender(){
     const today = new Date()
     const [date,setDate] = useState(today)
     return (
-        <View>
-            <TotalContainer>
-                <CalenderContainer>
-                    <DateViewer
-                        date = {date}
-                        setDate = {setDate}
-                    />
+        <Wrap>
+            <Header>
+                <DateViewer date = {date} setDate = {setDate}/>
+                <TotalAmounts today = {date}/>
+            </Header>
+            <ContentContainer>
+                <CalenderWrap>
                     <CalenderHeader/>
                     <MainCalender today = {date}/>
-                </CalenderContainer>   
-            </TotalContainer>
-        </View>
+                </CalenderWrap>
+            </ContentContainer>
+        </Wrap>
 
     )
 }

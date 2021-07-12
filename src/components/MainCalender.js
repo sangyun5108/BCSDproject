@@ -1,40 +1,45 @@
 import React from 'react'
 import styled from 'styled-components'
 import {useSelector } from 'react-redux'
-
+const Wrap = styled.div`
+    display : grid;
+    grid-template-columns: repeat(1,1fr);
+    grid-row-gap: .25rem;
+`
 const Week = styled.div`
-    display : flex;
+    display : grid;
+    grid-template-columns: repeat(7,1fr);
+    grid-column-gap: .25rem;
+    width: 100%;
+    height: 85%;
 `
 const Day = styled.div`
-    background : ${day => day.show ? 'white':'lightgray'};
-    border-left : lightgray 1px solid;
-    border-bottom : lightgray 1px solid;
-    text-align :right;
-    width : 13.855%;
-    flex-grow : 1;
-    height : 50px;
+    background : ${day => day.show ? '#f5f5f7':'#FCFCFD'};
     color : ${day => day.show ? 'black': 'gray'};
-    
-    
-`
-const Dates = styled.div`
-    font-size : 10px;
+    display : flex;
+    flex-direction : column;
+    justify-content : space-between;
+    border-radius : 0.225rem;
+    width: 100%;
+    height: 100%;
+    font-weight: 600;
+    font-size: .0875rem;
+    line-height: 1rem;
+    padding-left : 0.1rem;
 `
 const Income = styled.div`
-    color : red;
-    font-size : 5px;
-    visibility : ${day => day.amount > 0 ? 'visible' : 'collapse'};
+    color : blue;
+    font-size: .0575rem;
+    visibility : ${day => day.day.IN_total > 0 && day.day.IN_show? 'visible' : 'collapse'};
+    text-align : right;
 `
 const Expediture = styled.div`
-    color : blue;
-    font-size : 5px;
-    visibility : ${day => day.amount < 0 ? 'visible' : 'collapse'};
-`
-
-
-function MainCalender({today}){
-    const lists = useSelector((state)=>state.list);
-    console.log(lists)
+    color : red;
+    font-size: .0575rem;
+    visibility : ${day => day.day.EX_total < 0 && day.day.EX_show? 'visible' : 'collapse'};
+    text-align : right;
+    `
+const useWeekArray = (today, lists) => {
     let thisMonth = new Date(today.getFullYear(), today.getMonth(),1)
     let dayOfFirstDate = thisMonth.getDay()
     let startDate = new Date(thisMonth)
@@ -55,35 +60,46 @@ function MainCalender({today}){
                     account.type === 'INCOME' && 
                     account.year === thisMonth.getFullYear() &&
                     account.month === thisMonth.getMonth() &&
-                    account.date === thisMonth.getDate()
-                    ).map(account => account.amount).reduce((a,b)=>a+b,0),
+                    account.date === thisMonth.getDate())
+                    .map(account => account.amount)
+                    .reduce((a,b)=>a+b,0),
             EX_total : lists.filter(account => 
                 account.type === 'EXPEDITURE' && 
                 account.year === thisMonth.getFullYear() &&
                 account.month === thisMonth.getMonth() &&
-                account.date === thisMonth.getDate()
-            ).map(account => account.amount).reduce((a,b)=>a+b,0),
-            show : true
+                account.date === thisMonth.getDate())
+                .map(account => account.amount)
+                .reduce((a,b)=>a+b,0),
+            show : true,
+            IN_show : true,
+            EX_show : true
         }:
         {
             date : thisMonth.getDate(),
+            IN_total : 0,
+            EX_total : 0,
             show : false
 
         }
     }))
-    console.log(weekArray)
+    return weekArray
+}
+
+function MainCalender({today}){
+    const lists = useSelector((state)=>state.list);
+    let weekArray = useWeekArray(today, lists)
     return (
-        <div>
+        <Wrap>
             {weekArray.map((week,index) =>
             <Week key={index}>
                 {week.map((day,index) =>
                     <Day show = {day.show} key={index} >
-                        <Dates>{day.date}</Dates>
-                        <Income amount = {day.IN_total}>{day.IN_total}</Income>
-                        <Expediture amount = {day.EX_total}>{day.EX_total}</Expediture>
+                        <div>{day.date}</div>
+                        <Income day = {day}>+{day.IN_total}</Income>
+                        <Expediture day = {day}>{day.EX_total}</Expediture>
                     </Day>)}
             </Week>)}
-        </div>
+        </Wrap>
     )
 }
 

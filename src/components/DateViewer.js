@@ -5,9 +5,29 @@ const Controler = styled.div`
     justify-content : center;
 `
 const DateSetContainer = styled.div`
+    width : 100%;
     background : white;
-    border : lightgray solid 1px;
     text-align : center;
+    font-weight : 600;
+    font-size : 2.5rem;
+   
+`
+const Year = styled.div`
+    font-size : 0.5rem;
+    color : gray;
+`
+const Monthselector = styled.div`
+    width : 33.33333%;
+    margin : 3rem;
+    color : gray;
+    &:hover{
+        color : black;
+        cursor : pointer;
+    }
+`
+const Now = styled.div`
+    width : 33.33333%;
+    margin : 3rem;
 `
 function DateViewer({date, setDate}){//날짜 출력
     const month = date.getMonth()  
@@ -19,11 +39,25 @@ function DateViewer({date, setDate}){//날짜 출력
     }
     return(
         <DateSetContainer>
-            <div>
-                {date.getFullYear()}/{date.getMonth()+1}
-            </div>
             <Controler>
-                <button onClick={()=>onDecrease()}>&lt;</button>{date.getMonth()+1}<button onClick={()=>onIncrease()}>&gt;</button>
+                <Monthselector onClick={()=>onDecrease()}>
+                    <Year>
+                        {date.getFullYear()}
+                    </Year>
+                    {date.getMonth()}
+                </Monthselector>
+                <Now>
+                    <Year>
+                        {date.getFullYear()}
+                    </Year>
+                    {date.getMonth()+1}
+                </Now>
+                <Monthselector onClick={()=>onIncrease()}>
+                    <Year>
+                        {date.getFullYear()}
+                    </Year>
+                    {date.getMonth()+2}
+                </Monthselector>
             </Controler> 
         </DateSetContainer>
     )

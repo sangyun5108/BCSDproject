@@ -1,18 +1,24 @@
 import React from 'react'
 import styled from 'styled-components'
 const Header = styled.div`
-    display : flex;
+    display : grid;
+    grid-template-columns: repeat(7,1fr);
+    grid-row-gap: .4375rem;
+    width: 100%;
+    height: 3.4375rem;
 `
 const DOW = styled.div`
-    background : wight;
-    border-bottom : lightgray 1px solid;
-    border-left : lightgray 1px solid;
-    width : 13.855%;
-    flex-grow : 1;
+    display : flex;
+    justify-content : center;
+    align-items : center;
+    font-weight : 600;
+    font-size : 0.0625rem;
+    line-height : 1.3125rem;
     text-align : center;
+    
 `
 function CalenderHeader(){
-    const dayArray = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat']
+    const dayArray = ['SUN','MON','TUE','WED','THU','FRI','SAT']
     return (
         <Header>
             {dayArray.map((day,index) => <DOW key={index}>{day}</DOW>)}
