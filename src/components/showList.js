@@ -2,7 +2,7 @@ import React,{useState} from 'react';
 import {useSelector} from 'react-redux';
 import styled from 'styled-components';
 import transformation from '../utils/transformation';
-
+import {useGiveSum} from '../hooks/useGiveSum';
 const Wrapper = styled.div`
     width:100%;
     height:20vh;
@@ -121,42 +121,12 @@ const Datelist = styled.div`
 
 const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','July','Aug','Sep','Oct','Nov','Dec'];
 
-const sumIncome = (lists,month,year) => {
-
-    const income = lists
-    .filter((list)=>list.month===month&&list.type==='INCOME'&&Number(list.year)===year)
-    .map((list)=>{
-        return Number(list.amount);
-    })
-    .reduce((acc,cur)=>{
-        return acc+cur;
-    },0);
-    return transformation(income);
-
-}//월별 수입 합계를 구해주는 함수
-
-const sumExpediture = (lists,month,year) => {
-
-    let expediture = lists
-    .filter((list)=>list.month===month&&list.type==='EXPEDITURE'&&Number(list.year)===year)
-    .map((list)=>{
-        return Number(list.amount);
-    })
-    .reduce((acc,cur)=>{
-        return acc+cur;
-    },0);
-    if(expediture===0){
-        expediture = -1*expediture;
-    }
-    return transformation(-1*expediture);
-
-}//월별 지출 합계를 구해주는 함수
-
 const ShowList = () => {
 
     const [type,setType] = useState('incomeExpediture');
     const [month,setMonth] = useState(0);
     const [year,setYear] = useState(2021);
+    //redux에서 관리
     let newLists;
     let listdate=0;
 
@@ -232,8 +202,8 @@ const ShowList = () => {
                 </MonthWrapper>
             </MWrapper>
             <Wrapper>
-                <BlueButton active={type} onClick={clickPlusBtn}>+{sumIncome(lists,month,year)}</BlueButton>
-                <RedButton active={type} onClick={clickMinusBtn}>-{sumExpediture(lists,month,year)}</RedButton>
+                <BlueButton active={type} onClick={clickPlusBtn}>+{useGiveSum('INCOME',month,year)}</BlueButton>
+                <RedButton active={type} onClick={clickMinusBtn}>{useGiveSum('EXPEDITURE',month,year)}</RedButton>
             </Wrapper>
             {newLists.map((list)=>{
                 return(

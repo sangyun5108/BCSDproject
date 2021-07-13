@@ -1,4 +1,4 @@
-import { INCOME, EXPEDITURE, INIT } from "./types";
+import { INCOME, EXPEDITURE, INIT} from "./types";
 
 const initialState = {
     list:[]
