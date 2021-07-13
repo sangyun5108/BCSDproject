@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import styled from 'styled-components';
 import transformation from '../utils/transformation';
@@ -155,22 +155,13 @@ const ShowList = () => {
         dispatch(Year(year));
     }
 
-    const clickPlusBtn = () => {
+    const clickBtn = (e) => {
+        const value = e.target.value;
 
-        if(type ==='INCOME'){
+        if(type==='INCOME'||type==='EXPEDITURE'){
             type = 'incomeExpediture';
         }else{
-            type = 'INCOME';
-        }
-        dispatch(Type(type));
-    }
-
-    const clickMinusBtn = () => {
-        
-        if(type==='EXPEDITURE'){
-            type = 'incomeExpediture';
-        }else{
-            type = 'EXPEDITURE';
+            type = value;
         }
         dispatch(Type(type));
     }
@@ -210,8 +201,8 @@ const ShowList = () => {
                 </MonthWrapper>
             </MWrapper>
             <Wrapper>
-                <BlueButton active={type} onClick={clickPlusBtn}>+{useGiveSum('INCOME',month,year)}</BlueButton>
-                <RedButton active={type} onClick={clickMinusBtn}>{useGiveSum('EXPEDITURE',month,year)}</RedButton>
+                <BlueButton active={type} value={'INCOME'} onClick={clickBtn}>+{useGiveSum('INCOME',month,year)}</BlueButton>
+                <RedButton active={type} value={'EXPEDITURE'} onClick={clickBtn}>{useGiveSum('EXPEDITURE',month,year)}</RedButton>
             </Wrapper>
             {newLists.map((list)=>{
                 return(
