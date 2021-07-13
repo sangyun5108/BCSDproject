@@ -1,8 +1,10 @@
 import React,{useState} from 'react';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import styled from 'styled-components';
 import transformation from '../utils/transformation';
 import {useGiveSum} from '../hooks/useGiveSum';
+import {Type,Month,Year} from '../redux/actions';
+
 const Wrapper = styled.div`
     width:100%;
     height:20vh;
@@ -28,13 +30,13 @@ const MonthWrapper = styled.div`
     width:100%;
 `;
 
-const Year = styled.div`
+const Years = styled.div`
     font-size:1rem;
     color:#979797;
     font-weight:500;
 `;
 
-const Month = styled.span`
+const Months = styled.span`
     width:500px;
     text-align:center;
     font-weight:700
@@ -123,48 +125,54 @@ const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','July','Aug','Sep','Oct','No
 
 const ShowList = () => {
 
-    const [type,setType] = useState('incomeExpediture');
-    const [month,setMonth] = useState(0);
-    const [year,setYear] = useState(2021);
     //redux에서 관리
     let newLists;
     let listdate=0;
 
-    const lists = useSelector((state)=>state.list);
+    const lists = useSelector((state)=>(state.IE).list);
+    const dispatch = useDispatch();
+    
+    let type = useSelector((state)=>(state.SH).type);
+    let month = useSelector((state)=>(state.SH).month);
+    let year = useSelector((state)=>(state.SH).year);
     
     const showMonth = (e) => {
         const direction = e.target.parentNode.value;
         if(direction==='right'){
-            setMonth(month+1);
-            if(month===11){
-                setMonth(0);
-                setYear(year+1);
+            month+=1;
+            if(month===12){
+                month=0;
+                year+=1;
             }
         }else{
-            setMonth(month-1);
-            if(month===0){
-                setMonth(11);
-                setYear(year-1);
+                month-=1;
+            if(month===-1){
+                month=11;
+                year-=1;
             }
         }
+        dispatch(Month(month));
+        dispatch(Year(year));
     }
 
     const clickPlusBtn = () => {
 
         if(type ==='INCOME'){
-            setType('incomeExpediture');
-            return;
+            type = 'incomeExpediture';
+        }else{
+            type = 'INCOME';
         }
-        setType('INCOME');
+        dispatch(Type(type));
     }
 
     const clickMinusBtn = () => {
         
         if(type==='EXPEDITURE'){
-            setType('incomeExpediture');
-            return;
+            type = 'incomeExpediture';
+        }else{
+            type = 'EXPEDITURE';
         }
-        setType('EXPEDITURE');
+        dispatch(Type(type));
     }
 
     if(type==='INCOME'||type==='EXPEDITURE'){
@@ -190,12 +198,12 @@ const ShowList = () => {
     return(
         <>
             <MWrapper>
-                <Year>{year}</Year>
+                <Years>{year}</Years>
                 <MonthWrapper>
                     <Button onClick={showMonth} value='left'>
                         <i className="fas fa-angle-left"></i>
                     </Button>
-                    <Month>{MONTHS[month]}</Month>
+                    <Months>{MONTHS[month]}</Months>
                     <Button onClick={showMonth} value='right'>
                         <i className="fas fa-angle-right"></i>
                     </Button>
