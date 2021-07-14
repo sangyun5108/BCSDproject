@@ -173,7 +173,7 @@ const AddHistory = () => {
     const labelRef = useRef(null);
 
     const history = useHistory();
-    const Dispatch = useDispatch();
+    const dispatch = useDispatch();
 
     const onClickIncome = (e) => {
         e.preventDefault();
@@ -236,9 +236,9 @@ const AddHistory = () => {
         const dayOfWeek = WEEK[new Date(`${yearRef.current.value}-${monthRef.current.value}-${dateRef.current.value}`).getDay()];
 
         if(type===true){
-            Dispatch(income(amountRef.current.value,labelRef.current.value,Number(yearRef.current.value),monthIndex,Number(dateRef.current.value),dayOfWeek));
+            dispatch(income(amountRef.current.value,labelRef.current.value,Number(yearRef.current.value),monthIndex,Number(dateRef.current.value),dayOfWeek));
         }else{
-            Dispatch(expediture(amountRef.current.value,labelRef.current.value,Number(yearRef.current.value),monthIndex,Number(dateRef.current.value),dayOfWeek));
+            dispatch(expediture(amountRef.current.value,labelRef.current.value,Number(yearRef.current.value),monthIndex,Number(dateRef.current.value),dayOfWeek));
         }
         localStorage.setItem('lists',JSON.stringify(store.getState().incomeExpeditureReducer.list));
     }

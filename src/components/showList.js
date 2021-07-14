@@ -127,32 +127,34 @@ const ShowList = () => {
 
     let newLists;
     let listdate=0;
+    let incomeSum = 0;
+    let expeditureSum = 0;
 
     const {list:lists} = useSelector((state)=>state.incomeExpeditureReducer);
     const dispatch = useDispatch();
 
     let {type,month,year} = useSelector((state)=>state.showListReducer);
-
-    let incomeSum = 0;
-    let expeditureSum = 0;
+    let newMonth = month;
+    let newType = type;
+    let newYear = year;
     
     const showMonth = (e) => {
         const direction = e.target.parentNode.value;
         if(direction==='right'){
-            month+=1;
-            if(month===12){
-                month=0;
-                year+=1;
+            newMonth+=1
+            if(month===11){
+                newMonth=0;
+                newYear+=1;
             }
         }else{
-                month-=1;
-            if(month===-1){
-                month=11;
-                year-=1;
+            newMonth-=1;
+            if(newMonth===-1){
+                newMonth=11;
+                newYear-=1;
             }
         }
-        dispatch(Month(month));
-        dispatch(Year(year));
+        dispatch(Month(newMonth));
+        dispatch(Year(newYear));
     }
 
     incomeSum = useGiveSum('INCOME',month,year);
@@ -164,9 +166,9 @@ const ShowList = () => {
         if(type==='INCOME'||type==='EXPEDITURE'){
             type = 'incomeExpediture';
         }else{
-            type = value;
+            newType = value;
         }
-        dispatch(Type(type));
+        dispatch(Type(newType));
     }
 
     if(type==='INCOME'||type==='EXPEDITURE'){
