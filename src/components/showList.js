@@ -128,12 +128,10 @@ const ShowList = () => {
     let newLists;
     let listdate=0;
 
-    const lists = useSelector((state)=>(state.incomeExpeditureReducer).list);
+    const {list:lists} = useSelector((state)=>state.incomeExpeditureReducer);
     const dispatch = useDispatch();
-    
-    let type = useSelector((state)=>(state.showListReducer).type);
-    let month = useSelector((state)=>(state.showListReducer).month);
-    let year = useSelector((state)=>(state.showListReducer).year);
+
+    let {type,month,year} = useSelector((state)=>state.showListReducer);
 
     let incomeSum = 0;
     let expeditureSum = 0;
