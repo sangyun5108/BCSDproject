@@ -3,6 +3,7 @@ import AccountBook from './AccountBook';
 import { Route,Switch,useHistory } from 'react-router';
 import styled from 'styled-components';
 import AddHistory from '../components/AddHistory';
+import MainCalender from '../components/MainCalender';
 
 const Wrapper = styled.div`
     width:100%;
@@ -71,7 +72,7 @@ const MainPage = () => {
                     <AddHistory/>
                 </Route>
                 <Route path='/calendar'>
-                    <h1>Calender</h1>
+                    <MainCalender/>
                 </Route>
             </Switch>
         </>

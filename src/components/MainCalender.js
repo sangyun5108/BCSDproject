@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import {useSelector} from 'react-redux'
+import store from '../redux/store'
 const Wrap = styled.div`
     display : grid;
     grid-template-columns: repeat(1,1fr);
@@ -83,8 +84,11 @@ const useWeekArray = (today, lists) => {
     return weekArray
 }
 
-function MainCalender({today}){
-    const lists = useSelector((state)=>state.accountList);
+function MainCalender(){
+    const {lists,today} = useSelector((state)=>({
+        lists : (state.IE).accountList,
+        today : (state.IE).date
+    }))
     let weekArray = useWeekArray(today, lists)
     return (
         <Wrap>
