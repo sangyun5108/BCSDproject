@@ -240,7 +240,7 @@ const AddHistory = () => {
         }else{
             Dispatch(expediture(amountRef.current.value,labelRef.current.value,Number(yearRef.current.value),monthIndex,Number(dateRef.current.value),dayOfWeek));
         }
-        localStorage.setItem('lists',JSON.stringify(store.getState().IE.list));
+        localStorage.setItem('lists',JSON.stringify(store.getState().incomeExpeditureReducer.list));
     }
 
     const onClickXbutton = (e) => {

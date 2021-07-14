@@ -125,16 +125,18 @@ const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','July','Aug','Sep','Oct','No
 
 const ShowList = () => {
 
-    //redux에서 관리
     let newLists;
     let listdate=0;
 
-    const lists = useSelector((state)=>(state.IE).list);
+    const lists = useSelector((state)=>(state.incomeExpeditureReducer).list);
     const dispatch = useDispatch();
     
-    let type = useSelector((state)=>(state.SH).type);
-    let month = useSelector((state)=>(state.SH).month);
-    let year = useSelector((state)=>(state.SH).year);
+    let type = useSelector((state)=>(state.showListReducer).type);
+    let month = useSelector((state)=>(state.showListReducer).month);
+    let year = useSelector((state)=>(state.showListReducer).year);
+
+    let incomeSum = 0;
+    let expeditureSum = 0;
     
     const showMonth = (e) => {
         const direction = e.target.parentNode.value;
@@ -154,6 +156,9 @@ const ShowList = () => {
         dispatch(Month(month));
         dispatch(Year(year));
     }
+
+    incomeSum = useGiveSum('INCOME',month,year);
+    expeditureSum = useGiveSum('EXPEDITURE',month,year);
 
     const clickBtn = (e) => {
         const value = e.target.value;
@@ -201,8 +206,8 @@ const ShowList = () => {
                 </MonthWrapper>
             </MWrapper>
             <Wrapper>
-                <BlueButton active={type} value={'INCOME'} onClick={clickBtn}>+{useGiveSum('INCOME',month,year)}</BlueButton>
-                <RedButton active={type} value={'EXPEDITURE'} onClick={clickBtn}>{useGiveSum('EXPEDITURE',month,year)}</RedButton>
+                <BlueButton active={type} value={'INCOME'} onClick={clickBtn}>+{incomeSum}</BlueButton>
+                <RedButton active={type} value={'EXPEDITURE'} onClick={clickBtn}>{expeditureSum}</RedButton>
             </Wrapper>
             {newLists.map((list)=>{
                 return(
