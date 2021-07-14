@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import styled from 'styled-components';
 import transformation from '../utils/transformation';
 import {useGiveSum} from '../hooks/useGiveSum';
-import {Type,Month,Year} from '../redux/actions';
+import {Type,Month,Year,GreenBtn,RedBtn} from '../redux/actions';
 
 const Wrapper = styled.div`
     width:100%;
@@ -28,6 +28,10 @@ const MonthWrapper = styled.div`
     justify-content:center;
     align-items:center;
     width:100%;
+`;
+
+const UlWrapper = styled.ul`
+    margin-left:0px;
 `;
 
 const Years = styled.div`
@@ -131,12 +135,15 @@ const ShowList = () => {
     let expeditureSum = 0;
 
     const {list:lists} = useSelector((state)=>state.incomeExpeditureReducer);
+    const {greenBtn,redBtn} = useSelector((state)=>state.showListReducer);
     const dispatch = useDispatch();
 
     let {type,month,year} = useSelector((state)=>state.showListReducer);
     let newMonth = month;
     let newType = type;
     let newYear = year;
+    let newGreenBtn = greenBtn;
+    let newRedBtn = redBtn;
     
     const showMonth = (e) => {
         const direction = e.target.parentNode.value;
@@ -162,12 +169,24 @@ const ShowList = () => {
 
     const clickBtn = (e) => {
         const value = e.target.value;
-
-        if(newType==='INCOME'||newType==='EXPEDITURE'){
+        if(value==='INCOME'&&newGreenBtn===false){
+            newType = 'INCOME';
+            newGreenBtn = true;
+            newRedBtn = false;
+        }else if(value==='EXPEDITURE'&&newRedBtn===false){
+           newType = 'EXPEDITURE';
+           newRedBtn = true;
+           newGreenBtn = false;
+        }else if(value==='INCOME'&&newGreenBtn===true){
             newType = 'incomeExpediture';
-        }else{
-            newType = value;
+            newGreenBtn = false;
+        }else if(value ==='EXPEDITURE'&&newRedBtn===true){
+            newType = 'incomeExpediture';
+            newRedBtn = false;
         }
+        
+        dispatch(GreenBtn(newGreenBtn));
+        dispatch(RedBtn(newRedBtn));
         dispatch(Type(newType));
     }
 
@@ -209,23 +228,25 @@ const ShowList = () => {
                 <BlueButton active={type} value={'INCOME'} onClick={clickBtn}>+{incomeSum}</BlueButton>
                 <RedButton active={type} value={'EXPEDITURE'} onClick={clickBtn}>{expeditureSum}</RedButton>
             </Wrapper>
-            {newLists.map((list)=>{
-                return(
-                    <div key={list.id}>
-                                {checkDate(list.date)?(
-                                    <Datelist>
-                                        {list.day}, {list.date}th
-                                    </Datelist>
-                                ):''}
-                        <ListWrapper> 
-                            <List>
-                                <Label>{list.label}</Label>
-                                <Amount active={list.amount}>{list.amount>0?`+${transformation(list.amount)}`:transformation(list.amount)}</Amount>
-                            </List>
-                        </ListWrapper>
-                    </div>
-                );
-            })}
+            <UlWrapper>
+                {newLists.map((list)=>{
+                    return(
+                        <div key={list.id}>
+                                    {checkDate(list.date)?(
+                                        <Datelist>
+                                            {list.day}, {list.date}th
+                                        </Datelist>
+                                    ):''}
+                            <ListWrapper> 
+                                <List>
+                                    <Label>{list.label}</Label>
+                                    <Amount active={list.amount}>{list.amount>0?`+${transformation(list.amount)}`:transformation(list.amount)}</Amount>
+                                </List>
+                            </ListWrapper>
+                        </div>
+                    );
+                })}
+            </UlWrapper>
         </>
     )
 }
