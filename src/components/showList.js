@@ -163,8 +163,8 @@ const ShowList = () => {
     const clickBtn = (e) => {
         const value = e.target.value;
 
-        if(type==='INCOME'||type==='EXPEDITURE'){
-            type = 'incomeExpediture';
+        if(newType==='INCOME'||newType==='EXPEDITURE'){
+            newType = 'incomeExpediture';
         }else{
             newType = value;
         }

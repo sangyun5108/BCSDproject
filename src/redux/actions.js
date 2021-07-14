@@ -1,34 +1,16 @@
 import {INCOME, EXPEDITURE, INIT, TYPE, MONTH, YEAR} from './types';
-
+import {getId} from '../utils/getId';
 let incomeId=0;
 let expeditureId=100;
 
-const getIncomeId = () => {
-    const income = JSON.parse(localStorage.getItem('lists'))
-    .filter((list)=>list.type==='INCOME');
-    
-    if(income.length!==0){
-        incomeId = ++income[income.length-1].id;
-    }
-    return;
-} //localStorage income id값을 받아오는 함수
-
-const getExpeditureId = () => {
-    const expediture = JSON.parse(localStorage.getItem('lists'))
-    .filter((list)=>list.type==='EXPEDITURE')
-   if(expediture.length!==0) {
-       expeditureId = ++expediture[expediture.length-1].id;
-   }
-   return;
-}//localStorage expediture id값을 받아오는 함수
-
 const checkLocal  = () => {
     if(localStorage.getItem('lists')){
-        getIncomeId();
-        getExpeditureId();
+        incomeId = getId('INCOME',0);
+        expeditureId = getId('EXPEDITURE',100);
     }
     return;
 }
+
 
 export const income = (amount,label,year,month,date,day) => {
     return {
