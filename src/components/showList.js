@@ -142,7 +142,7 @@ const ShowList = () => {
         const direction = e.target.parentNode.value;
         if(direction==='right'){
             newMonth+=1
-            if(month===11){
+            if(newMonth===11){
                 newMonth=0;
                 newYear+=1;
             }
@@ -212,9 +212,11 @@ const ShowList = () => {
             {newLists.map((list)=>{
                 return(
                     <div key={list.id}>
-                        <Datelist>
-                                {checkDate(list.date)?`${list.day}, ${list.date}th`:''}
-                        </Datelist>
+                                {checkDate(list.date)?(
+                                    <Datelist>
+                                        {list.day}, {list.date}th
+                                    </Datelist>
+                                ):''}
                         <ListWrapper> 
                             <List>
                                 <Label>{list.label}</Label>
