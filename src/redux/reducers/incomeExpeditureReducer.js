@@ -9,7 +9,9 @@ export const incomeExpeditureReducer = (state=initialState,action) => {
     switch(action.type){
         case INIT:
             return {
-                list:action.list
+                list:action.list,
+                incomeId:action.incomeId,
+                expeditureId:action.expeditureId
             }
         case INCOME:
             return {

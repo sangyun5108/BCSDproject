@@ -1,5 +1,5 @@
 import React from 'react';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {useRef, useEffect, useState} from 'react';
 import {income,expediture} from '../redux/actions';
 import {useHistory} from 'react-router-dom';
@@ -171,6 +171,7 @@ const AddHistory = () => {
     const dateRef = useRef(null);
     const amountRef = useRef(null);
     const labelRef = useRef(null);
+    let {incomeId,expeditureId} = useSelector((state)=>state.incomeExpeditureReducer);
 
     const history = useHistory();
     const dispatch = useDispatch();
@@ -230,15 +231,16 @@ const AddHistory = () => {
     }
 
     const onSubmit = (e) =>{
+
         e.preventDefault();
         history.push('/');
         const monthIndex = Number(monthRef.current.value)-1;
         const dayOfWeek = WEEK[new Date(`${yearRef.current.value}-${monthRef.current.value}-${dateRef.current.value}`).getDay()];
 
         if(type===true){
-            dispatch(income(amountRef.current.value,labelRef.current.value,Number(yearRef.current.value),monthIndex,Number(dateRef.current.value),dayOfWeek));
+            dispatch(income(amountRef.current.value,labelRef.current.value,Number(yearRef.current.value),monthIndex,Number(dateRef.current.value),dayOfWeek,incomeId++));
         }else{
-            dispatch(expediture(amountRef.current.value,labelRef.current.value,Number(yearRef.current.value),monthIndex,Number(dateRef.current.value),dayOfWeek));
+            dispatch(expediture(amountRef.current.value,labelRef.current.value,Number(yearRef.current.value),monthIndex,Number(dateRef.current.value),dayOfWeek,expeditureId++));
         }
         localStorage.setItem('lists',JSON.stringify(store.getState().incomeExpeditureReducer.list));
     }

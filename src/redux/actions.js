@@ -1,18 +1,8 @@
 import {INCOME, EXPEDITURE, INIT, TYPE, MONTH, YEAR} from './types';
 import {getId} from '../utils/getId';
-let incomeId=0;
-let expeditureId=100;
+import {checkLocal} from '../utils/checkLocal';
 
-const checkLocal  = () => {
-    if(localStorage.getItem('lists')){
-        incomeId = getId('INCOME',0);
-        expeditureId = getId('EXPEDITURE',100);
-    }
-    return;
-}
-
-
-export const income = (amount,label,year,month,date,day) => {
+export const income = (amount,label,year,month,date,day,id) => {
     return {
         type:INCOME,
         amount,
@@ -21,11 +11,11 @@ export const income = (amount,label,year,month,date,day) => {
         month,
         date,
         day,
-        id:incomeId++
+        id
     }
 }
 
-export const expediture = (amount,label,year,month,date,day) => {
+export const expediture = (amount,label,year,month,date,day,id) => {
     return {
         type:EXPEDITURE,
         amount,
@@ -34,18 +24,27 @@ export const expediture = (amount,label,year,month,date,day) => {
         month,
         date,
         day,
-        id:expeditureId++
+        id
     }
 }
 
 export const init = ()=>{
-    checkLocal();
     const getlist = JSON.parse(localStorage.getItem('lists'));
     const list = getlist?getlist:[];
+    let incomeId = 0;
+    let expeditureId = 0;
+
+    if(checkLocal()){
+        incomeId = getId('INCOME',0);
+        expeditureId = getId('EXPEDITURE',100);
+    }
+    
 
     return {
         type:INIT,
-        list
+        list,
+        incomeId,
+        expeditureId
     }
 }
 
