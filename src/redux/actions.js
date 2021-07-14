@@ -1,4 +1,4 @@
-import {INCOME, EXPEDITURE, INIT, TYPE, MONTH, YEAR} from './types';
+import {INCOME, EXPEDITURE, INIT, TYPE, MONTH, YEAR,SHOWIN,SHOWEX} from './types';
 
 let incomeId=0;
 let expeditureId=100;
@@ -87,3 +87,5 @@ export const Year = (year) => {
         year
     }
 }
+export const showIn = () => ({type : SHOWIN})
+export const showEx = () => ({type : SHOWEX})
