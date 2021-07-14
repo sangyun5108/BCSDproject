@@ -22,14 +22,12 @@ const Header = styled.div`
     font-size: 100%;
     font: inherit;
 `
-
 const ContentContainer = styled.div`
     display : flex;
     align-items : center;
     justify-content : center;
     width : 100%;
 `
-
 const CalenderWrap = styled.div`
     padding-bottom: 1.5rem;
     margin-top : 2.0625rem;
@@ -41,7 +39,6 @@ const CalenderWrap = styled.div`
     box-shadow : 0 0.3125rem 3.125rem rgb(0 0 0 / 10%);
     max-width : 500px;
     width : 100%;
-    
 `
 function Calender(){
     const today = new Date()

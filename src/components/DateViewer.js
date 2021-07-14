@@ -29,8 +29,12 @@ const Now = styled.div`
     width : 33.33333%;
     margin : 3rem;
 `
+const monthList = [
+    'Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan'
+]
+
 function DateViewer({date, setDate}){//날짜 출력
-    const month = date.getMonth()  
+    const month = date.getMonth()
     const onIncrease = () =>{
         setDate(new Date(date.getFullYear(),month + 1,date.getDate()))
     }
@@ -42,21 +46,21 @@ function DateViewer({date, setDate}){//날짜 출력
             <Controler>
                 <Monthselector onClick={()=>onDecrease()}>
                     <Year>
-                        {date.getFullYear()}
+                        {new Date(date.getFullYear(),month-1).getFullYear()}
                     </Year>
-                    {date.getMonth()}
+                    {monthList[new Date(date.getFullYear(),month-1).getMonth()]}
                 </Monthselector>
                 <Now>
                     <Year>
                         {date.getFullYear()}
                     </Year>
-                    {date.getMonth()+1}
+                    {monthList[month]}
                 </Now>
                 <Monthselector onClick={()=>onIncrease()}>
                     <Year>
-                        {date.getFullYear()}
+                        {new Date(date.getFullYear(),month+1).getFullYear()}
                     </Year>
-                    {date.getMonth()+2}
+                    {monthList[month+1]}
                 </Monthselector>
             </Controler> 
         </DateSetContainer>

@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import {useSelector } from 'react-redux'
+import {useSelector} from 'react-redux'
 const Wrap = styled.div`
     display : grid;
     grid-template-columns: repeat(1,1fr);
@@ -30,13 +30,13 @@ const Day = styled.div`
 const Income = styled.div`
     color : blue;
     font-size: .0575rem;
-    visibility : ${day => day.day.IN_total > 0 && day.day.IN_show? 'visible' : 'collapse'};
+    visibility : ${day => day.day.IN_total > 0 ? 'visible' : 'collapse'};
     text-align : right;
 `
 const Expediture = styled.div`
     color : red;
     font-size: .0575rem;
-    visibility : ${day => day.day.EX_total < 0 && day.day.EX_show? 'visible' : 'collapse'};
+    visibility : ${day => day.day.EX_total < 0 ? 'visible' : 'collapse'};
     text-align : right;
     `
 const useWeekArray = (today, lists) => {
@@ -71,8 +71,6 @@ const useWeekArray = (today, lists) => {
                 .map(account => account.amount)
                 .reduce((a,b)=>a+b,0),
             show : true,
-            IN_show : true,
-            EX_show : true
         }:
         {
             date : thisMonth.getDate(),
@@ -86,7 +84,7 @@ const useWeekArray = (today, lists) => {
 }
 
 function MainCalender({today}){
-    const lists = useSelector((state)=>state.list);
+    const lists = useSelector((state)=>state.accountList);
     let weekArray = useWeekArray(today, lists)
     return (
         <Wrap>
@@ -95,8 +93,10 @@ function MainCalender({today}){
                 {week.map((day,index) =>
                     <Day show = {day.show} key={index} >
                         <div>{day.date}</div>
-                        <Income day = {day}>+{day.IN_total}</Income>
-                        <Expediture day = {day}>{day.EX_total}</Expediture>
+                        <div>
+                            <Income day = {day}>+{day.IN_total}</Income>
+                            <Expediture day = {day}>{day.EX_total}</Expediture>
+                        </div>
                     </Day>)}
             </Week>)}
         </Wrap>

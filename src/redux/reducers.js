@@ -1,10 +1,13 @@
-import { INCOME, EXPEDITURE} from "./types";
+import { INCOME, EXPEDITURE, SHOWEX,SHOWIN } from "./types";
 
 const data = JSON.parse(localStorage.getItem('lists'));
 const list = data?data:[];
-
+const accountList = list
 const initialState={
-    list
+    list,
+    accountList,
+    inClicked : false,
+    exClicked : false
 }
 
 export const incomeExpeditureReducer = (state=initialState,action) => {
@@ -22,7 +25,8 @@ export const incomeExpeditureReducer = (state=initialState,action) => {
                         date:action.date,
                         id:action.id
                     }
-                ]
+                ],
+                ...accountList
             }
 
         case EXPEDITURE:
@@ -40,6 +44,34 @@ export const incomeExpeditureReducer = (state=initialState,action) => {
                         }
                     ]
                 }
+        case SHOWIN:
+            return state.inClicked?{
+                ...state,
+                accountList:[...state.list],
+                inClicked : false,
+                exClicked : false
+            }
+            :{
+                ...state,
+                accountList:[...state.list].filter(account => account.type === 'INCOME'),
+                inClicked : true,
+                exClicked : false
+            }
+            
+        case SHOWEX:
+            return state.exClicked?{
+                ...state,
+                accountList:[...state.list],
+                inClicked : false,
+                exClicked : false
+            }
+            :{
+                ...state,
+                accountList:[...state.list].filter(account => account.type === 'EXPEDITURE'),
+                inClicked : false,
+                exClicked : true
+            }
+        
         default:
             return state;
     }
