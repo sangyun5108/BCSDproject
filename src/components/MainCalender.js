@@ -85,10 +85,13 @@ const useWeekArray = (today, lists) => {
 }
 
 function MainCalender(){
-    const {lists,today} = useSelector((state)=>({
-        lists : (state.IE).accountList,
-        today : (state.IE).date
-    }))
+    const lists = useSelector((state)=> (state.IE).accountList)
+    const {year,month} = useSelector((state => ({
+        year : (state.SH).year,
+        month : (state.SH).month
+    })))
+    console.log(year, month)
+    const today = new Date(year, month)
     let weekArray = useWeekArray(today, lists)
     return (
         <Wrap>

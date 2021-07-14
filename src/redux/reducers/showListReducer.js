@@ -2,8 +2,8 @@ import {TYPE,MONTH,YEAR} from '../types';
 
 const initialStateShowList = {
     type:'incomeExpediture',
-    month:0,
-    year:2021
+    month:new Date().getMonth(),
+    year:new Date().getFullYear()
 };
 
 
