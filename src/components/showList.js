@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import styled from 'styled-components';
 import transformation from '../utils/transformation';
 import {useGiveSum} from '../hooks/useGiveSum';
-import {Type,Month,Year,GreenBtn,RedBtn} from '../redux/actions';
+import {Type,Month,Year,BlueBtn,RedBtn} from '../redux/actions';
 
 const Wrapper = styled.div`
     width:100%;
@@ -187,7 +187,7 @@ const ShowList = () => {
             newRedBtn = false;
         }
         
-        dispatch(GreenBtn(newGreenBtn));
+        dispatch(BlueBtn(newGreenBtn));
         dispatch(RedBtn(newRedBtn));
         dispatch(Type(newType));
     }

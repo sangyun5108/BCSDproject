@@ -1,11 +1,9 @@
-import {TYPE,MONTH,YEAR,GREENBTN,REDBTN} from '../types';
+import {TYPE,MONTH,YEAR,BLUEBTN,REDBTN} from '../types';
 
 const initialStateShowList = {
     type:'incomeExpediture',
     month:new Date().getMonth(),
     year:new Date().getFullYear(),
-    month:0,
-    year:2021,
     greenBtn:false,
     redBtn:false
 };
@@ -28,7 +26,7 @@ export const showListReducer = (state=initialStateShowList,action) => {
                 ...state,
                 year:action.year
             }
-        case GREENBTN:
+        case BLUEBTN:
             return {
                 ...state,
                 greenBtn:action.btn

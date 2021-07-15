@@ -7,5 +7,5 @@ export const TYPE = 'TYPE';
 export const SHOWIN = `calender/SHOWIN`
 export const SHOWEX = 'calender/SHOWEX'
 
-export const GREENBTN = 'GREENBTN';
+export const BLUEBTN = 'BLUEBTN';
 export const REDBTN = 'REDBTN';

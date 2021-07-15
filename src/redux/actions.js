@@ -1,4 +1,4 @@
-import {INCOME, EXPEDITURE, INIT, TYPE, MONTH, YEAR,SHOWIN,SHOWEX, GREENBTN, REDBTN} from './types';
+import {INCOME, EXPEDITURE, INIT, TYPE, MONTH, YEAR,SHOWIN,SHOWEX, BLUEBTN, REDBTN} from './types';
 import {getId} from '../utils/getId';
 import {checkLocal} from '../utils/checkLocal';
 
@@ -71,9 +71,9 @@ export const Year = (year) => {
 export const showIn = () => ({type : SHOWIN})
 export const showEx = () => ({type : SHOWEX})
 
-export const GreenBtn = (btn) => {
+export const BlueBtn = (btn) => {
     return {
-        type:GREENBTN,
+        type:BLUEBTN,
         btn
     }
 }
