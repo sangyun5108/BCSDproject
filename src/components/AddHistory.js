@@ -1,6 +1,6 @@
 import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {useRef, useEffect, useState} from 'react';
+import {useRef, useState} from 'react';
 import {income,expediture} from '../redux/actions';
 import {useHistory} from 'react-router-dom';
 import styled from 'styled-components';
@@ -248,12 +248,7 @@ const AddHistory = () => {
     const onClickXbutton = (e) => {
         setClose(!close);
         history.push('/');
-    }    
-    useEffect(()=>{
-        yearRef.current.value = nowyear;
-        monthRef.current.value = nowmonth;
-        dateRef.current.value = nowdate;
-    },[]) //input태그 안에 기본값
+    }
 
     return(
         <>   
@@ -265,9 +260,9 @@ const AddHistory = () => {
                         <Xbutton onClick={onClickXbutton}>X</Xbutton>
                     <form onSubmit={onSubmit}>
                         <InputDayWrapper>
-                            <InputYear ref={yearRef} maxLength="4" onBlur={checkYearType}></InputYear>
-                            <InputDay ref={monthRef} maxLength="2" onBlur={checkMonthType}></InputDay>
-                            <InputDay ref={dateRef} maxLength="2" onBlur={checkDateType}></InputDay>
+                            <InputYear ref={yearRef} defaultValue={nowyear} maxLength="4" onBlur={checkYearType}></InputYear>
+                            <InputDay ref={monthRef} defaultValue={nowmonth} maxLength="2" onBlur={checkMonthType}></InputDay>
+                            <InputDay ref={dateRef} defaultValue={nowdate} maxLength="2" onBlur={checkDateType}></InputDay>
                         </InputDayWrapper>
                         <InputLabelAmountWrapper>
                             <InputLabel ref={labelRef} onBlur={getLabel} placeholder="Label" required></InputLabel>

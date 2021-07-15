@@ -68,7 +68,7 @@ const MainPage = () => {
                 <Route exact path='/'>
                     <AccountBook/>
                 </Route>
-                <Route exact path='/addHistory'>
+                <Route path='/addHistory'>
                     <AddHistory/>
                 </Route>
                 <Route path='/calendar'>
