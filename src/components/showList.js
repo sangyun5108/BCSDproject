@@ -149,7 +149,7 @@ const ShowList = () => {
         const direction = e.target.parentNode.value;
         if(direction==='right'){
             newMonth+=1
-            if(newMonth===11){
+            if(newMonth===12){
                 newMonth=0;
                 newYear+=1;
             }
