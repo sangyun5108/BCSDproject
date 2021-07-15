@@ -127,7 +127,7 @@ const DoneButton = styled.button`
     bottom:0;
     margin-bottom:10%;
     border:none;
-    background-color:${props=>props.active?'#66bb6a':'#ef5350'};
+    background-color:${props=>props.active?'#166ff3':'#f8123b'};
     color:white;
     font-size:30px;
     font-weight:700;

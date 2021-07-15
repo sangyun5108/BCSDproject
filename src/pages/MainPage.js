@@ -15,6 +15,7 @@ const Wrapper = styled.div`
 
 const BtnWrapper = styled.div`
     width:150px;
+    margin-top:25px;
     display:flex;
     justify-content:space-between;
 `;

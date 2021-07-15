@@ -7,66 +7,73 @@ import {Type,Month,Year,BlueBtn,RedBtn} from '../redux/actions';
 
 const Wrapper = styled.div`
     width:100%;
-    height:20vh;
+    height:100px;
     margin-top:40px;
     display:flex;
     justify-content:center;
-    overflow:hidden;
 `;
 
 const MWrapper = styled.div`
-    width:100%;
+    width:80%;
+    height:100%;
     display:flex;
-    flex-direction:column;
     align-items:center;
-    font-size : 50px;
-    margin-top:20px;
+    margin:72px 0px 0px 0;
 `;
 
 const MonthWrapper = styled.div`
     display:flex;
+    font-size:60px;
+    padding-bottom:2px;
+    flex-direction:column;
     justify-content:center;
     align-items:center;
-    width:100%;
+    width:33.3333%;
 `;
 
 const UlWrapper = styled.ul`
-    margin-left:0px;
+    padding-left:0px;
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-conten:center;
 `;
 
 const Years = styled.div`
-    font-size:1rem;
+    font-size:18px;
     color:#979797;
     font-weight:500;
 `;
 
-const Months = styled.span`
-    width:500px;
+const Months = styled.div`
     text-align:center;
-    font-weight:700
+    font-weight:800;
 `;
 
 const Button = styled.button`
-    font-size:50px;
     padding:0px;
     outline:none;
+    font-size:55px;
     border:none;
     background-color:white;
+    color:#979797;
     &:hover{
         cursor:pointer;
+        color:black;
     }
 `;
 
 const BlueButton = styled.button`
-    border:2px solid green;
+    border:2px solid #166ff3;
     font-size:25px;
     font-weight:800;
-    border-radius:12px;
-    width:250px;
-    height:50px;
+    border-radius:15px;
+    width:280px;
+    height:55px;
     margin-right:15px;
-    background:${props=>props.active==='INCOME'?"green":"white"};
-    color:${props=>props.active==='INCOME'?"white":"green"};
+    background:${props=>props.active==='INCOME'?"#166ff3":"white"};
+    color:${props=>props.active==='INCOME'?"white":"#166ff3"};
     &:hover{
         cursor:pointer;
     }
@@ -76,18 +83,19 @@ const RedButton = styled.button`
     border:2px solid red;
     font-size:25px;
     font-weight:800;
-    border-radius:12px;
-    width:250px;
-    height:50px;
-    background:${props=>props.active==='EXPEDITURE'?"red":"white"};
-    color:${props=>props.active==='EXPEDITURE'?"white":"red"};
+    border-radius:15px;
+    width:280px;
+    height:55px;
+    background:${props=>props.active==='EXPEDITURE'?"#f8123b":"white"};
+    color:${props=>props.active==='EXPEDITURE'?"white":"#f8123b"};
     &:hover{
         cursor:pointer;
     }
 `;
 
 const ListWrapper = styled.div`
-    width:500px;
+    width:550px;
+    padding:0px 10px 0px 10px;
     height:75px;
     border-radius:15px;
     background:#f5f5f5;
@@ -97,9 +105,8 @@ const ListWrapper = styled.div`
 `;
 
 const List = styled.li`
-    width:500px;
-    height:50px;
     list-style:none;
+    width:100%;
     display:flex;
     align-items:center;
     justify-content:space-between;
@@ -112,7 +119,7 @@ const Label = styled.div`
 `;
 
 const Amount = styled.div`
-    color:${props=>props.active>=0?"green":"red"};
+    color:${props=>props.active>=0?"#166ff3":"#f8123b"};
     font-weight:700;
     margin-right:20px;
     font-size:20px;
@@ -140,9 +147,11 @@ const ShowList = () => {
 
     let {type,month,year} = useSelector((state)=>state.showListReducer);
     let newMonth = month;
+    let newRightMonth = newMonth+1===12?0:newMonth+1;
+    let newLeftMonth = newMonth-1===-1?11:newMonth-1;
     let newType = type;
     let newYear = year;
-    let newGreenBtn = greenBtn;
+    let newBlueBtn = greenBtn;
     let newRedBtn = redBtn;
     
     const showMonth = (e) => {
@@ -152,14 +161,12 @@ const ShowList = () => {
             if(newMonth===12){
                 newMonth=0;
                 newYear+=1;
-                console.log(newMonth)
             }
         }else{
             newMonth-=1;
             if(newMonth===-1){
                 newMonth=11;
                 newYear-=1;
-                console.log(newMonth)
             }
         }
         dispatch(Month(newMonth));
@@ -171,23 +178,23 @@ const ShowList = () => {
 
     const clickBtn = (e) => {
         const value = e.target.value;
-        if(value==='INCOME'&&newGreenBtn===false){
+        if(value==='INCOME'&&newBlueBtn===false){
             newType = 'INCOME';
-            newGreenBtn = true;
+            newBlueBtn = true;
             newRedBtn = false;
         }else if(value==='EXPEDITURE'&&newRedBtn===false){
            newType = 'EXPEDITURE';
            newRedBtn = true;
-           newGreenBtn = false;
-        }else if(value==='INCOME'&&newGreenBtn===true){
+           newBlueBtn = false;
+        }else if(value==='INCOME'&&newBlueBtn===true){
             newType = 'incomeExpediture';
-            newGreenBtn = false;
+            newBlueBtn = false;
         }else if(value ==='EXPEDITURE'&&newRedBtn===true){
             newType = 'incomeExpediture';
             newRedBtn = false;
         }
         
-        dispatch(BlueBtn(newGreenBtn));
+        dispatch(BlueBtn(newBlueBtn));
         dispatch(RedBtn(newRedBtn));
         dispatch(Type(newType));
     }
@@ -215,20 +222,26 @@ const ShowList = () => {
     return(
         <>
             <MWrapper>
-                <Years>{year}</Years>
                 <MonthWrapper>
                     <Button onClick={showMonth} value='left'>
-                        <i className="fas fa-angle-left"></i>
-                    </Button>
-                    <Months>{MONTHS[month]}</Months>
-                    <Button onClick={showMonth} value='right'>
-                        <i className="fas fa-angle-right"></i>
+                        <Years>{newMonth===0?year-1:year}</Years>
+                        <Months>{MONTHS[newLeftMonth]}</Months>
                     </Button>
                 </MonthWrapper>
+                <MonthWrapper>
+                    <Years>{year}</Years>
+                    <Months>{MONTHS[newMonth]}</Months>
+                </MonthWrapper>    
+                <MonthWrapper>
+                    <Button onClick={showMonth} value='right'>
+                        <Years>{newMonth===11?year+1:year}</Years>
+                        <Months>{MONTHS[newRightMonth]}</Months>
+                    </Button>
+                </MonthWrapper>   
             </MWrapper>
             <Wrapper>
                 <BlueButton active={type} value={'INCOME'} onClick={clickBtn}>+{incomeSum}</BlueButton>
-                <RedButton active={type} value={'EXPEDITURE'} onClick={clickBtn}>{expeditureSum}</RedButton>
+                <RedButton active={type} value={'EXPEDITURE'} onClick={clickBtn}>-{expeditureSum}</RedButton>
             </Wrapper>
             <UlWrapper>
                 {newLists.map((list)=>{
