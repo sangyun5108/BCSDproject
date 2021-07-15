@@ -1,6 +1,13 @@
-import {createStore} from 'redux';
-import { incomeExpeditureReducer } from './reducers';
+import {createStore,combineReducers} from 'redux';
+import { incomeExpeditureReducer} from './reducers/incomeExpeditureReducer';
+import { showListReducer } from './reducers/showListReducer';
 
-const store = createStore(incomeExpeditureReducer);
+const reducers = combineReducers(
+    {   incomeExpeditureReducer,
+        showListReducer,
+    }
+);
+
+const store = createStore(reducers);
 
 export default store;

@@ -1,12 +1,18 @@
-import { INCOME, EXPEDITURE } from "./types";
+import { INCOME, EXPEDITURE, INIT} from "../types";
 
-const initialState={
-    list:[
+const initialState = {
+    list:[]
+};
 
-    ]
-}
 export const incomeExpeditureReducer = (state=initialState,action) => {
+    
     switch(action.type){
+        case INIT:
+            return {
+                list:action.list,
+                incomeId:action.incomeId,
+                expeditureId:action.expeditureId
+            }
         case INCOME:
             return {
                 list:[
@@ -18,6 +24,7 @@ export const incomeExpeditureReducer = (state=initialState,action) => {
                         year:action.year,
                         month:action.month,
                         date:action.date,
+                        day:action.day,
                         id:action.id
                     }
                 ]
@@ -34,6 +41,7 @@ export const incomeExpeditureReducer = (state=initialState,action) => {
                             year:action.year,
                             month:action.month,
                             date:action.date,
+                            day:action.day,
                             id:action.id
                         }
                     ]
@@ -42,3 +50,4 @@ export const incomeExpeditureReducer = (state=initialState,action) => {
             return state;
     }
 }
+

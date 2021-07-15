@@ -1,13 +1,11 @@
-import AddHistory from './components/addHistroy';
 import {Provider} from 'react-redux';
 import store from './redux/store';
-import MonthList from './components/monthList';
+import MainPage from '../src/pages/MainPage';
 
-function App() {
-  return (
+const App = () => {
+  return(
     <Provider store={store}>
-      <AddHistory/>
-      <MonthList/>
+      <MainPage/>
     </Provider>
   );
 }
