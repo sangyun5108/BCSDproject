@@ -1,4 +1,5 @@
 import React,{useState} from 'react'
+import { useSelector } from 'react-redux'
 import styled from'styled-components'
 import MainCalender from './MainCalender'
 import DateViewer from './DateViewer'
@@ -7,49 +8,55 @@ import TotalAmounts from './TotalAmounts'
 const Wrap = styled.div`
     display : flex;
     flex-direction : column;
-    width : 100%
+    width : 100vw;
+    height : 100vh;
     align-items : center;
-    overflow-x : hidden;
-    min-height : 100vh;
 `
 const Header = styled.div`
     display : flex;
-    width : 100%
-    overflow-x : hidden;
     flex-direction : column;
     align-items : center;
     justify-content : center;
     font-size: 100%;
-    font: inherit;
+    width : 100%;
+    max-width : 960px;
 `
 const ContentContainer = styled.div`
-    display : flex;
-    align-items : center;
-    justify-content : center;
-    width : 100%;
-`
-const CalenderWrap = styled.div`
-    padding-bottom: 1.5rem;
-    margin-top : 2.0625rem;
-    padding-left : 0.5rem;
-    padding-right : 0.5rem;
+    width ; 100%;
     display : flex;
     flex-direction : column;
-    border-radius: 0.875rem;
-    box-shadow : 0 0.3125rem 3.125rem rgb(0 0 0 / 10%);
-    max-width : 500px;
-    width : 100%;
+    align-items : center;
+    justify-content : center;
+`
+const CalenderWrap = styled.div`
+    padding-bottom: 36px;
+    margin-top : 49px;
+    padding-left : 12px;
+    padding-right : 12px;
+    display : flex;
+    flex-direction : column;
+    width : 90vw;
+    height : 60vw;
+    max-width : 960px;
+    max-height : 640px;
+    border-radius: 14px;
+    box-shadow : 0 5px 50px rgb(0 0 0 / 10%);
 `
 function Calender(){
-    const today = new Date()
+    const {year,month} = useSelector((state => ({
+        year : (state.showListReducer).year,
+        month : (state.showListReducer).month
+    })))
+    const today = new Date(year, month)    
     const [date,setDate] = useState(today)
+    console.log(today)
     return (
         <Wrap>
             <Header>
                 <DateViewer date = {date} setDate = {setDate}/>
-                <TotalAmounts today = {date}/>
             </Header>
             <ContentContainer>
+                <TotalAmounts today = {date}/>
                 <CalenderWrap>
                     <CalenderHeader/>
                     <MainCalender today = {date}/>

@@ -1,18 +1,16 @@
 import React from 'react'
 import styled from 'styled-components'
 import {useSelector} from 'react-redux'
-import store from '../redux/store'
 const Wrap = styled.div`
     display : grid;
-    grid-template-columns: repeat(1,1fr);
-    grid-row-gap: .25rem;
+    grid-template-rows: repeat(6,1fr);
+    grid-row-gap: 4px;
+    height : 100%;
 `
 const Week = styled.div`
     display : grid;
     grid-template-columns: repeat(7,1fr);
-    grid-column-gap: .25rem;
-    width: 100%;
-    height: 85%;
+    grid-column-gap: 4px;
 `
 const Day = styled.div`
     background : ${day => day.show ? '#f5f5f7':'#FCFCFD'};
@@ -20,25 +18,28 @@ const Day = styled.div`
     display : flex;
     flex-direction : column;
     justify-content : space-between;
-    border-radius : 0.225rem;
-    width: 100%;
-    height: 100%;
+    border-radius : 4px;
+    height : 100%;
+    min-width: 100%;
     font-weight: 600;
-    font-size: .0875rem;
-    line-height: 1rem;
-    padding-left : 0.1rem;
+    font-size: 16px;
+    line-height: 16px;
 `
 const Income = styled.div`
+    display : ${day => day.day.IN_total > 0 ? 'block' : 'None'};
     color : blue;
-    font-size: .0575rem;
-    visibility : ${day => day.day.IN_total > 0 ? 'visible' : 'collapse'};
     text-align : right;
+    min-width: 100%;
+    font-size : min(1.8vw, 16px);
 `
 const Expediture = styled.div`
+    display : ${day => day.day.EX_total < 0 ? 'block' : 'None'};
     color : red;
-    font-size: .0575rem;
-    visibility : ${day => day.day.EX_total < 0 ? 'visible' : 'collapse'};
+    font-size: 16px;
     text-align : right;
+    min-width: 100%;
+    font-size : min(1.8vw, 16px);
+    font-weight : 600;
     `
 const useWeekArray = (today, lists) => {
     let thisMonth = new Date(today.getFullYear(), today.getMonth(),1)
@@ -84,21 +85,16 @@ const useWeekArray = (today, lists) => {
     return weekArray
 }
 
-function MainCalender(){
-    const lists = useSelector((state)=> (state.IE).accountList)
-    const {year,month} = useSelector((state => ({
-        year : (state.SH).year,
-        month : (state.SH).month
-    })))
-    console.log(year, month)
-    const today = new Date(year, month)
+function MainCalender({today}){
+    console.log(today)
+    const lists = useSelector((state)=> (state.incomeExpeditureReducer).accountList)
     let weekArray = useWeekArray(today, lists)
     return (
         <Wrap>
             {weekArray.map((week,index) =>
             <Week key={index}>
                 {week.map((day,index) =>
-                    <Day show = {day.show} key={index} >
+                    <Day show = {day.show} key={index}>
                         <div>{day.date}</div>
                         <div>
                             <Income day = {day}>+{day.IN_total}</Income>

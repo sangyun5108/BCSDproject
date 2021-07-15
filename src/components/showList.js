@@ -149,15 +149,17 @@ const ShowList = () => {
         const direction = e.target.parentNode.value;
         if(direction==='right'){
             newMonth+=1
-            if(newMonth===11){
+            if(newMonth===12){
                 newMonth=0;
                 newYear+=1;
+                console.log(newMonth)
             }
         }else{
             newMonth-=1;
             if(newMonth===-1){
                 newMonth=11;
                 newYear-=1;
+                console.log(newMonth)
             }
         }
         dispatch(Month(newMonth));

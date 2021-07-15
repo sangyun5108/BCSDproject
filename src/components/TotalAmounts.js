@@ -4,20 +4,24 @@ import styled from 'styled-components'
 import { showEx, showIn } from '../redux/actions'
 
 const TotalMoney = styled.div`
+    width : 100%;
     display : flex;
-    font-size: 1rem;
+    font-size: min(3vw, 24px);
     font-weight: 600;
+    justify-content : center;
+
 `
 const IncomeButton = styled.div`
     display : flex;
     justify-content : center;
     align-items: center;
-    width : 150px;
-    height: 2rem;
+    width : 25%;
+    height : 50px;
+    max-width : 250px;
     cursor: pointer;
-    margin-right: .4375rem;
-    border: .125rem solid #166ff3;
-    border-radius: .5375rem;
+    margin-right: 10.5px;
+    border: 2px solid #166ff3;
+    border-radius: 9px;
     color: ${props => props.isClicked ?'white':'#166ff3'};
     background : ${props => props.isClicked ?'#166ff3':'white'};
 `
@@ -25,12 +29,13 @@ const ExpeditureButton = styled.div`
     display : flex;
     justify-content : center;
     align-items: center;
-    width : 150px;
-    height: 2rem;
+    width : 25%;
+    height : 50px;
+    max-width : 250px;
     cursor: pointer;
-    margin-left: .4375rem;
-    border: .125rem solid #f8123b;
-    border-radius: .5375rem;
+    margin-left: 10.5px;
+    border: 2px solid #f8123b;
+    border-radius: 9px;
     color: ${props => props.isClicked ?'white':'#f8123b'};
     background : ${props => props.isClicked ?'#f8123b':'white'};
 `
@@ -38,10 +43,11 @@ const ExpeditureButton = styled.div`
 
 function TotalAmounts({today}){
     const {lists,inClicked, exClicked} = useSelector((state)=>({
-        lists : state.list,
-        inClicked : state.inClicked,
-        exClicked : state.exClicked
+        lists : state.incomeExpeditureReducer.list,
+        inClicked : state.incomeExpeditureReducer.inClicked,
+        exClicked : state.incomeExpeditureReducer.exClicked
     }));
+    console.log()
     const dispatch = useDispatch()
     const showIncomes = () => dispatch(showIn())
     const showExpeditures = () => dispatch(showEx())
