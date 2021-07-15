@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import styled from 'styled-components';
 import transformation from '../utils/transformation';
 import {useGiveSum} from '../hooks/useGiveSum';
-import {Type,Month,Year} from '../redux/actions';
+import {Type,Month,Year,GreenBtn,RedBtn} from '../redux/actions';
 
 const Wrapper = styled.div`
     width:100%;
@@ -28,6 +28,10 @@ const MonthWrapper = styled.div`
     justify-content:center;
     align-items:center;
     width:100%;
+`;
+
+const UlWrapper = styled.ul`
+    margin-left:0px;
 `;
 
 const Years = styled.div`
@@ -125,45 +129,65 @@ const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','July','Aug','Sep','Oct','No
 
 const ShowList = () => {
 
-    //redux에서 관리
     let newLists;
     let listdate=0;
+    let incomeSum = 0;
+    let expeditureSum = 0;
 
-    const lists = useSelector((state)=>(state.IE).list);
+    const {list:lists} = useSelector((state)=>state.incomeExpeditureReducer);
+    const {greenBtn,redBtn} = useSelector((state)=>state.showListReducer);
     const dispatch = useDispatch();
-    
-    let type = useSelector((state)=>(state.SH).type);
-    let month = useSelector((state)=>(state.SH).month);
-    let year = useSelector((state)=>(state.SH).year);
+
+    let {type,month,year} = useSelector((state)=>state.showListReducer);
+    let newMonth = month;
+    let newType = type;
+    let newYear = year;
+    let newGreenBtn = greenBtn;
+    let newRedBtn = redBtn;
     
     const showMonth = (e) => {
         const direction = e.target.parentNode.value;
         if(direction==='right'){
-            month+=1;
-            if(month===12){
-                month=0;
-                year+=1;
+            newMonth+=1
+            if(newMonth===11){
+                newMonth=0;
+                newYear+=1;
             }
         }else{
-                month-=1;
-            if(month===-1){
-                month=11;
-                year-=1;
+            newMonth-=1;
+            if(newMonth===-1){
+                newMonth=11;
+                newYear-=1;
             }
         }
-        dispatch(Month(month));
-        dispatch(Year(year));
+        dispatch(Month(newMonth));
+        dispatch(Year(newYear));
     }
+
+    incomeSum = useGiveSum('INCOME',month,year);
+    expeditureSum = useGiveSum('EXPEDITURE',month,year);
 
     const clickBtn = (e) => {
         const value = e.target.value;
-
-        if(type==='INCOME'||type==='EXPEDITURE'){
-            type = 'incomeExpediture';
-        }else{
-            type = value;
+        if(value==='INCOME'&&newGreenBtn===false){
+            newType = 'INCOME';
+            newGreenBtn = true;
+            newRedBtn = false;
+        }else if(value==='EXPEDITURE'&&newRedBtn===false){
+           newType = 'EXPEDITURE';
+           newRedBtn = true;
+           newGreenBtn = false;
+        }else if(value==='INCOME'&&newGreenBtn===true){
+            newType = 'incomeExpediture';
+            newGreenBtn = false;
+        }else if(value ==='EXPEDITURE'&&newRedBtn===true){
+            newType = 'incomeExpediture';
+            newRedBtn = false;
         }
-        dispatch(Type(type));
+        
+        dispatch(GreenBtn(newGreenBtn));
+        dispatch(RedBtn(newRedBtn));
+        dispatch(Type(newType));
     }
 
     if(type==='INCOME'||type==='EXPEDITURE'){
@@ -201,24 +225,28 @@ const ShowList = () => {
                 </MonthWrapper>
             </MWrapper>
             <Wrapper>
-                <BlueButton active={type} value={'INCOME'} onClick={clickBtn}>+{useGiveSum('INCOME',month,year)}</BlueButton>
-                <RedButton active={type} value={'EXPEDITURE'} onClick={clickBtn}>{useGiveSum('EXPEDITURE',month,year)}</RedButton>
+                <BlueButton active={type} value={'INCOME'} onClick={clickBtn}>+{incomeSum}</BlueButton>
+                <RedButton active={type} value={'EXPEDITURE'} onClick={clickBtn}>{expeditureSum}</RedButton>
             </Wrapper>
-            {newLists.map((list)=>{
-                return(
-                    <div key={list.id}>
-                        <Datelist>
-                                {checkDate(list.date)?`${list.day}, ${list.date}th`:''}
-                        </Datelist>
-                        <ListWrapper> 
-                            <List>
-                                <Label>{list.label}</Label>
-                                <Amount active={list.amount}>{list.amount>0?`+${transformation(list.amount)}`:transformation(list.amount)}</Amount>
-                            </List>
-                        </ListWrapper>
-                    </div>
-                );
-            })}
+            <UlWrapper>
+                {newLists.map((list)=>{
+                    return(
+                        <div key={list.id}>
+                                    {checkDate(list.date)?(
+                                        <Datelist>
+                                            {list.day}, {list.date}th
+                                        </Datelist>
+                                    ):''}
+                            <ListWrapper> 
+                                <List>
+                                    <Label>{list.label}</Label>
+                                    <Amount active={list.amount}>{list.amount>0?`+${transformation(list.amount)}`:transformation(list.amount)}</Amount>
+                                </List>
+                            </ListWrapper>
+                        </div>
+                    );
+                })}
+            </UlWrapper>
         </>
     )
 }

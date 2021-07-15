@@ -1,36 +1,8 @@
-import {INCOME, EXPEDITURE, INIT, TYPE, MONTH, YEAR,SHOWIN,SHOWEX} from './types';
+import {INCOME, EXPEDITURE, INIT, TYPE, MONTH, YEAR,SHOWIN,SHOWEX, GREENBTN, REDBTN} from './types';
+import {getId} from '../utils/getId';
+import {checkLocal} from '../utils/checkLocal';
 
-let incomeId=0;
-let expeditureId=100;
-
-const getIncomeId = () => {
-    const income = JSON.parse(localStorage.getItem('lists'))
-    .filter((list)=>list.type==='INCOME');
-    
-    if(income.length!==0){
-        incomeId = ++income[income.length-1].id;
-    }
-    return;
-} //localStorage income id값을 받아오는 함수
-
-const getExpeditureId = () => {
-    const expediture = JSON.parse(localStorage.getItem('lists'))
-    .filter((list)=>list.type==='EXPEDITURE')
-   if(expediture.length!==0) {
-       expeditureId = ++expediture[expediture.length-1].id;
-   }
-   return;
-}//localStorage expediture id값을 받아오는 함수
-
-const checkLocal  = () => {
-    if(localStorage.getItem('lists')){
-        getIncomeId();
-        getExpeditureId();
-    }
-    return;
-}
-
-export const income = (amount,label,year,month,date,day) => {
+export const income = (amount,label,year,month,date,day,id) => {
     return {
         type:INCOME,
         amount,
@@ -39,11 +11,11 @@ export const income = (amount,label,year,month,date,day) => {
         month,
         date,
         day,
-        id:incomeId++
+        id
     }
 }
 
-export const expediture = (amount,label,year,month,date,day) => {
+export const expediture = (amount,label,year,month,date,day,id) => {
     return {
         type:EXPEDITURE,
         amount,
@@ -52,18 +24,27 @@ export const expediture = (amount,label,year,month,date,day) => {
         month,
         date,
         day,
-        id:expeditureId++
+        id
     }
 }
 
 export const init = ()=>{
-    checkLocal();
     const getlist = JSON.parse(localStorage.getItem('lists'));
     const list = getlist?getlist:[];
+    let incomeId = 0;
+    let expeditureId = 0;
+
+    if(checkLocal()){
+        incomeId = getId('INCOME',0);
+        expeditureId = getId('EXPEDITURE',100);
+    }
+    
 
     return {
         type:INIT,
-        list
+        list,
+        incomeId,
+        expeditureId
     }
 }
 
@@ -89,3 +70,17 @@ export const Year = (year) => {
 }
 export const showIn = () => ({type : SHOWIN})
 export const showEx = () => ({type : SHOWEX})
+
+export const GreenBtn = (btn) => {
+    return {
+        type:GREENBTN,
+        btn
+    }
+}
+
+export const RedBtn = (btn) => {
+    return {
+        type:REDBTN,
+        btn
+    }
+}

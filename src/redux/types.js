@@ -6,3 +6,6 @@ export const YEAR = 'YEAR';
 export const TYPE = 'TYPE';
 export const SHOWIN = `calender/SHOWIN`
 export const SHOWEX = 'calender/SHOWEX'
+
+export const GREENBTN = 'GREENBTN';
+export const REDBTN = 'REDBTN';

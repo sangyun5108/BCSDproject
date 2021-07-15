@@ -3,8 +3,8 @@ import { incomeExpeditureReducer} from './reducers/incomeExpeditureReducer';
 import { showListReducer } from './reducers/showListReducer';
 
 const reducers = combineReducers(
-    {   IE:incomeExpeditureReducer,
-        SH:showListReducer,
+    {   incomeExpeditureReducer,
+        showListReducer,
     }
 );
 
