@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import transformation from '../utils/transformation';
 import useGiveSum from '../hooks/useGiveSum';
 import useFilterList from '../hooks/useFilterList';
-import {Type,Month,Year,BlueBtn,RedBtn} from '../redux/actions';
+import {Type,Month,Year,BlueBtn,RedBtn,DeleteList} from '../redux/actions';
 
 const Wrapper = styled.div`
     width:100%;
@@ -159,6 +159,7 @@ const ShowList = () => {
     let incomeSum=0;
     let expeditureSum=0;
 
+    const {list:lists} = useSelector((state)=>state.incomeExpeditureReducer);
     const {greenBtn,redBtn} = useSelector((state)=>state.showListReducer);
     const dispatch = useDispatch();
 
@@ -227,6 +228,17 @@ const ShowList = () => {
         }
     }
 
+    const deleteList = (e) => {
+        const deleteId = Number(e.target.value);
+        const list = lists
+        .filter((list)=>{
+            return list.id!==deleteId;
+        })
+        .sort((a,b)=>{
+            return a.id-b.id;
+        });
+        dispatch(DeleteList(list));
+    }
     
     return(
         <>
@@ -265,7 +277,7 @@ const ShowList = () => {
                                 <List>
                                     <Label>{list.label}</Label>
                                     <Amount active={list.amount}>{list.amount>0?`+${transformation(list.amount)}`:transformation(list.amount)}</Amount>
-                                    <DeleteBtn>X</DeleteBtn>
+                                    <DeleteBtn value={list.id} onClick={(e)=>deleteList(e)}>X</DeleteBtn>
                                 </List>
                             </ListWrapper>
                         </div>

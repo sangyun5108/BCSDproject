@@ -1,4 +1,4 @@
-import {INCOME, EXPEDITURE, INIT, TYPE, MONTH, YEAR,SHOWIN,SHOWEX, BLUEBTN, REDBTN} from './types';
+import {INCOME, EXPEDITURE, INIT, TYPE, MONTH, YEAR,SHOWIN,SHOWEX, BLUEBTN, REDBTN, DELETE} from './types';
 import {getId} from '../utils/getId';
 import {checkLocal} from '../utils/checkLocal';
 
@@ -25,6 +25,18 @@ export const expediture = (amount,label,year,month,date,day,id) => {
         date,
         day,
         id
+    }
+}
+
+export const DeleteList = (list) => {
+    localStorage.setItem('lists',JSON.stringify(list));
+    let incomeId = getId('INCOME',0);
+    let expeditureId = getId('EXPEDITURE',100);
+    return {
+        type:DELETE,
+        list,
+        incomeId,
+        expeditureId
     }
 }
 

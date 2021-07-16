@@ -1,5 +1,5 @@
 import React from 'react';
-import ShowList from '../components/showList';
+import ShowList from '../components/ShowList';
 import styled from 'styled-components';
 import {useEffect} from 'react';
 import { useDispatch} from 'react-redux';
@@ -34,6 +34,7 @@ const AccountBook = () => {
   }
 
   useEffect(()=>{
+    console.log('init');
     dispatch(init());
   },[dispatch]);
 

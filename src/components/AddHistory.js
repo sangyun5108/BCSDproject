@@ -177,12 +177,10 @@ const AddHistory = () => {
     const dispatch = useDispatch();
 
     const onClickIncome = (e) => {
-        e.preventDefault();
         setType(true);
     }
 
     const onClickExpediture = (e) => {
-        e.preventDefault();
         setType(false);
     }
 
@@ -232,6 +230,8 @@ const AddHistory = () => {
 
     const onSubmit = (e) =>{
 
+        console.log(incomeId, expeditureId);
+        
         e.preventDefault();
         history.push('/');
         const monthIndex = Number(monthRef.current.value)-1;
