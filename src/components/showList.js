@@ -2,7 +2,8 @@ import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import styled from 'styled-components';
 import transformation from '../utils/transformation';
-import {useGiveSum} from '../hooks/useGiveSum';
+import useGiveSum from '../hooks/useGiveSum';
+import useFilterList from '../hooks/useFilterList';
 import {Type,Month,Year,BlueBtn,RedBtn} from '../redux/actions';
 
 const Wrapper = styled.div`
@@ -102,6 +103,7 @@ const ListWrapper = styled.div`
     margin-bottom:15px;
     display:flex;
     align-items:center;
+    position:relative;
 `;
 
 const List = styled.li`
@@ -132,16 +134,31 @@ const Datelist = styled.div`
     color:grey;
 `;
 
+const DeleteBtn = styled.button`
+    position:absolute;
+    width:30px;
+    height:30px;
+    top:0px;
+    right:0px;
+    border-radius:50%;
+    outline:none;
+    text-align:center;
+    border:none;
+    background:none;
+    &:hover{
+        cursor:pointer;
+    }
+`;
+
 const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','July','Aug','Sep','Oct','Nov','Dec'];
 
 const ShowList = () => {
 
     let newLists;
     let listdate=0;
-    let incomeSum = 0;
-    let expeditureSum = 0;
+    let incomeSum=0;
+    let expeditureSum=0;
 
-    const {list:lists} = useSelector((state)=>state.incomeExpeditureReducer);
     const {greenBtn,redBtn} = useSelector((state)=>state.showListReducer);
     const dispatch = useDispatch();
 
@@ -199,16 +216,7 @@ const ShowList = () => {
         dispatch(Type(newType));
     }
 
-    if(type==='INCOME'||type==='EXPEDITURE'){
-        newLists = lists.filter((list)=>list.type===type&&list.month===month&&Number(list.year)===year)
-
-    }else{
-        newLists = lists.filter((list)=>list.month===month&&Number(list.year)===year)
-    }
-
-    newLists.sort((a,b)=>{
-        return a.date-b.date;
-    })
+    newLists = useFilterList(type,month,year);
 
     const checkDate = (date) => {
         if(date!==listdate){
@@ -218,6 +226,7 @@ const ShowList = () => {
             return false;
         }
     }
+
     
     return(
         <>
@@ -256,6 +265,7 @@ const ShowList = () => {
                                 <List>
                                     <Label>{list.label}</Label>
                                     <Amount active={list.amount}>{list.amount>0?`+${transformation(list.amount)}`:transformation(list.amount)}</Amount>
+                                    <DeleteBtn>X</DeleteBtn>
                                 </List>
                             </ListWrapper>
                         </div>
