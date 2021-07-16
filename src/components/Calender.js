@@ -1,7 +1,6 @@
 import React,{useState} from 'react'
 import { useSelector } from 'react-redux'
 import styled from'styled-components'
-import MainCalender from './MainCalender'
 import DateViewer from './DateViewer'
 import CalenderHeader from './CalenderHeader'
 import TotalAmounts from './TotalAmounts'
