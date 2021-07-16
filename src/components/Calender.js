@@ -49,7 +49,6 @@ function Calender(){
     })))
     const today = new Date(year, month)    
     const [date,setDate] = useState(today)
-    console.log(today)
     return (
         <Wrap>
             <Header>
@@ -59,7 +58,7 @@ function Calender(){
                 <TotalAmounts today = {date}/>
                 <CalenderWrap>
                     <CalenderHeader/>
-                    <MainCalender today = {date}/>
+                    {/* <MainCalender today = {date}/> */}
                 </CalenderWrap>
             </ContentContainer>
         </Wrap>

@@ -4,8 +4,8 @@ export const INIT = 'INIT';
 export const MONTH = 'MONTH';
 export const YEAR = 'YEAR';
 export const TYPE = 'TYPE';
-export const SHOWIN = `calender/SHOWIN`
-export const SHOWEX = 'calender/SHOWEX'
 
-export const GREENBTN = 'GREENBTN';
+export const BLUEBTN = 'BLUEBTN';
 export const REDBTN = 'REDBTN';
+export const INLIST = 'INLIST';
+export const EXLIST = 'EXLIST';

@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import styled from 'styled-components';
 import transformation from '../utils/transformation';
 import {useGiveSum} from '../hooks/useGiveSum';
-import {Type,Month,Year,GreenBtn,RedBtn} from '../redux/actions';
+import {Type,Month,Year,BlueBtn,RedBtn} from '../redux/actions';
 
 const Wrapper = styled.div`
     width:100%;
@@ -135,14 +135,14 @@ const ShowList = () => {
     let expeditureSum = 0;
 
     const {list:lists} = useSelector((state)=>state.incomeExpeditureReducer);
-    const {greenBtn,redBtn} = useSelector((state)=>state.showListReducer);
+    const {blueBtn,redBtn} = useSelector((state)=>state.showListReducer);
     const dispatch = useDispatch();
 
     let {type,month,year} = useSelector((state)=>state.showListReducer);
     let newMonth = month;
     let newType = type;
     let newYear = year;
-    let newGreenBtn = greenBtn;
+    let newBlueBtn = blueBtn;
     let newRedBtn = redBtn;
     
     const showMonth = (e) => {
@@ -171,23 +171,23 @@ const ShowList = () => {
 
     const clickBtn = (e) => {
         const value = e.target.value;
-        if(value==='INCOME'&&newGreenBtn===false){
+        if(value==='INCOME'&&newBlueBtn===false){
             newType = 'INCOME';
-            newGreenBtn = true;
+            newBlueBtn = true;
             newRedBtn = false;
         }else if(value==='EXPEDITURE'&&newRedBtn===false){
            newType = 'EXPEDITURE';
            newRedBtn = true;
-           newGreenBtn = false;
-        }else if(value==='INCOME'&&newGreenBtn===true){
+           newBlueBtn = false;
+        }else if(value==='INCOME'&&newBlueBtn===true){
             newType = 'incomeExpediture';
-            newGreenBtn = false;
+            newBlueBtn = false;
         }else if(value ==='EXPEDITURE'&&newRedBtn===true){
             newType = 'incomeExpediture';
             newRedBtn = false;
         }
         
-        dispatch(GreenBtn(newGreenBtn));
+        dispatch(BlueBtn(newBlueBtn));
         dispatch(RedBtn(newRedBtn));
         dispatch(Type(newType));
     }

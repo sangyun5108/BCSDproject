@@ -1,4 +1,4 @@
-import {INCOME, EXPEDITURE, INIT, TYPE, MONTH, YEAR,SHOWIN,SHOWEX, GREENBTN, REDBTN} from './types';
+import {INCOME, EXPEDITURE, INIT, TYPE, MONTH, YEAR, BLUEBTN, REDBTN, INLIST, EXLIST} from './types';
 import {getId} from '../utils/getId';
 import {checkLocal} from '../utils/checkLocal';
 
@@ -68,19 +68,32 @@ export const Year = (year) => {
         year
     }
 }
-export const showIn = () => ({type : SHOWIN})
-export const showEx = () => ({type : SHOWEX})
-
-export const GreenBtn = (btn) => {
+export const BlueBtn = (btn) => {
     return {
-        type:GREENBTN,
-        btn
+        type:BLUEBTN,
+        btn : btn
     }
 }
 
 export const RedBtn = (btn) => {
     return {
         type:REDBTN,
-        btn
+        btn : btn
+    }
+}
+
+export const InList = () => {
+    const incomeList = JSON.parse(localStorage.getItem('lists')).filter(account => account.type === 'INCOME')
+    return {
+        type : INLIST,
+        list : incomeList
+    }
+}
+
+export const ExList = () => {
+    const expeditureList = JSON.parse(localStorage.getItem('lists')).filter(account => account.type === 'EXPEDITURE')
+    return {
+        type : EXLIST,
+        list : expeditureList
     }
 }

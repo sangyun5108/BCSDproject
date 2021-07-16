@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector,useDispatch } from 'react-redux'
 import styled from 'styled-components'
-import { showEx, showIn } from '../redux/actions'
+import { BlueBtn, ExList, InList, RedBtn } from '../redux/actions'
 
 const TotalMoney = styled.div`
     width : 100%;
@@ -40,17 +40,43 @@ const ExpeditureButton = styled.div`
     background : ${props => props.isClicked ?'#f8123b':'white'};
 `
 
-
 function TotalAmounts({today}){
-    const {lists,inClicked, exClicked} = useSelector((state)=>({
-        lists : state.incomeExpeditureReducer.list,
-        inClicked : state.incomeExpeditureReducer.inClicked,
-        exClicked : state.incomeExpeditureReducer.exClicked
-    }));
-    console.log()
+    const lists = useSelector((state) => state.incomeExpeditureReducer.list)
+    const list = useSelector((state) => state.showListReducer.list)
+    let {blueBtn, redBtn} = useSelector((state) => ({
+        blueBtn : state.showListReducer.blueBtn,
+        redBtn : state.showListReducer.redBtn
+    }))
+    console.log(blueBtn, redBtn)
+    console.log(list)
+
     const dispatch = useDispatch()
-    const showIncomes = () => dispatch(showIn())
-    const showExpeditures = () => dispatch(showEx())
+    const showIncomes = () => dispatch(InList())
+    const showExpeditures = () => dispatch(ExList())
+    const clickIncomeBtn = () => {
+        if(blueBtn){
+            blueBtn = false
+            redBtn = false
+        }else{
+            blueBtn = true
+            redBtn = false
+            showIncomes()
+        }
+        dispatch(BlueBtn(blueBtn))
+        dispatch(RedBtn(redBtn))
+    }
+    const clickExpeditureBtn = () => {
+        if(redBtn){
+            blueBtn = false
+            redBtn = false
+        }else{
+            blueBtn = false
+            redBtn = true
+            showExpeditures()
+        }
+        dispatch(BlueBtn(blueBtn))
+        dispatch(RedBtn(redBtn))
+    }
     let totalIncome = lists.filter(account => 
         account.type === 'INCOME' && 
         account.year === today.getFullYear() &&
@@ -65,8 +91,8 @@ function TotalAmounts({today}){
         .reduce((a,b)=>a+b,0)
     return (
         <TotalMoney>
-            <IncomeButton onClick={showIncomes} isClicked = {inClicked}>+{totalIncome}</IncomeButton>
-            <ExpeditureButton onClick={showExpeditures} isClicked = {exClicked}>-{Math.abs(totalExpediture)}</ExpeditureButton>
+            <IncomeButton onClick={() => clickIncomeBtn()}>+{totalIncome}</IncomeButton>
+            <ExpeditureButton onClick={() => clickExpeditureBtn()} >-{Math.abs(totalExpediture)}</ExpeditureButton>
         </TotalMoney>
     )
 }
