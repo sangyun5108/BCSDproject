@@ -5,8 +5,6 @@ const initialStateShowList = {
     type:'incomeExpediture',
     month:new Date().getMonth(),
     year:new Date().getFullYear(),
-    month:0,
-    year:2021,
     list : list,
     blueBtn:false,
     redBtn:false

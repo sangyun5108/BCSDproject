@@ -127,7 +127,7 @@ const DoneButton = styled.button`
     bottom:0;
     margin-bottom:10%;
     border:none;
-    background-color:${props=>props.active?'#66bb6a':'#ef5350'};
+    background-color:${props=>props.active?'#166ff3':'#f8123b'};
     color:white;
     font-size:30px;
     font-weight:700;
@@ -177,12 +177,10 @@ const AddHistory = () => {
     const dispatch = useDispatch();
 
     const onClickIncome = (e) => {
-        e.preventDefault();
         setType(true);
     }
 
     const onClickExpediture = (e) => {
-        e.preventDefault();
         setType(false);
     }
 
@@ -231,7 +229,6 @@ const AddHistory = () => {
     }
 
     const onSubmit = (e) =>{
-
         e.preventDefault();
         history.push('/');
         const monthIndex = Number(monthRef.current.value)-1;
