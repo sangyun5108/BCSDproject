@@ -104,11 +104,15 @@ const ListWrapper = styled.div`
     display:flex;
     align-items:center;
     position:relative;
+    &:hover{
+        cursor:pointer;
+    }
 `;
 
 const List = styled.li`
     list-style:none;
-    width:100%;
+    width:95%;
+    height:75px;
     display:flex;
     align-items:center;
     justify-content:space-between;
@@ -228,8 +232,8 @@ const ShowList = () => {
         }
     }
 
-    const deleteList = (e) => {
-        const deleteId = Number(e.target.value);
+    const deleteList = (id) => {
+        const deleteId = id;
         const list = lists
         .filter((list)=>{
             return list.id!==deleteId;
@@ -277,7 +281,7 @@ const ShowList = () => {
                                 <List>
                                     <Label>{list.label}</Label>
                                     <Amount active={list.amount}>{list.amount>0?`+${transformation(list.amount)}`:transformation(list.amount)}</Amount>
-                                    <DeleteBtn value={list.id} onClick={(e)=>deleteList(e)}>X</DeleteBtn>
+                                    <DeleteBtn onClick={()=>deleteList(list.id)}>X</DeleteBtn>
                                 </List>
                             </ListWrapper>
                         </div>

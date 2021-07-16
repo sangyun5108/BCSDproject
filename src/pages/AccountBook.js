@@ -34,7 +34,6 @@ const AccountBook = () => {
   }
 
   useEffect(()=>{
-    console.log('init');
     dispatch(init());
   },[dispatch]);
 

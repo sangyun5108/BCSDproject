@@ -229,9 +229,6 @@ const AddHistory = () => {
     }
 
     const onSubmit = (e) =>{
-
-        console.log(incomeId, expeditureId);
-        
         e.preventDefault();
         history.push('/');
         const monthIndex = Number(monthRef.current.value)-1;
