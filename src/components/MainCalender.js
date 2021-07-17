@@ -64,6 +64,7 @@ const useWeekArray = (today, lists) => {
                     .map(account => account.amount)
                     .reduce((a,b)=>a+b,0),
             EX_total : lists.filter(account => 
+                account.type === 'EXPEDITURE' &&
                 account.date === thisMonth.getDate())
                 .map(account => account.amount)
                 .reduce((a,b)=>a+b,0),
