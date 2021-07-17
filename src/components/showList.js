@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import transformation from '../utils/transformation';
 import useGiveSum from '../hooks/useGiveSum';
 import useFilterList from '../hooks/useFilterList';
-import {Type,Month,Year,BlueBtn,RedBtn,DeleteList} from '../redux/actions';
+import {Type,Month,Year,Btn,DeleteList} from '../redux/actions';
 
 const Wrapper = styled.div`
     width:100%;
@@ -215,8 +215,7 @@ const ShowList = () => {
             newRedBtn = false;
         }
         
-        dispatch(BlueBtn(newBlueBtn));
-        dispatch(RedBtn(newRedBtn));
+        dispatch(Btn(newRedBtn,newBlueBtn));
         dispatch(Type(newType));
     }
 

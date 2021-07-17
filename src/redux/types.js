@@ -8,3 +8,4 @@ export const TYPE = 'TYPE';
 
 export const BLUEBTN = 'BLUEBTN';
 export const REDBTN = 'REDBTN';
+export const BTN = 'BTN';

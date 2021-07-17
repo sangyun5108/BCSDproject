@@ -1,4 +1,4 @@
-import {INCOME, EXPEDITURE, INIT, TYPE, MONTH, YEAR, BLUEBTN, REDBTN, DELETE} from './types';
+import {INCOME, EXPEDITURE, INIT, TYPE, MONTH, YEAR, BLUEBTN,BTN,REDBTN, DELETE} from './types';
 import {getId} from '../utils/getId';
 import {checkLocal} from '../utils/checkLocal';
 
@@ -57,6 +57,14 @@ export const init = ()=>{
         list,
         incomeId,
         expeditureId
+    }
+}
+
+export const Btn = (redBtn,blueBtn) => {
+    return {
+        type:BTN,
+        redBtn,
+        blueBtn
     }
 }
 
