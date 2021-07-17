@@ -175,7 +175,6 @@ const ShowList = () => {
     let newYear = year;
     let newBlueBtn = blueBtn;
     let newRedBtn = redBtn;
-    
     const showMonth = (e) => {
         const direction = e.target.parentNode.value;
         if(direction==='right'){

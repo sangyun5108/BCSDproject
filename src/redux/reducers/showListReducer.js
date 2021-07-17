@@ -1,4 +1,4 @@
-import {TYPE,MONTH,YEAR,BLUEBTN,REDBTN,INLIST,EXLIST} from '../types';
+import {TYPE,MONTH,YEAR,BLUEBTN,REDBTN,INLIST,EXLIST,ALLLIST} from '../types';
 const data = JSON.parse(localStorage.getItem('lists'));
 const list = data?data:[];
 const initialStateShowList = {
@@ -44,6 +44,11 @@ export const showListReducer = (state=initialStateShowList,action) => {
                 list : action.list
             }
         case EXLIST:
+            return{
+                ...state,
+                list : action.list
+            }
+        case ALLLIST:
             return{
                 ...state,
                 list : action.list

@@ -87,7 +87,7 @@ const useWeekArray = (today, lists) => {
 
 function MainCalender({today}){
     console.log(today)
-    const lists = useSelector((state)=> (state.incomeExpeditureReducer).accountList)
+    const lists = useSelector((state)=> (state.incomeExpeditureReducer).list)
     let weekArray = useWeekArray(today, lists)
     return (
         <Wrap>

@@ -1,4 +1,4 @@
-import { INCOME, EXPEDITURE, INIT, DELETE } from "../types";
+import { INCOME, EXPEDITURE, INIT } from "../types";
 const data = JSON.parse(localStorage.getItem('lists'));
 const list = data?data:[];
 const initialState={
@@ -47,13 +47,6 @@ export const incomeExpeditureReducer = (state=initialState,action) => {
                         }
                     ]
                 }
-        
-        case DELETE:
-            return {
-                list:action.list,
-                incomeId:action.incomeId,
-                expeditureId:action.expeditureId
-            }
         default:
             return state;
     }

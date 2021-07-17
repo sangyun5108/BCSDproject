@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector,useDispatch } from 'react-redux'
 import styled from 'styled-components'
-import { BlueBtn, ExList, InList, RedBtn } from '../redux/actions'
+import { AllLiST, BlueBtn, ExList, InList, RedBtn } from '../redux/actions'
 
 const TotalMoney = styled.div`
     width : 100%;
@@ -22,8 +22,8 @@ const IncomeButton = styled.div`
     margin-right: 10.5px;
     border: 2px solid #166ff3;
     border-radius: 9px;
-    color: ${props => props.isClicked ?'white':'#166ff3'};
-    background : ${props => props.isClicked ?'#166ff3':'white'};
+    color: ${clicked => clicked.clicked ?'white':'#166ff3'};
+    background : ${clicked => clicked.clicked ?'#166ff3':'white'};
 `
 const ExpeditureButton = styled.div`
     display : flex;
@@ -36,46 +36,47 @@ const ExpeditureButton = styled.div`
     margin-left: 10.5px;
     border: 2px solid #f8123b;
     border-radius: 9px;
-    color: ${props => props.isClicked ?'white':'#f8123b'};
-    background : ${props => props.isClicked ?'#f8123b':'white'};
+    color: ${clicked => clicked.clicked ? 'white':'#f8123b'};
+    background : ${clicked => clicked.clicked ?'#f8123b':'white'};
 `
 
 function TotalAmounts({today}){
     const lists = useSelector((state) => state.incomeExpeditureReducer.list)
     const list = useSelector((state) => state.showListReducer.list)
-    let {blueBtn, redBtn} = useSelector((state) => ({
-        blueBtn : state.showListReducer.blueBtn,
-        redBtn : state.showListReducer.redBtn
-    }))
+    const {blueBtn, redBtn} = useSelector((state) => state.showListReducer)
     console.log(blueBtn, redBtn)
     console.log(list)
-
+    let newBlueBtn = blueBtn
+    let newRedBtn = redBtn
     const dispatch = useDispatch()
     const showIncomes = () => dispatch(InList())
     const showExpeditures = () => dispatch(ExList())
+    const showAll = () => dispatch(AllLiST())
     const clickIncomeBtn = () => {
-        if(blueBtn){
-            blueBtn = false
-            redBtn = false
+        if(newBlueBtn){
+            newBlueBtn = false
+            newRedBtn = false
+            showAll()
         }else{
-            blueBtn = true
-            redBtn = false
+            newBlueBtn = true
+            newRedBtn = false
             showIncomes()
         }
-        dispatch(BlueBtn(blueBtn))
-        dispatch(RedBtn(redBtn))
+        dispatch(BlueBtn(newBlueBtn))
+        dispatch(RedBtn(newRedBtn))
     }
     const clickExpeditureBtn = () => {
-        if(redBtn){
-            blueBtn = false
-            redBtn = false
+        if(newRedBtn){
+            newBlueBtn = false
+            newRedBtn = false
+            showAll()
         }else{
-            blueBtn = false
-            redBtn = true
+            newBlueBtn = false
+            newRedBtn = true
             showExpeditures()
         }
-        dispatch(BlueBtn(blueBtn))
-        dispatch(RedBtn(redBtn))
+        dispatch(BlueBtn(newBlueBtn))
+        dispatch(RedBtn(newRedBtn))
     }
     let totalIncome = lists.filter(account => 
         account.type === 'INCOME' && 
@@ -91,8 +92,8 @@ function TotalAmounts({today}){
         .reduce((a,b)=>a+b,0)
     return (
         <TotalMoney>
-            <IncomeButton onClick={() => clickIncomeBtn()}>+{totalIncome}</IncomeButton>
-            <ExpeditureButton onClick={() => clickExpeditureBtn()} >-{Math.abs(totalExpediture)}</ExpeditureButton>
+            <IncomeButton onClick={() => clickIncomeBtn()} clicked={blueBtn}>+{totalIncome}</IncomeButton>
+            <ExpeditureButton onClick={() => clickExpeditureBtn()} clicked={redBtn} >-{Math.abs(totalExpediture)}</ExpeditureButton>
         </TotalMoney>
     )
 }

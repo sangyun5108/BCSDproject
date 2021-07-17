@@ -1,4 +1,4 @@
-import {INCOME, EXPEDITURE, INIT, TYPE, MONTH, YEAR, BLUEBTN, REDBTN, INLIST, EXLIST, DELETE} from './types';
+import {INCOME, EXPEDITURE, INIT, TYPE, MONTH, YEAR, BLUEBTN, REDBTN, INLIST, EXLIST, ALLLIST,DELETE} from './types';
 import {getId} from '../utils/getId';
 import {checkLocal} from '../utils/checkLocal';
 
@@ -107,5 +107,13 @@ export const ExList = () => {
     return {
         type : EXLIST,
         list : expeditureList
+    }
+}
+
+export const AllLiST = () => {
+    const allists = JSON.parse(localStorage.getItem('lists'))
+    return {
+        type : ALLLIST,
+        list : allists
     }
 }

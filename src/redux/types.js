@@ -10,3 +10,4 @@ export const BLUEBTN = 'BLUEBTN';
 export const REDBTN = 'REDBTN';
 export const INLIST = 'INLIST';
 export const EXLIST = 'EXLIST';
+export const ALLLIST = 'ALLLIST'

@@ -1,5 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useDispatch, useSelector } from 'react-redux'
+import { Month, Year } from '../redux/actions'
 const Controler = styled.div`
     display : flex;
     justify-content : center;
@@ -11,7 +13,7 @@ const DateSetContainer = styled.div`
     font-weight : 600;
     font-size : 60px;
 `
-const Year = styled.div`
+const Years = styled.div`
     font-size : 12px;
     color : gray;
 `
@@ -32,33 +34,36 @@ const monthList = [
     'Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan'
 ]
 
-function DateViewer({date, setDate}){//날짜 출력
+function DateViewer({date}){//날짜 출력
     const month = date.getMonth()
+    const dispatch = useDispatch()
     const onIncrease = () =>{
-        setDate(new Date(date.getFullYear(),month + 1,date.getDate()))
+        dispatch(Month(date.getMonth(date.setMonth(month+1))))
+        dispatch(Year(date.getFullYear()))
     }
     const onDecrease = () =>{
-        setDate(new Date(date.getFullYear(),month - 1,date.getDate()))
+        dispatch(Month(date.getMonth(date.setMonth(month-1))))
+        dispatch(Year(date.getFullYear()))
     }
     return(
         <DateSetContainer>
             <Controler>
                 <Monthselector onClick={()=>onDecrease()}>
-                    <Year>
-                        {new Date(date.getFullYear(),month-1).getFullYear()}
-                    </Year>
+                    <Years>
+                    {new Date(date.getFullYear(),month-1).getFullYear()}
+                    </Years>
                     {monthList[new Date(date.getFullYear(),month-1).getMonth()]}
                 </Monthselector>
                 <Now>
-                    <Year>
+                    <Years>
                         {date.getFullYear()}
-                    </Year>
+                    </Years>
                     {monthList[month]}
                 </Now>
                 <Monthselector onClick={()=>onIncrease()}>
-                    <Year>
+                    <Years>
                         {new Date(date.getFullYear(),month+1).getFullYear()}
-                    </Year>
+                    </Years>
                     {monthList[month+1]}
                 </Monthselector>
             </Controler> 

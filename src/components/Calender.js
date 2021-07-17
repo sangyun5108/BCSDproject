@@ -52,13 +52,13 @@ function Calender(){
     return (
         <Wrap>
             <Header>
-                <DateViewer date = {date} setDate = {setDate}/>
+                <DateViewer date = {date}/>
             </Header>
             <ContentContainer>
                 <TotalAmounts today = {date}/>
                 <CalenderWrap>
                     <CalenderHeader/>
-                    {/* <MainCalender today = {date}/> */}
+                    <MainCalender today = {date}/>
                 </CalenderWrap>
             </ContentContainer>
         </Wrap>
