@@ -42,10 +42,12 @@ function DateViewer(){//날짜 출력
     let date = new Date(year,month)
     const dispatch = useDispatch()
     const onIncrease = () =>{
-        dispatch(DateSet(date.getFullYear(),date.getMonth(date.setMonth(month+1))))
+        date.setMonth(month+1)
+        dispatch(DateSet(date.getFullYear(),date.getMonth()))
     }
     const onDecrease = () =>{
-        dispatch(DateSet(date.getFullYear(),date.getMonth(date.setMonth(month-1))))
+        date.setMonth(month-1)
+        dispatch(DateSet(date.getFullYear(),date.getMonth()))
     }
     return(
         <DateSetContainer>

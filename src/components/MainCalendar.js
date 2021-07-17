@@ -81,7 +81,7 @@ const useWeekArray = (today, lists) => {
     return weekArray
 }
 
-function MainCalender(){
+function MainCalendar(){
     const list = useSelector((state)=> (state.incomeExpeditureReducer).list)
     const {blueBtn, redBtn} = useSelector((state) => state.showListReducer)
     const {year,month} = useSelector((state => ({
@@ -121,4 +121,4 @@ function MainCalender(){
     )
 }
 
-export default MainCalender
+export default MainCalendar
