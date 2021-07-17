@@ -3,7 +3,7 @@ import AccountBook from './AccountBook';
 import { Route,useHistory } from 'react-router';
 import styled from 'styled-components';
 import AddHistory from '../components/AddHistory';
-// import Calender from '../components/Calender';
+import Calender from '../components/Calender';
 
 const Wrapper = styled.div`
     width:100%;
@@ -68,9 +68,9 @@ const MainPage = () => {
                 <Route exact path={'/'}>
                     <AccountBook/>
                 </Route>
-                {/* <Route path='/calendar'>
+                <Route path='/calendar'>
                     <Calender/>
-                </Route> */}
+                </Route>
                 <Route path='/addHistory'>
                         <AddHistory/>
                 </Route>

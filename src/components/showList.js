@@ -217,8 +217,6 @@ const ShowList = () => {
         }
         
         dispatch(Btn(newRedBtn,newBlueBtn));
-        // dispatch(BlueBtn(newBlueBtn));
-        // dispatch(RedBtn(newRedBtn));
         dispatch(Type(newType));
     }
 
