@@ -1,7 +1,8 @@
 import React from 'react'
 import { useSelector,useDispatch } from 'react-redux'
 import styled from 'styled-components'
-import { BlueBtn, RedBtn } from '../redux/actions'
+import { Btn, Type } from '../redux/actions'
+import useFilterList from '../hooks/useFilterList'
 
 const TotalMoney = styled.div`
     width : 100%;
@@ -40,9 +41,15 @@ const ExpeditureButton = styled.div`
     background : ${clicked => clicked.clicked ?'#f8123b':'white'};
 `
 
-function TotalAmounts({today}){
+function TotalAmounts(){
     const lists = useSelector((state) => state.incomeExpeditureReducer.list)
     const {blueBtn, redBtn} = useSelector((state) => state.showListReducer)
+    const {year,month} = useSelector((state => ({
+        year : (state.showListReducer).year,
+        month : (state.showListReducer).month
+    })))
+    console.log(blueBtn,redBtn)
+    let today = new Date(year,month)
     let newBlueBtn = blueBtn
     let newRedBtn = redBtn
     const dispatch = useDispatch()
@@ -50,36 +57,29 @@ function TotalAmounts({today}){
         if(newBlueBtn){
             newBlueBtn = false
             newRedBtn = false
+            dispatch(Type('incomeExpediture'))
         }else{
             newBlueBtn = true
             newRedBtn = false
+            dispatch(Type('INCOME'))
         }
-        dispatch(BlueBtn(newBlueBtn))
-        dispatch(RedBtn(newRedBtn))
+        dispatch(Btn(newRedBtn,newBlueBtn))
+        
     }
     const clickExpeditureBtn = () => {
         if(newRedBtn){
             newBlueBtn = false
             newRedBtn = false
+            dispatch(Type('incomeExpediture'))
         }else{
             newBlueBtn = false
             newRedBtn = true
+            dispatch(Type('EXPEDITURE'))
         }
-        dispatch(BlueBtn(newBlueBtn))
-        dispatch(RedBtn(newRedBtn))
+        dispatch(Btn(newRedBtn,newBlueBtn))
     }
-    let totalIncome = lists.filter(account => 
-        account.type === 'INCOME' && 
-        account.year === today.getFullYear() &&
-        account.month === today.getMonth())
-        .map(account => account.amount)
-        .reduce((a,b)=>a+b,0)
-    let totalExpediture = lists.filter(account => 
-        account.type === 'EXPEDITURE' && 
-        account.year === today.getFullYear() &&
-        account.month === today.getMonth())
-        .map(account => account.amount)
-        .reduce((a,b)=>a+b,0)
+    let totalIncome = useFilterList('INCOME',month,year).reduce((a,b)=>a+b.amount,0)
+    let totalExpediture = useFilterList('EXPEDITURE',month,year).reduce((a,b)=>a+b.amount,0)
     return (
         <TotalMoney>
             <IncomeButton onClick={() => clickIncomeBtn()} clicked={blueBtn}>+{totalIncome}</IncomeButton>

@@ -40,7 +40,7 @@ export const DeleteList = (list) => {
     }
 }
 
-export const Date = (year,month) => {
+export const DateSet = (year,month) => {
     return {
         type:DATE,
         year,

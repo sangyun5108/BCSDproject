@@ -15,7 +15,6 @@ export const incomeExpeditureReducer = (state=initialState,action) => {
                 date : new Date(),
                 incomeId:action.incomeId,
                 expeditureId:action.expeditureId
-
             }
         case INCOME:
             return {
