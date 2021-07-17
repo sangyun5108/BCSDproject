@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector,useDispatch } from 'react-redux'
 import styled from 'styled-components'
-import { AllLiST, BlueBtn, ExList, InList, RedBtn } from '../redux/actions'
+import { BlueBtn, RedBtn } from '../redux/actions'
 
 const TotalMoney = styled.div`
     width : 100%;
@@ -42,25 +42,17 @@ const ExpeditureButton = styled.div`
 
 function TotalAmounts({today}){
     const lists = useSelector((state) => state.incomeExpeditureReducer.list)
-    const list = useSelector((state) => state.showListReducer.list)
     const {blueBtn, redBtn} = useSelector((state) => state.showListReducer)
-    console.log(blueBtn, redBtn)
-    console.log(list)
     let newBlueBtn = blueBtn
     let newRedBtn = redBtn
     const dispatch = useDispatch()
-    const showIncomes = () => dispatch(InList())
-    const showExpeditures = () => dispatch(ExList())
-    const showAll = () => dispatch(AllLiST())
     const clickIncomeBtn = () => {
         if(newBlueBtn){
             newBlueBtn = false
             newRedBtn = false
-            showAll()
         }else{
             newBlueBtn = true
             newRedBtn = false
-            showIncomes()
         }
         dispatch(BlueBtn(newBlueBtn))
         dispatch(RedBtn(newRedBtn))
@@ -69,11 +61,9 @@ function TotalAmounts({today}){
         if(newRedBtn){
             newBlueBtn = false
             newRedBtn = false
-            showAll()
         }else{
             newBlueBtn = false
             newRedBtn = true
-            showExpeditures()
         }
         dispatch(BlueBtn(newBlueBtn))
         dispatch(RedBtn(newRedBtn))

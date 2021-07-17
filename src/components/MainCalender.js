@@ -60,15 +60,10 @@ const useWeekArray = (today, lists) => {
             date : thisMonth.getDate(),
             IN_total : lists.filter(account => 
                     account.type === 'INCOME' && 
-                    account.year === thisMonth.getFullYear() &&
-                    account.month === thisMonth.getMonth() &&
                     account.date === thisMonth.getDate())
                     .map(account => account.amount)
                     .reduce((a,b)=>a+b,0),
             EX_total : lists.filter(account => 
-                account.type === 'EXPEDITURE' && 
-                account.year === thisMonth.getFullYear() &&
-                account.month === thisMonth.getMonth() &&
                 account.date === thisMonth.getDate())
                 .map(account => account.amount)
                 .reduce((a,b)=>a+b,0),
@@ -86,9 +81,23 @@ const useWeekArray = (today, lists) => {
 }
 
 function MainCalender({today}){
-    console.log(today)
-    const lists = useSelector((state)=> (state.incomeExpeditureReducer).list)
-    let weekArray = useWeekArray(today, lists)
+    const list = useSelector((state)=> (state.incomeExpeditureReducer).list)
+    const {blueBtn, redBtn} = useSelector((state) => state.showListReducer)
+    let accountList = []
+    if(blueBtn && !redBtn){
+        accountList = list.filter(account => account.type === 'INCOME' &&
+            account.year === today.getFullYear() &&
+            account.month === today.getMonth())
+    }else if (!blueBtn && redBtn){
+        accountList = list.filter(account => account.type === 'EXPEDITURE' &&
+            account.year === today.getFullYear() &&
+            account.month === today.getMonth())
+    }else{
+        accountList = list.filter(account => account.year === today.getFullYear() &&
+            account.month === today.getMonth())
+    }
+    console.log(accountList)
+    const weekArray = useWeekArray(today, accountList)
     return (
         <Wrap>
             {weekArray.map((week,index) =>

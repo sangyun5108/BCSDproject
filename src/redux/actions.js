@@ -1,4 +1,4 @@
-import {INCOME, EXPEDITURE, INIT, TYPE, MONTH, YEAR, BLUEBTN, REDBTN, INLIST, EXLIST, ALLLIST,DELETE} from './types';
+import {INCOME, EXPEDITURE, INIT, TYPE, MONTH, YEAR, BLUEBTN, REDBTN, DELETE} from './types';
 import {getId} from '../utils/getId';
 import {checkLocal} from '../utils/checkLocal';
 
@@ -91,29 +91,5 @@ export const RedBtn = (btn) => {
     return {
         type:REDBTN,
         btn : btn
-    }
-}
-
-export const InList = () => {
-    const incomeList = JSON.parse(localStorage.getItem('lists')).filter(account => account.type === 'INCOME')
-    return {
-        type : INLIST,
-        list : incomeList
-    }
-}
-
-export const ExList = () => {
-    const expeditureList = JSON.parse(localStorage.getItem('lists')).filter(account => account.type === 'EXPEDITURE')
-    return {
-        type : EXLIST,
-        list : expeditureList
-    }
-}
-
-export const AllLiST = () => {
-    const allists = JSON.parse(localStorage.getItem('lists'))
-    return {
-        type : ALLLIST,
-        list : allists
     }
 }

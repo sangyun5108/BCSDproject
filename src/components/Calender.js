@@ -47,8 +47,7 @@ function Calender(){
         year : (state.showListReducer).year,
         month : (state.showListReducer).month
     })))
-    const today = new Date(year, month)    
-    const [date,setDate] = useState(today)
+    const date = new Date(year, month)      
     return (
         <Wrap>
             <Header>
