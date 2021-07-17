@@ -1,4 +1,4 @@
-import {INCOME, EXPEDITURE, INIT, TYPE, MONTH, YEAR, BLUEBTN, REDBTN, INLIST, EXLIST, DELETE} from './types';
+import {DATE,INCOME, EXPEDITURE, INIT, TYPE, DELETE, BTN} from './types';
 import {getId} from '../utils/getId';
 import {checkLocal} from '../utils/checkLocal';
 
@@ -40,6 +40,22 @@ export const DeleteList = (list) => {
     }
 }
 
+export const Date = (year,month) => {
+    return {
+        type:DATE,
+        year,
+        month,
+    }
+}
+
+export const Btn = (redBtn,blueBtn) => {
+    return {
+        type:BTN,
+        redBtn,
+        blueBtn
+    }
+}
+
 export const init = ()=>{
     const getlist = JSON.parse(localStorage.getItem('lists'));
     const list = getlist?getlist:[];
@@ -67,45 +83,3 @@ export const Type = (kind) => {
     }
 }
 
-export const Month = (month) => {
-    return {
-        type:MONTH,
-        month
-    }
-}
-
-export const Year = (year) => {
-    return {
-        type:YEAR,
-        year
-    }
-}
-export const BlueBtn = (btn) => {
-    return {
-        type:BLUEBTN,
-        btn : btn
-    }
-}
-
-export const RedBtn = (btn) => {
-    return {
-        type:REDBTN,
-        btn : btn
-    }
-}
-
-export const InList = () => {
-    const incomeList = JSON.parse(localStorage.getItem('lists')).filter(account => account.type === 'INCOME')
-    return {
-        type : INLIST,
-        list : incomeList
-    }
-}
-
-export const ExList = () => {
-    const expeditureList = JSON.parse(localStorage.getItem('lists')).filter(account => account.type === 'EXPEDITURE')
-    return {
-        type : EXLIST,
-        list : expeditureList
-    }
-}

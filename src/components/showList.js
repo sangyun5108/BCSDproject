@@ -4,7 +4,8 @@ import styled from 'styled-components';
 import transformation from '../utils/transformation';
 import useGiveSum from '../hooks/useGiveSum';
 import useFilterList from '../hooks/useFilterList';
-import {Type,Month,Year,BlueBtn,RedBtn,DeleteList} from '../redux/actions';
+import {Date,Type,DeleteList,Btn} from '../redux/actions';
+import store from '../redux/store';
 
 const Wrapper = styled.div`
     width:100%;
@@ -154,7 +155,7 @@ const DeleteBtn = styled.button`
     }
 `;
 
-const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','July','Aug','Sep','Oct','Nov','Dec'];
+const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 
 const ShowList = () => {
 
@@ -191,8 +192,7 @@ const ShowList = () => {
                 newYear-=1;
             }
         }
-        dispatch(Month(newMonth));
-        dispatch(Year(newYear));
+        dispatch(Date(newYear,newMonth));
     }
 
     incomeSum = useGiveSum('INCOME',month,year);
@@ -216,8 +216,9 @@ const ShowList = () => {
             newRedBtn = false;
         }
         
-        dispatch(BlueBtn(newBlueBtn));
-        dispatch(RedBtn(newRedBtn));
+        dispatch(Btn(newRedBtn,newBlueBtn));
+        // dispatch(BlueBtn(newBlueBtn));
+        // dispatch(RedBtn(newRedBtn));
         dispatch(Type(newType));
     }
 
@@ -246,6 +247,7 @@ const ShowList = () => {
     
     return(
         <>
+            {console.log(store.getState())}
             <MWrapper>
                 <MonthWrapper>
                     <Button onClick={showMonth} value='left'>

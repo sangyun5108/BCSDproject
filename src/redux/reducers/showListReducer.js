@@ -1,11 +1,9 @@
-import {TYPE,MONTH,YEAR,BLUEBTN,REDBTN,INLIST,EXLIST} from '../types';
-const data = JSON.parse(localStorage.getItem('lists'));
-const list = data?data:[];
+import {DATE,TYPE,BTN} from '../types';
+
 const initialStateShowList = {
     type:'incomeExpediture',
     month:new Date().getMonth(),
     year:new Date().getFullYear(),
-    list : list,
     blueBtn:false,
     redBtn:false
 };
@@ -18,35 +16,17 @@ export const showListReducer = (state=initialStateShowList,action) => {
                 ...state,
                 type:action.kind
             }
-        case MONTH:
+        case DATE:
             return {
                 ...state,
-                month:action.month
-            }
-        case YEAR:
-            return {
-                ...state,
+                month:action.month,
                 year:action.year
             }
-        case BLUEBTN:
+        case BTN :
             return {
                 ...state,
-                blueBtn:action.btn
-            }
-        case REDBTN:
-            return{
-                ...state,
-                redBtn:action.btn
-            }
-        case INLIST:
-            return{
-                ...state,
-                list : action.list
-            }
-        case EXLIST:
-            return{
-                ...state,
-                list : action.list
+                blueBtn:action.blueBtn,
+                redBtn:action.redBtn
             }
         default:
             return state;
