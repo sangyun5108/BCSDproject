@@ -1,6 +1,6 @@
-import React,{useState} from 'react'
-import { useSelector } from 'react-redux'
+import React  from 'react'
 import styled from'styled-components'
+import MainCalender from './MainCalender'
 import DateViewer from './DateViewer'
 import CalenderHeader from './CalenderHeader'
 import TotalAmounts from './TotalAmounts'
@@ -42,22 +42,16 @@ const CalenderWrap = styled.div`
     box-shadow : 0 5px 50px rgb(0 0 0 / 10%);
 `
 function Calender(){
-    const {year,month} = useSelector((state => ({
-        year : (state.showListReducer).year,
-        month : (state.showListReducer).month
-    })))
-    const today = new Date(year, month)    
-    const [date,setDate] = useState(today)
     return (
         <Wrap>
             <Header>
-                <DateViewer date = {date} setDate = {setDate}/>
+                <DateViewer/>
             </Header>
             <ContentContainer>
-                <TotalAmounts today = {date}/>
+                <TotalAmounts/>
                 <CalenderWrap>
                     <CalenderHeader/>
-                    {/* <MainCalender today = {date}/> */}
+                    <MainCalender/>
                 </CalenderWrap>
             </ContentContainer>
         </Wrap>

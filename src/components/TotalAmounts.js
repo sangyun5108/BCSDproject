@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector,useDispatch } from 'react-redux'
 import styled from 'styled-components'
-import { Type,Btn } from '../redux/actions'
+import { Btn, Type } from '../redux/actions'
 import useFilterList from '../hooks/useFilterList'
 
 const TotalMoney = styled.div`
@@ -23,8 +23,8 @@ const IncomeButton = styled.div`
     margin-right: 10.5px;
     border: 2px solid #166ff3;
     border-radius: 9px;
-    color: ${props => props.isClicked ?'white':'#166ff3'};
-    background : ${props => props.isClicked ?'#166ff3':'white'};
+    color: ${clicked => clicked.clicked ?'white':'#166ff3'};
+    background : ${clicked => clicked.clicked ?'#166ff3':'white'};
 `
 const ExpeditureButton = styled.div`
     display : flex;
@@ -37,8 +37,8 @@ const ExpeditureButton = styled.div`
     margin-left: 10.5px;
     border: 2px solid #f8123b;
     border-radius: 9px;
-    color: ${props => props.isClicked ?'white':'#f8123b'};
-    background : ${props => props.isClicked ?'#f8123b':'white'};
+    color: ${clicked => clicked.clicked ? 'white':'#f8123b'};
+    background : ${clicked => clicked.clicked ?'#f8123b':'white'};
 `
 
 function TotalAmounts(){
@@ -47,6 +47,7 @@ function TotalAmounts(){
         year : (state.showListReducer).year,
         month : (state.showListReducer).month
     })))
+    console.log(blueBtn,redBtn)
     let newBlueBtn = blueBtn
     let newRedBtn = redBtn
     const dispatch = useDispatch()

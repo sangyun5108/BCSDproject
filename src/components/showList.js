@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import transformation from '../utils/transformation';
 import useGiveSum from '../hooks/useGiveSum';
 import useFilterList from '../hooks/useFilterList';
-import {Date,Type,DeleteList,Btn} from '../redux/actions';
+import {DateSet,Type,DeleteList,Btn} from '../redux/actions';
 import store from '../redux/store';
 
 const Wrapper = styled.div`
@@ -167,7 +167,7 @@ const ShowList = () => {
     const {list:lists} = useSelector((state)=>state.incomeExpeditureReducer);
     const {blueBtn,redBtn} = useSelector((state)=>state.showListReducer);
     const dispatch = useDispatch();
-
+    console.log(blueBtn,redBtn)
     let {type,month,year} = useSelector((state)=>state.showListReducer);
     let newMonth = month;
     let newRightMonth = newMonth+1===12?0:newMonth+1;
@@ -176,7 +176,6 @@ const ShowList = () => {
     let newYear = year;
     let newBlueBtn = blueBtn;
     let newRedBtn = redBtn;
-    
     const showMonth = (e) => {
         const direction = e.target.parentNode.value;
         if(direction==='right'){
@@ -192,7 +191,7 @@ const ShowList = () => {
                 newYear-=1;
             }
         }
-        dispatch(Date(newYear,newMonth));
+        dispatch(DateSet(newYear,newMonth));
     }
 
     incomeSum = useGiveSum('INCOME',month,year);
