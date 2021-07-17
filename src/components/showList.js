@@ -4,7 +4,8 @@ import styled from 'styled-components';
 import transformation from '../utils/transformation';
 import useGiveSum from '../hooks/useGiveSum';
 import useFilterList from '../hooks/useFilterList';
-import {Type,Month,Year,Btn,DeleteList} from '../redux/actions';
+import {DateSet,Type,DeleteList,Btn} from '../redux/actions';
+import store from '../redux/store';
 
 const Wrapper = styled.div`
     width:100%;
@@ -166,7 +167,7 @@ const ShowList = () => {
     const {list:lists} = useSelector((state)=>state.incomeExpeditureReducer);
     const {blueBtn,redBtn} = useSelector((state)=>state.showListReducer);
     const dispatch = useDispatch();
-
+    console.log(blueBtn,redBtn)
     let {type,month,year} = useSelector((state)=>state.showListReducer);
     let newMonth = month;
     let newRightMonth = newMonth+1===12?0:newMonth+1;
@@ -190,8 +191,7 @@ const ShowList = () => {
                 newYear-=1;
             }
         }
-        dispatch(Month(newMonth));
-        dispatch(Year(newYear));
+        dispatch(DateSet(newYear,newMonth));
     }
 
     incomeSum = useGiveSum('INCOME',month,year);
@@ -244,6 +244,7 @@ const ShowList = () => {
     
     return(
         <>
+            {console.log(store.getState())}
             <MWrapper>
                 <MonthWrapper>
                     <Button onClick={showMonth} value='left'>

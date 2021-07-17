@@ -1,4 +1,4 @@
-import {INCOME, EXPEDITURE, INIT, TYPE, MONTH, YEAR, BLUEBTN,BTN,REDBTN, DELETE} from './types';
+import {DATE,INCOME, EXPEDITURE, INIT, TYPE, DELETE, BTN} from './types';
 import {getId} from '../utils/getId';
 import {checkLocal} from '../utils/checkLocal';
 
@@ -40,6 +40,22 @@ export const DeleteList = (list) => {
     }
 }
 
+export const DateSet = (year,month) => {
+    return {
+        type:DATE,
+        year,
+        month,
+    }
+}
+
+export const Btn = (redBtn,blueBtn) => {
+    return {
+        type:BTN,
+        redBtn,
+        blueBtn
+    }
+}
+
 export const init = ()=>{
     const getlist = JSON.parse(localStorage.getItem('lists'));
     const list = getlist?getlist:[];
@@ -60,14 +76,6 @@ export const init = ()=>{
     }
 }
 
-export const Btn = (redBtn,blueBtn) => {
-    return {
-        type:BTN,
-        redBtn,
-        blueBtn
-    }
-}
-
 export const Type = (kind) => {
     return {
         type:TYPE,
@@ -75,29 +83,3 @@ export const Type = (kind) => {
     }
 }
 
-export const Month = (month) => {
-    return {
-        type:MONTH,
-        month
-    }
-}
-
-export const Year = (year) => {
-    return {
-        type:YEAR,
-        year
-    }
-}
-export const BlueBtn = (btn) => {
-    return {
-        type:BLUEBTN,
-        btn : btn
-    }
-}
-
-export const RedBtn = (btn) => {
-    return {
-        type:REDBTN,
-        btn : btn
-    }
-}

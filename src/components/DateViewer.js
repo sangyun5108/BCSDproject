@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useDispatch, useSelector } from 'react-redux'
-import { Month, Year } from '../redux/actions'
+import { DateSet } from '../redux/actions'
 const Controler = styled.div`
     display : flex;
     justify-content : center;
@@ -34,16 +34,18 @@ const monthList = [
     'Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan'
 ]
 
-function DateViewer({date}){//날짜 출력
-    const month = date.getMonth()
+function DateViewer(){//날짜 출력
+    const {year,month} = useSelector((state => ({
+        year : (state.showListReducer).year,
+        month : (state.showListReducer).month
+    })))
+    let date = new Date(year,month)
     const dispatch = useDispatch()
     const onIncrease = () =>{
-        dispatch(Month(date.getMonth(date.setMonth(month+1))))
-        dispatch(Year(date.getFullYear()))
+        dispatch(DateSet(date.getFullYear(),date.getMonth(date.setMonth(month+1))))
     }
     const onDecrease = () =>{
-        dispatch(Month(date.getMonth(date.setMonth(month-1))))
-        dispatch(Year(date.getFullYear()))
+        dispatch(DateSet(date.getFullYear(),date.getMonth(date.setMonth(month-1))))
     }
     return(
         <DateSetContainer>

@@ -1,6 +1,6 @@
 import React from 'react';
 import AccountBook from './AccountBook';
-import { Route,Switch,useHistory } from 'react-router';
+import { Route,useHistory } from 'react-router';
 import styled from 'styled-components';
 import AddHistory from '../components/AddHistory';
 import Calender from '../components/Calender';
@@ -48,7 +48,7 @@ const MainPage = () => {
         if(value==='account'){
             history.push('/');
         }else{
-            history.push('/calendar');
+            history.push('/calender');
         }
     }
 
@@ -60,22 +60,20 @@ const MainPage = () => {
                         <i className="fas fa-coins"></i>
                     </Btn>
                     <Stick></Stick>
-                    <Btn onClick={onClickBtn} value='calendar'>
+                    <Btn onClick={onClickBtn} value='calender'>
                         <i className="fas fa-calendar-alt"></i>
                     </Btn>
                 </BtnWrapper>
             </Wrapper>
-            <Switch>
-                <Route exact path='/'>
+                <Route exact path={'/'}>
                     <AccountBook/>
                 </Route>
-                <Route path='/addHistory'>
-                    <AddHistory/>
-                </Route>
-                <Route path='/calendar'>
+                <Route path='/calender'>
                     <Calender/>
                 </Route>
-            </Switch>
+                <Route path='/addHistory'>
+                        <AddHistory/>
+                </Route>
         </>
     );
 }
