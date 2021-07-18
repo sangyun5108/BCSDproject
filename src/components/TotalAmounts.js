@@ -55,26 +55,28 @@ function TotalAmounts(){
         if(newBlueBtn){
             newBlueBtn = false
             newRedBtn = false
-            dispatch(Type('incomeExpediture'))
+            dispatch(Type({kind:'incomeExpediture'}))
         }else{
             newBlueBtn = true
             newRedBtn = false
-            dispatch(Type('INCOME'))
+            dispatch(Type({kind:'INCOME'}))
         }
-        dispatch(Btn({blueBtn : newBlueBtn,redBtn : newRedBtn}))
+        dispatch(Btn({redBtn:newRedBtn,
+        blueBtn:newBlueBtn}))
         
     }
     const clickExpeditureBtn = () => {
         if(newRedBtn){
             newBlueBtn = false
             newRedBtn = false
-            dispatch(Type('incomeExpediture'))
+            dispatch(Type({kind:'incomeExpediture'}))
         }else{
             newBlueBtn = false
             newRedBtn = true
-            dispatch(Type('EXPEDITURE'))
+            dispatch(Type({kind:'EXPEDITURE'}))
         }
-        dispatch(Btn({blueBtn : newBlueBtn,redBtn : newRedBtn}))
+        dispatch(Btn({redBtn:newRedBtn,
+        blueBtn:newBlueBtn}))
     }
     let totalIncome = useFilterList('INCOME',month,year).reduce((a,b)=>a+b.amount,0)
     let totalExpediture = useFilterList('EXPEDITURE',month,year).reduce((a,b)=>a+b.amount,0)

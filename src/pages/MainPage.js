@@ -21,7 +21,7 @@ const BtnWrapper = styled.div`
 `;
 
 const Btn = styled.button`
-    width:50px;
+    width:30px;
     padding:0px;
     font-size:30px;
     border:none;

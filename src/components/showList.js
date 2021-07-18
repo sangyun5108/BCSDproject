@@ -4,7 +4,8 @@ import styled from 'styled-components';
 import transformation from '../utils/transformation';
 import useGiveSum from '../hooks/useGiveSum';
 import useFilterList from '../hooks/useFilterList';
-import {DateSet,Type,DeleteList,Btn} from '../redux/actions';
+import {DateSet,Type,deleteLists,Btn} from '../redux/actions';
+import { getId } from '../utils/getId';
 import store from '../redux/store';
 
 const Wrapper = styled.div`
@@ -105,9 +106,6 @@ const ListWrapper = styled.div`
     display:flex;
     align-items:center;
     position:relative;
-    &:hover{
-        cursor:pointer;
-    }
 `;
 
 const List = styled.li`
@@ -167,7 +165,6 @@ const ShowList = () => {
     const {list:lists} = useSelector((state)=>state.incomeExpeditureReducer);
     const {blueBtn,redBtn} = useSelector((state)=>state.showListReducer);
     const dispatch = useDispatch();
-    console.log(blueBtn,redBtn)
     let {type,month,year} = useSelector((state)=>state.showListReducer);
     let newMonth = month;
     let newRightMonth = newMonth+1===12?0:newMonth+1;
@@ -191,7 +188,8 @@ const ShowList = () => {
                 newYear-=1;
             }
         }
-        dispatch(DateSet(newYear,newMonth));
+        dispatch(DateSet({year:newYear,
+            month:newMonth}));
     }
 
     incomeSum = useGiveSum('INCOME',month,year);
@@ -215,8 +213,10 @@ const ShowList = () => {
             newRedBtn = false;
         }
         
-        dispatch(Btn(newRedBtn,newBlueBtn));
-        dispatch(Type(newType));
+        dispatch(Btn({
+            redBtn:newRedBtn,
+            blueBtn:newBlueBtn}));
+        dispatch(Type({kind:newType}));
     }
 
     newLists = useFilterList(type,month,year);
@@ -239,7 +239,13 @@ const ShowList = () => {
         .sort((a,b)=>{
             return a.id-b.id;
         });
-        dispatch(DeleteList(list));
+        localStorage.setItem('lists',JSON.stringify(list));
+        let incomeId = getId('INCOME',0);
+        let expeditureId = getId('EXPEDITURE',100);
+        dispatch(deleteLists({list,
+            incomeId,
+            expeditureId
+        }));
     }
     
     return(
