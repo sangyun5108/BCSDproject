@@ -235,7 +235,8 @@ const AddHistory = () => {
         const dayOfWeek = WEEK[new Date(`${yearRef.current.value}-${monthRef.current.value}-${dateRef.current.value}`).getDay()];
 
         if(type===true){
-            dispatch(income({amount:amountRef.current.value,
+            dispatch(income({
+                amount:amountRef.current.value,
                 label:labelRef.current.value,
                 year:Number(yearRef.current.value),
                 month:monthIndex,
@@ -243,7 +244,8 @@ const AddHistory = () => {
                 day:dayOfWeek,
                 id:incomeId++}));
         }else{
-            dispatch(expediture({amount:amountRef.current.value,
+            dispatch(expediture({
+                amount:amountRef.current.value,
                 label:labelRef.current.value,
                 year:Number(yearRef.current.value),
                 month:monthIndex,

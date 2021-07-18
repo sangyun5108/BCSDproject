@@ -10,15 +10,3 @@ export const DateSet = createAction(DATE);
 export const Btn = createAction(BTN);
 export const deleteLists = createAction(DELETE)
 
-// export const DeleteList = (list) => {
-//     localStorage.setItem('lists',JSON.stringify(list));
-//     let incomeId = getId('INCOME',0);
-//     let expeditureId = getId('EXPEDITURE',100);
-//     return {
-//         type:DELETE,
-//         list,
-//         incomeId,
-//         expeditureId
-//     }
-// }
-

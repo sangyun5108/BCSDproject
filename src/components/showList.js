@@ -6,6 +6,7 @@ import useGiveSum from '../hooks/useGiveSum';
 import useFilterList from '../hooks/useFilterList';
 import {DateSet,Type,deleteLists,Btn} from '../redux/actions';
 import { getId } from '../utils/getId';
+import store from '../redux/store';
 
 const Wrapper = styled.div`
     width:100%;
@@ -212,7 +213,8 @@ const ShowList = () => {
             newRedBtn = false;
         }
         
-        dispatch(Btn({redBtn:newRedBtn,
+        dispatch(Btn({
+            redBtn:newRedBtn,
             blueBtn:newBlueBtn}));
         dispatch(Type({kind:newType}));
     }
@@ -248,6 +250,7 @@ const ShowList = () => {
     
     return(
         <>
+            {console.log(store.getState())}
             <MWrapper>
                 <MonthWrapper>
                     <Button onClick={showMonth} value='left'>
