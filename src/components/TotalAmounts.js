@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector,useDispatch } from 'react-redux'
 import styled from 'styled-components'
-import { Btn, Type } from '../redux/reducers/showListReducer_toolkit'
+import { Btn, Type } from '../redux/reducers/showListReducer'
 import useFilterList from '../hooks/useFilterList'
 
 const TotalMoney = styled.div`
@@ -59,7 +59,7 @@ function TotalAmounts(){
         }else{
             newBlueBtn = true
             newRedBtn = false
-            dispatch(Type({kind:'INCOME'}))
+            dispatch(Type({kind:'income'}))
         }
         dispatch(Btn({redBtn:newRedBtn,
         blueBtn:newBlueBtn}))
@@ -73,13 +73,13 @@ function TotalAmounts(){
         }else{
             newBlueBtn = false
             newRedBtn = true
-            dispatch(Type({kind:'EXPEDITURE'}))
+            dispatch(Type({kind:'expediture'}))
         }
         dispatch(Btn({redBtn:newRedBtn,
         blueBtn:newBlueBtn}))
     }
-    let totalIncome = useFilterList('INCOME',month,year).reduce((a,b)=>a+b.amount,0)
-    let totalExpediture = useFilterList('EXPEDITURE',month,year).reduce((a,b)=>a+b.amount,0)
+    let totalIncome = useFilterList('income',month,year).reduce((a,b)=>a+b.amount,0)
+    let totalExpediture = useFilterList('expediture',month,year).reduce((a,b)=>a+b.amount,0)
     return (
         <TotalMoney>
             <IncomeButton onClick={() => clickIncomeBtn()} clicked={blueBtn}>+{totalIncome}</IncomeButton>

@@ -59,12 +59,12 @@ const useWeekArray = (today, lists) => {
         {
             date : thisMonth.getDate(),
             IN_total : lists.filter(account => 
-                    account.type === 'INCOME' && 
+                    account.type === 'income' && 
                     account.date === thisMonth.getDate())
                     .map(account => account.amount)
                     .reduce((a,b)=>a+b,0),
             EX_total : lists.filter(account => 
-                account.type === 'EXPEDITURE' &&
+                account.type === 'expediture' &&
                 account.date === thisMonth.getDate())
                 .map(account => account.amount)
                 .reduce((a,b)=>a+b,0),
@@ -91,11 +91,11 @@ function MainCalendar(){
     let today = new Date(year,month)
     let accountList = []
     if(blueBtn && !redBtn){
-        accountList = list.filter(account => account.type === 'INCOME' &&
+        accountList = list.filter(account => account.type === 'income' &&
             account.year === today.getFullYear() &&
             account.month === today.getMonth())
     }else if (!blueBtn && redBtn){
-        accountList = list.filter(account => account.type === 'EXPEDITURE' &&
+        accountList = list.filter(account => account.type === 'expediture' &&
             account.year === today.getFullYear() &&
             account.month === today.getMonth())
     }else{

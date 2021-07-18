@@ -1,10 +1,8 @@
 import {createSlice} from '@reduxjs/toolkit';
 const data = JSON.parse(localStorage.getItem('lists'));
 const list = data?data:[];
-const date = new Date();
 const initialState={
     list,
-    date
 }
 
 export const incomeExpeditureReducer = createSlice({

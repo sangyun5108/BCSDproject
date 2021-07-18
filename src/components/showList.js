@@ -6,7 +6,9 @@ import useGiveSum from '../hooks/useGiveSum';
 import useFilterList from '../hooks/useFilterList';
 import { DateSet,Btn,Type } from '../redux/reducers/showListReducer';
 import { getId } from '../utils/getId';
-import {deletelist } from '../redux/reducers/incomeExpeditureReducer';
+import { deletelist } from '../redux/reducers/incomeExpeditureReducer';
+
+
 
 const Wrapper = styled.div`
     width:100%;
@@ -75,8 +77,8 @@ const BlueButton = styled.button`
     width:280px;
     height:55px;
     margin-right:15px;
-    background:${props=>props.active==='INCOME'?"#166ff3":"white"};
-    color:${props=>props.active==='INCOME'?"white":"#166ff3"};
+    background:${props=>props.active==='income'?"#166ff3":"white"};
+    color:${props=>props.active==='income'?"white":"#166ff3"};
     &:hover{
         cursor:pointer;
     }
@@ -89,8 +91,8 @@ const RedButton = styled.button`
     border-radius:15px;
     width:280px;
     height:55px;
-    background:${props=>props.active==='EXPEDITURE'?"#f8123b":"white"};
-    color:${props=>props.active==='EXPEDITURE'?"white":"#f8123b"};
+    background:${props=>props.active==='expediture'?"#f8123b":"white"};
+    color:${props=>props.active==='expediture'?"white":"#f8123b"};
     &:hover{
         cursor:pointer;
     }
@@ -197,18 +199,18 @@ const ShowList = () => {
 
     const clickBtn = (e) => {
         const value = e.target.value;
-        if(value==='INCOME'&&newBlueBtn===false){
-            newType = 'INCOME';
+        if(value==='income'&&newBlueBtn===false){
+            newType = 'income';
             newBlueBtn = true;
             newRedBtn = false;
-        }else if(value==='EXPEDITURE'&&newRedBtn===false){
-           newType = 'EXPEDITURE';
+        }else if(value==='expediture'&&newRedBtn===false){
+           newType = 'expediture';
            newRedBtn = true;
            newBlueBtn = false;
-        }else if(value==='INCOME'&&newBlueBtn===true){
+        }else if(value==='income'&&newBlueBtn===true){
             newType = 'incomeExpediture';
             newBlueBtn = false;
-        }else if(value ==='EXPEDITURE'&&newRedBtn===true){
+        }else if(value ==='expediture'&&newRedBtn===true){
             newType = 'incomeExpediture';
             newRedBtn = false;
         }
@@ -269,8 +271,8 @@ const ShowList = () => {
                 </MonthWrapper>   
             </MWrapper>
             <Wrapper>
-                <BlueButton active={type} value={'INCOME'} onClick={clickBtn}>+{incomeSum}</BlueButton>
-                <RedButton active={type} value={'EXPEDITURE'} onClick={clickBtn}>-{expeditureSum}</RedButton>
+                <BlueButton active={type} value={'income'} onClick={clickBtn}>+{incomeSum}</BlueButton>
+                <RedButton active={type} value={'expediture'} onClick={clickBtn}>-{expeditureSum}</RedButton>
             </Wrapper>
             <UlWrapper>
                 {newLists.map((list)=>{

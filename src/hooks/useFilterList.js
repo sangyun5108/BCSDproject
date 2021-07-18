@@ -3,7 +3,7 @@ import {useSelector} from 'react-redux';
 const useFilterList = (type,month,year) => {
     let {list:lists} = useSelector((state)=>state.incomeExpeditureReducer);
 
-    if(type==='INCOME'||type==='EXPEDITURE'){
+    if(type==='income'||type==='expediture'){
         lists = lists.filter((list)=>list.type===type&&list.month===month&&Number(list.year)===year)
 
     }else{

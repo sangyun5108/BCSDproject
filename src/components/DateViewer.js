@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useDispatch, useSelector } from 'react-redux'
-import { DateSet } from '../redux/reducers/showListReducer_toolkit'
+import { DateSet } from '../redux/reducers/showListReducer'
 const Controler = styled.div`
     display : flex;
     justify-content : center;

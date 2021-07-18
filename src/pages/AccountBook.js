@@ -40,7 +40,6 @@ const AccountBook = () => {
     const list = getlist?getlist:[];
     let incomeId = 0;
     let expeditureId = 0;
-    const date = new Date();
 
     if(checkLocal()){
       incomeId = getId('income',0);
@@ -49,7 +48,6 @@ const AccountBook = () => {
 
     dispatch(init({
     list,
-    date,
     incomeId,
     expeditureId}));
   },[dispatch]);
