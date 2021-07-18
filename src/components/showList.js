@@ -4,7 +4,8 @@ import styled from 'styled-components';
 import transformation from '../utils/transformation';
 import useGiveSum from '../hooks/useGiveSum';
 import useFilterList from '../hooks/useFilterList';
-import {DateSet,Type,deleteLists,Btn} from '../redux/actions';
+import {deleteLists} from '../redux/actions';
+import { DateSet,Btn,Type } from '../redux/reducers/showListReducer_toolkit';
 import { getId } from '../utils/getId';
 import store from '../redux/store';
 

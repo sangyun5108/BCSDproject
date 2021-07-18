@@ -9,21 +9,17 @@ const incomeExpeditureReducer = createSlice({
     name : 'incomeExpeditureReducer',
     initialState : {
         list,
-        date : new Date()
     },
     reducers:{
         init(state, action){
-            const {list} = action.payload
-            let incomeId = 0;
-            let expeditureId = 0;
-        
+            let {list,incomeId,expeditureId,date} = action.payload
             if(checkLocal()){
                 incomeId = getId('INCOME',0);
                 expeditureId = getId('EXPEDITURE',100);
             }
             return {
                 list : list,
-                date : new Date(),
+                date : date,
                 incomeId : incomeId,
                 expeditureId : expeditureId
             }
@@ -78,5 +74,5 @@ const incomeExpeditureReducer = createSlice({
     }
 })
 
-export const {init,Income,Expediture,Delete} = incomeExpeditureReducer.actions
+export const {init,income,expediture,Delete} = incomeExpeditureReducer.actions
 export default incomeExpeditureReducer.reducer

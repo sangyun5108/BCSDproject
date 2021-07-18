@@ -3,7 +3,7 @@ import ShowList from '../components/showList';
 import styled from 'styled-components';
 import {useEffect} from 'react';
 import { useDispatch} from 'react-redux';
-import {init} from '../redux/actions';
+import {init} from '../redux/reducers/incomeExpeditureReducer_toolkit';
 import {useHistory} from 'react-router-dom';
 import { checkLocal } from '../utils/checkLocal';
 import { getId } from '../utils/getId';

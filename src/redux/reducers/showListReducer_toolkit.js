@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { expediture } from "../actions";
 
 const showListReducer = createSlice({
     name : 'showListReducer',
@@ -20,7 +19,6 @@ const showListReducer = createSlice({
         },
 
         DateSet(state,action){
-            console.log(action)
             const {month, year} = action.payload
             return {
                 ...state,
