@@ -65,15 +65,15 @@ const MainPage = () => {
                     </Btn>
                 </BtnWrapper>
             </Wrapper>
-                <Route exact path={'/'}>
+                {/* <Route exact path={'/'}>
                     <AccountBook/>
-                </Route>
+                </Route> */}
                 <Route path='/calendar'>
                     <Calendar/>
                 </Route>
-                <Route path='/addHistory'>
+                {/* <Route path='/addHistory'>
                         <AddHistory/>
-                </Route>
+                </Route> */}
         </>
     );
 }

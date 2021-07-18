@@ -1,13 +1,15 @@
-import {createStore,combineReducers} from 'redux';
-import { incomeExpeditureReducer} from './reducers/incomeExpeditureReducer';
-import { showListReducer } from './reducers/showListReducer';
-
+import { combineReducers } from 'redux';
+import incomeExpeditureReducer from './reducers/incomeExpeditureReducer_toolkit';
+import  showListReducer  from './reducers/showListReducer_toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 const reducers = combineReducers(
-    {   incomeExpeditureReducer,
-        showListReducer,
+    {   incomeExpeditureReducer : incomeExpeditureReducer,
+        showListReducer : showListReducer,
     }
 );
 
-const store = createStore(reducers);
+const store = configureStore({
+    reducer : reducers
+});
 
 export default store;
