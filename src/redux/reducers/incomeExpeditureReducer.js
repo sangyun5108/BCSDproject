@@ -1,24 +1,25 @@
-import { income,expediture } from '../actions';
-import { createReducer } from '@reduxjs/toolkit';
-import {INIT,INCOME,EXPEDITURE,DELETE} from '../types';
+import {createSlice} from '@reduxjs/toolkit';
 const data = JSON.parse(localStorage.getItem('lists'));
 const list = data?data:[];
+const date = new Date();
 const initialState={
     list,
-    date:new Date(),
+    date
 }
 
-export const incomeExpeditureReducer = createReducer(initialState,(builder)=>{
-    builder
-        .addCase(INIT,(state,action)=>{
+export const incomeExpeditureReducer = createSlice({
+    name:'incomeExpediture',
+    initialState,
+    reducers:{
+        init:(state,action)=>{
             return {
                 list:action.payload.list,
                 date :action.payload.date,
                 incomeId:action.payload.incomeId,
                 expeditureId:action.payload.expeditureId
             }
-        })
-        .addCase(INCOME,(state,action)=>{
+        },
+        income:(state,action)=>{
             (state.list).push({
                 type:income.type,
                 amount:Number(action.payload.amount),
@@ -29,8 +30,8 @@ export const incomeExpeditureReducer = createReducer(initialState,(builder)=>{
                 day:action.payload.day,
                 id:action.payload.id
             })
-        })
-        .addCase(EXPEDITURE,(state,action)=>{
+        },
+        expediture:(state,action)=>{
             (state.list).push({
                 type:expediture.type,
                 amount:-1*Number(action.payload.amount),
@@ -41,12 +42,16 @@ export const incomeExpeditureReducer = createReducer(initialState,(builder)=>{
                 day:action.payload.day,
                 id:action.payload.id
             })
-        })
-        .addCase(DELETE,(state,action)=>{
+        },
+        deletelist:(state,action)=>{
             return {
                 list:action.payload.list,
                 incomeId:action.payload.incomeId,
                 expeditureId:action.payload.expeditureId
             }
-        })
+        }
+        
+    }
 })
+
+export const {init,income,expediture,deletelist} = incomeExpeditureReducer.actions;

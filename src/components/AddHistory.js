@@ -1,7 +1,8 @@
 import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {useRef, useState} from 'react';
-import {income,expediture} from '../redux/actions';
+// import {income,expediture} from '../redux/actions';
+import { income,expediture } from '../redux/reducers/incomeExpeditureReducer';
 import {useHistory} from 'react-router-dom';
 import styled from 'styled-components';
 import store from '../redux/store';
@@ -256,7 +257,7 @@ const AddHistory = () => {
         localStorage.setItem('lists',JSON.stringify(store.getState().incomeExpeditureReducer.list));
     }
 
-    const onClickXbutton = (e) => {
+    const onClickXbutton = () => {
         setClose(!close);
         history.push('/');
     }

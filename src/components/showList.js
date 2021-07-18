@@ -4,8 +4,9 @@ import styled from 'styled-components';
 import transformation from '../utils/transformation';
 import useGiveSum from '../hooks/useGiveSum';
 import useFilterList from '../hooks/useFilterList';
-import {DateSet,Type,deleteLists,Btn} from '../redux/actions';
 import { getId } from '../utils/getId';
+import {deletelist } from '../redux/reducers/incomeExpeditureReducer';
+import { DateSet,Btn,Type } from '../redux/actions';
 import store from '../redux/store';
 
 const Wrapper = styled.div`
@@ -192,8 +193,8 @@ const ShowList = () => {
             month:newMonth}));
     }
 
-    incomeSum = useGiveSum('INCOME',month,year);
-    expeditureSum = useGiveSum('EXPEDITURE',month,year);
+    incomeSum = useGiveSum('incomeExpediture/income',month,year);
+    expeditureSum = useGiveSum('incomeExpediture/expediture',month,year);
 
     const clickBtn = (e) => {
         const value = e.target.value;
@@ -242,7 +243,7 @@ const ShowList = () => {
         localStorage.setItem('lists',JSON.stringify(list));
         let incomeId = getId('INCOME',0);
         let expeditureId = getId('EXPEDITURE',100);
-        dispatch(deleteLists({list,
+        dispatch(deletelist({list,
             incomeId,
             expeditureId
         }));

@@ -3,7 +3,8 @@ import ShowList from '../components/showList';
 import styled from 'styled-components';
 import {useEffect} from 'react';
 import { useDispatch} from 'react-redux';
-import {init} from '../redux/actions';
+// import {init} from '../redux/actions';
+import {init} from '../redux/reducers/incomeExpeditureReducer';
 import {useHistory} from 'react-router-dom';
 import { checkLocal } from '../utils/checkLocal';
 import { getId } from '../utils/getId';
@@ -39,15 +40,17 @@ const AccountBook = () => {
     const getlist = JSON.parse(localStorage.getItem('lists'));
     const list = getlist?getlist:[];
     let incomeId = 0;
-    let expeditureId = 0;
+    let expeditureId = 100;
+    const date = new Date();
 
     if(checkLocal()){
-      incomeId = getId('INCOME',0);
-      expeditureId = getId('EXPEDITURE',100);
+      incomeId = getId('incomeExpeidture/income',0);
+      expeditureId = getId('incomeExpediture/expediture',100);
     }
 
-    dispatch(init({list,
-    date:new Date(),
+    dispatch(init({
+    list,
+    date,
     incomeId,
     expeditureId}));
   },[dispatch]);
