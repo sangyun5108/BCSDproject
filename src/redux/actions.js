@@ -1,8 +1,6 @@
 import {DATE, INIT, TYPE, DELETE, BTN} from './types';
 import { createAction } from '@reduxjs/toolkit';
 
-// export const income = createAction(INCOME);
-// export const expediture = createAction(EXPEDITURE);
 export const init = createAction(INIT);
 
 export const Type = createAction(TYPE);

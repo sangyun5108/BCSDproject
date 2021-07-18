@@ -3,7 +3,6 @@ import ShowList from '../components/showList';
 import styled from 'styled-components';
 import {useEffect} from 'react';
 import { useDispatch} from 'react-redux';
-// import {init} from '../redux/actions';
 import {init} from '../redux/reducers/incomeExpeditureReducer';
 import {useHistory} from 'react-router-dom';
 import { checkLocal } from '../utils/checkLocal';
@@ -40,12 +39,12 @@ const AccountBook = () => {
     const getlist = JSON.parse(localStorage.getItem('lists'));
     const list = getlist?getlist:[];
     let incomeId = 0;
-    let expeditureId = 100;
+    let expeditureId = 0;
     const date = new Date();
 
     if(checkLocal()){
-      incomeId = getId('incomeExpeidture/income',0);
-      expeditureId = getId('incomeExpediture/expediture',100);
+      incomeId = getId('income',0);
+      expeditureId = getId('expediture',100);
     }
 
     dispatch(init({

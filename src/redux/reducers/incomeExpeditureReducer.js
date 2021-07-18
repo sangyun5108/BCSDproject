@@ -12,42 +12,46 @@ export const incomeExpeditureReducer = createSlice({
     initialState,
     reducers:{
         init:(state,action)=>{
+            const {list,date,incomeId,expeditureId} = action.payload;
             return {
-                list:action.payload.list,
-                date :action.payload.date,
-                incomeId:action.payload.incomeId,
-                expeditureId:action.payload.expeditureId
+                list,
+                date,
+                incomeId,
+                expeditureId
             }
         },
         income:(state,action)=>{
+            const {amount,label,year,month,date,day,id} = action.payload;
             (state.list).push({
-                type:income.type,
-                amount:Number(action.payload.amount),
-                label:action.payload.label,
-                year:action.payload.year,
-                month:action.payload.month,
-                date:action.payload.date,
-                day:action.payload.day,
-                id:action.payload.id
+                type:'income',
+                amount:Number(amount),
+                label,
+                year,
+                month,
+                date,
+                day,
+                id
             })
         },
         expediture:(state,action)=>{
+            const {amount,label,year,month,date,day,id} = action.payload;
             (state.list).push({
-                type:expediture.type,
-                amount:-1*Number(action.payload.amount),
-                label:action.payload.label,
-                year:action.payload.year,
-                month:action.payload.month,
-                date:action.payload.date,
-                day:action.payload.day,
-                id:action.payload.id
+                type:'expediture',
+                amount:-1*Number(amount),
+                label,
+                year,
+                month,
+                date,
+                day,
+                id
             })
         },
         deletelist:(state,action)=>{
+            const {list, incomeId, expeditureId} = action.payload;
             return {
-                list:action.payload.list,
-                incomeId:action.payload.incomeId,
-                expeditureId:action.payload.expeditureId
+                list,
+                incomeId,
+                expeditureId
             }
         }
         

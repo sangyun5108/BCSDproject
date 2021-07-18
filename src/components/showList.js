@@ -7,7 +7,6 @@ import useFilterList from '../hooks/useFilterList';
 import { getId } from '../utils/getId';
 import {deletelist } from '../redux/reducers/incomeExpeditureReducer';
 import { DateSet,Btn,Type } from '../redux/actions';
-import store from '../redux/store';
 
 const Wrapper = styled.div`
     width:100%;
@@ -193,8 +192,8 @@ const ShowList = () => {
             month:newMonth}));
     }
 
-    incomeSum = useGiveSum('incomeExpediture/income',month,year);
-    expeditureSum = useGiveSum('incomeExpediture/expediture',month,year);
+    incomeSum = useGiveSum('income',month,year);
+    expeditureSum = useGiveSum('expediture',month,year);
 
     const clickBtn = (e) => {
         const value = e.target.value;
@@ -251,7 +250,6 @@ const ShowList = () => {
     
     return(
         <>
-            {console.log(store.getState())}
             <MWrapper>
                 <MonthWrapper>
                     <Button onClick={showMonth} value='left'>

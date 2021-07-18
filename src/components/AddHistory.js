@@ -264,7 +264,6 @@ const AddHistory = () => {
 
     return(
         <>   
-            {console.log(store.getState())}
             <Wrapper>
                     <BtnWrapper>
                         <IncomeBtn active={type} onClick={onClickIncome}>Income</IncomeBtn>
