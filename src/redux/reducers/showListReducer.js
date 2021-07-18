@@ -1,4 +1,4 @@
-import {DATE,TYPE,BTN} from '../types';
+import {DateSet,Btn,Type} from '../actions';
 
 const initialStateShowList = {
     type:'incomeExpediture',
@@ -11,24 +11,25 @@ const initialStateShowList = {
 
 export const showListReducer = (state=initialStateShowList,action) => {
     switch(action.type){
-        case TYPE:
+        case Type.type:
             return {
                 ...state,
-                type:action.kind
+                type:action.payload.kind
             }
-        case DATE:
+        case DateSet.type:
             return {
                 ...state,
-                month:action.month,
-                year:action.year
+                month:action.payload.month,
+                year:action.payload.year
             }
-        case BTN :
+        case Btn.type:
             return {
                 ...state,
-                blueBtn:action.blueBtn,
-                redBtn:action.redBtn
+                blueBtn:action.payload.blueBtn,
+                redBtn:action.payload.redBtn
             }
         default:
             return state;
     }
 }
+

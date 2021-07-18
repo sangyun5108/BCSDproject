@@ -235,9 +235,21 @@ const AddHistory = () => {
         const dayOfWeek = WEEK[new Date(`${yearRef.current.value}-${monthRef.current.value}-${dateRef.current.value}`).getDay()];
 
         if(type===true){
-            dispatch(income(amountRef.current.value,labelRef.current.value,Number(yearRef.current.value),monthIndex,Number(dateRef.current.value),dayOfWeek,incomeId++));
+            dispatch(income({amount:amountRef.current.value,
+                label:labelRef.current.value,
+                year:Number(yearRef.current.value),
+                month:monthIndex,
+                date:Number(dateRef.current.value),
+                day:dayOfWeek,
+                id:incomeId++}));
         }else{
-            dispatch(expediture(amountRef.current.value,labelRef.current.value,Number(yearRef.current.value),monthIndex,Number(dateRef.current.value),dayOfWeek,expeditureId++));
+            dispatch(expediture({amount:amountRef.current.value,
+                label:labelRef.current.value,
+                year:Number(yearRef.current.value),
+                month:monthIndex,
+                date:Number(dateRef.current.value),
+                day:dayOfWeek,
+                id:expeditureId++}));
         }
         localStorage.setItem('lists',JSON.stringify(store.getState().incomeExpeditureReducer.list));
     }
@@ -249,6 +261,7 @@ const AddHistory = () => {
 
     return(
         <>   
+            {console.log(store.getState())}
             <Wrapper>
                     <BtnWrapper>
                         <IncomeBtn active={type} onClick={onClickIncome}>Income</IncomeBtn>

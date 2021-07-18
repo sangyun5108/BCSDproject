@@ -5,6 +5,8 @@ import {useEffect} from 'react';
 import { useDispatch} from 'react-redux';
 import {init} from '../redux/actions';
 import {useHistory} from 'react-router-dom';
+import { checkLocal } from '../utils/checkLocal';
+import { getId } from '../utils/getId';
 
 const AddHistoryBtn = styled.button`
   position:fixed;
@@ -34,7 +36,20 @@ const AccountBook = () => {
   }
 
   useEffect(()=>{
-    dispatch(init());
+    const getlist = JSON.parse(localStorage.getItem('lists'));
+    const list = getlist?getlist:[];
+    let incomeId = 0;
+    let expeditureId = 0;
+
+    if(checkLocal()){
+      incomeId = getId('INCOME',0);
+      expeditureId = getId('EXPEDITURE',100);
+    }
+
+    dispatch(init({list,
+    date:new Date(),
+    incomeId,
+    expeditureId}));
   },[dispatch]);
 
 

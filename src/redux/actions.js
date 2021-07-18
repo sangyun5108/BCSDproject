@@ -1,85 +1,24 @@
 import {DATE,INCOME, EXPEDITURE, INIT, TYPE, DELETE, BTN} from './types';
-import {getId} from '../utils/getId';
-import {checkLocal} from '../utils/checkLocal';
+import { createAction } from '@reduxjs/toolkit';
 
-export const income = (amount,label,year,month,date,day,id) => {
-    return {
-        type:INCOME,
-        amount,
-        label,
-        year,
-        month,
-        date,
-        day,
-        id
-    }
-}
+export const income = createAction(INCOME);
+export const expediture = createAction(EXPEDITURE);
+export const init = createAction(INIT);
 
-export const expediture = (amount,label,year,month,date,day,id) => {
-    return {
-        type:EXPEDITURE,
-        amount,
-        label,
-        year,
-        month,
-        date,
-        day,
-        id
-    }
-}
+export const Type = createAction(TYPE);
+export const DateSet = createAction(DATE);
+export const Btn = createAction(BTN);
+export const deleteLists = createAction(DELETE)
 
-export const DeleteList = (list) => {
-    localStorage.setItem('lists',JSON.stringify(list));
-    let incomeId = getId('INCOME',0);
-    let expeditureId = getId('EXPEDITURE',100);
-    return {
-        type:DELETE,
-        list,
-        incomeId,
-        expeditureId
-    }
-}
-
-export const DateSet = (year,month) => {
-    return {
-        type:DATE,
-        year,
-        month,
-    }
-}
-
-export const Btn = (redBtn,blueBtn) => {
-    return {
-        type:BTN,
-        redBtn,
-        blueBtn
-    }
-}
-
-export const init = ()=>{
-    const getlist = JSON.parse(localStorage.getItem('lists'));
-    const list = getlist?getlist:[];
-    let incomeId = 0;
-    let expeditureId = 0;
-
-    if(checkLocal()){
-        incomeId = getId('INCOME',0);
-        expeditureId = getId('EXPEDITURE',100);
-    }
-    
-
-    return {
-        type:INIT,
-        list,
-        incomeId,
-        expeditureId
-    }
-}
-
-export const Type = (kind) => {
-    return {
-        type:TYPE,
-        kind
-    }
-}
+// export const DeleteList = (list) => {
+//     localStorage.setItem('lists',JSON.stringify(list));
+//     let incomeId = getId('INCOME',0);
+//     let expeditureId = getId('EXPEDITURE',100);
+//     return {
+//         type:DELETE,
+//         list,
+//         incomeId,
+//         expeditureId
+//     }
+// }
 
