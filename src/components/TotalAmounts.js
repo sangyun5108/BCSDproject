@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector,useDispatch } from 'react-redux'
 import styled from 'styled-components'
-import { Btn, Type } from '../redux/actions'
+import { Btn, Type } from '../redux/reducers/showListReducer_toolkit'
 import useFilterList from '../hooks/useFilterList'
 
 const TotalMoney = styled.div`

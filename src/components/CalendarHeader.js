@@ -15,7 +15,7 @@ const DayOfWeek = styled.div`
     line-height : 20px;
     text-align : center;
 `
-function CalenderHeader(){
+function CalendarHeader(){
     const dayArray = ['SUN','MON','TUE','WED','THU','FRI','SAT']
     return (
         <Header>
@@ -23,4 +23,4 @@ function CalenderHeader(){
         </Header>
     )
 }
-export default CalenderHeader
+export default CalendarHeader

@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useDispatch, useSelector } from 'react-redux'
-import { DateSet } from '../redux/actions'
+import { DateSet } from '../redux/reducers/showListReducer_toolkit'
 const Controler = styled.div`
     display : flex;
     justify-content : center;
@@ -42,10 +42,12 @@ function DateViewer(){//날짜 출력
     let date = new Date(year,month)
     const dispatch = useDispatch()
     const onIncrease = () =>{
-        dispatch(DateSet(date.getFullYear(),date.getMonth(date.setMonth(month+1))))
+        date.setMonth(month+1)
+        dispatch(DateSet({year : date.getFullYear(), month : date.getMonth()}))
     }
     const onDecrease = () =>{
-        dispatch(DateSet(date.getFullYear(),date.getMonth(date.setMonth(month-1))))
+        date.setMonth(month-1)
+        dispatch(DateSet({year : date.getFullYear(), month : date.getMonth()}))
     }
     return(
         <DateSetContainer>
