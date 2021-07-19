@@ -210,7 +210,7 @@ const AddHistoryEdit = (props) => {
 
     let {inputType,label,amount,moneytype,id}=props.location.state;
 
-    const [type,setType] = useState(inputType==='income'?true:false); //income,Expediture 선택
+    const type = inputType==='income'?true:false;
     const [close,setClose] = useState(false);
     const [moneyType,setMoneyType] = useState(moneytype);
     const yearRef = useRef(null);

@@ -8,10 +8,10 @@ import store from '../redux/store';
 
 const Wrapper = styled.div`
     border-bottom:0px;
-    position:fixed;
+    position:absolute;
     bottom:0;
     width:600px;
-    height:94vh;
+    height:750px;
     background-color:white;
     z-index:0;
     border-radius:25px 25px 0px 0px;
@@ -32,7 +32,7 @@ const BtnWrapper = styled.div`
 const IncomeBtn = styled.button`
     width:210px;
     height:50px;
-    margin-right:5%;
+    margin-right:30px;
     text-align:center;
     font-size:25px;
     font-weight:bold;
@@ -40,7 +40,9 @@ const IncomeBtn = styled.button`
     border:none;
     background:${props => props.active===true?'#424242':''};
     color:${props => props.active===true?'white':''};
-
+    &:hover{
+        cursor:pointer;
+    }
 `;
 
 const ExpeditureBtn = styled.button`
@@ -53,6 +55,9 @@ const ExpeditureBtn = styled.button`
     border:none;
     background:${props => props.active===false?'#424242':''};
     color:${props => props.active===false?'white':''};
+    &:hover{
+        cursor:pointer;
+    }
 `;
 
 const InputDayWrapper = styled.div`

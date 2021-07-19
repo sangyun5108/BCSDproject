@@ -32,6 +32,7 @@ const Btn = styled.button`
     &:hover{
         cursor:pointer;
         transform:scale(1.3);
+        transition:transform 0.5s linear;
     }
 `;
 

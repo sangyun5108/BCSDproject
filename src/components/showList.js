@@ -1,6 +1,6 @@
 import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import styled from 'styled-components';
+import styled,{keyframes} from 'styled-components';
 import transformation from '../utils/transformation';
 import useFilterList from '../hooks/useFilterList';
 import { getId } from '../utils/getId';
@@ -55,6 +55,17 @@ const Datelist = styled.div`
     color:grey;
 `;
 
+const rotate = keyframes`
+    from{
+        transfrom:rotate(0deg);
+    }
+
+    to{
+        transform:rotate(360deg);
+    }
+`
+;
+
 const DeleteBtn = styled.button`
     position:absolute;
     width:50px;
@@ -68,6 +79,7 @@ const DeleteBtn = styled.button`
     background:none;
     &:hover{
         cursor:pointer;
+        animation:${rotate} 0.5s linear infinite;
     }
 `;
 
@@ -84,6 +96,7 @@ const EditBtn = styled.button`
     background:none;
     &:hover{
         cursor:pointer;
+        animation:${rotate} 0.5s linear infinite;
     }
 `;
 
@@ -104,7 +117,6 @@ const DeleteAndEditBox = styled.div`
     height:80px;
     border-radius:0 20px 20px 0px;
 `
-;
 
 const ShowList = () => {
 
