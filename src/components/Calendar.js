@@ -45,10 +45,10 @@ function Calendar(){
     return (
         <Wrap>
             <Header>
-                <DateViewer/>
+                {/* <DateViewer/> */}
             </Header>
             <ContentContainer>
-                <TotalAmounts/>
+                {/* <TotalAmounts/> */}
                 <CalendarWrap>
                     <CalendarHeader/>
                     <MainCalendar/>

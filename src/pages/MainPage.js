@@ -4,6 +4,7 @@ import { Route,useHistory } from 'react-router';
 import styled from 'styled-components';
 import AddHistory from '../components/AddHistory';
 import Calendar from '../components/Calendar';
+import SelectBar from '../components/SelectBar';
 
 const Wrapper = styled.div`
     width:100%;
@@ -65,15 +66,16 @@ const MainPage = () => {
                     </Btn>
                 </BtnWrapper>
             </Wrapper>
-                <Route exact path={'/'}>
-                    <AccountBook/>
-                </Route>
-                <Route path='/calendar'>
-                    <Calendar/>
-                </Route>
-                <Route path='/addHistory'>
-                        <AddHistory/>
-                </Route>
+            <SelectBar/>
+            <Route exact path={'/'}>
+                <AccountBook/>
+            </Route>
+            <Route path='/calendar'>
+                <Calendar/>
+            </Route>
+            <Route path='/addHistory'>
+                    <AddHistory/>
+            </Route>
         </>
     );
 }

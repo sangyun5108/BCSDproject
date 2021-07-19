@@ -47,7 +47,6 @@ function TotalAmounts(){
         year : (state.showListReducer).year,
         month : (state.showListReducer).month
     })))
-    console.log(blueBtn,redBtn)
     let newBlueBtn = blueBtn
     let newRedBtn = redBtn
     const dispatch = useDispatch()
