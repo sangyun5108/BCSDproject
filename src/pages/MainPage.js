@@ -14,7 +14,7 @@ const Wrapper = styled.div`
     justify-content:center;
 `;
 
-const BtnWrapper = styled.div`
+const BtnWrapper = styled.nav`
     width:150px;
     margin-top:25px;
     display:flex;

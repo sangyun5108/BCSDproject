@@ -12,7 +12,7 @@ const Wrapper = styled.div`
     justify-content:center;
 `;
 
-const MWrapper = styled.div`
+const MWrapper = styled.header`
     width:80%;
     height:100%;
     display:flex;
