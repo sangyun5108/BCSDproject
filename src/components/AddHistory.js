@@ -56,7 +56,7 @@ const ExpeditureBtn = styled.button`
 `;
 
 const InputDayWrapper = styled.div`
-    margin-top:10%;
+    margin:50px 0 30px 0;
     display:flex;
     justify-content:center;
 `;
@@ -167,6 +167,7 @@ const AddHistory = () => {
 
     const [type,setType] = useState(true); //income,Expediture 선택
     const [close,setClose] = useState(false);
+    const [moneyType,setMoneyType] = useState('카드');
     const yearRef = useRef(null);
     const monthRef = useRef(null);
     const dateRef = useRef(null);
@@ -217,6 +218,10 @@ const AddHistory = () => {
         }
     }
 
+    const onClickMoneyType = (e) => {
+        setMoneyType(e.target.innerText);
+    }
+
     const onSubmit = (e) =>{
         e.preventDefault();
         history.push('/');
@@ -231,18 +236,22 @@ const AddHistory = () => {
                 month:monthIndex,
                 date:Number(dateRef.current.value),
                 day:dayOfWeek,
-                id:incomeId++}));
-        }else{
-            dispatch(expediture({
-                amount:amountRef.current.value,
-                label:labelRef.current.value,
-                year:Number(yearRef.current.value),
-                month:monthIndex,
-                date:Number(dateRef.current.value),
-                day:dayOfWeek,
-                id:expeditureId++}));
-        }
-        localStorage.setItem('lists',JSON.stringify(store.getState().incomeExpeditureReducer.list));
+                id:incomeId++,
+                moneyType:moneyType,
+            }));
+            }else{
+                dispatch(expediture({
+                    amount:amountRef.current.value,
+                    label:labelRef.current.value,
+                    year:Number(yearRef.current.value),
+                    month:monthIndex,
+                    date:Number(dateRef.current.value),
+                    day:dayOfWeek,
+                    id:expeditureId++,
+                    moneyType:moneyType,
+                }));
+            }
+            localStorage.setItem('lists',JSON.stringify(store.getState().incomeExpeditureReducer.list));
     }
 
     const onClickXbutton = () => {
@@ -264,15 +273,66 @@ const AddHistory = () => {
                             <InputDay ref={monthRef} defaultValue={nowmonth} maxLength="2" onBlur={checkMonthType}></InputDay>
                             <InputDay ref={dateRef} defaultValue={nowdate} maxLength="2" onBlur={checkDateType}></InputDay>
                         </InputDayWrapper>
+                        <InputMoneyTypeWrapper>
+                            <InputCashTypeBtn active={moneyType} onClick={onClickMoneyType}>
+                                <InputMoneyTypeText>{type?'월급':'현금'}</InputMoneyTypeText>
+                            </InputCashTypeBtn>
+                            <InputCardTypeBtn active={moneyType} onClick={onClickMoneyType}>
+                                <InputMoneyTypeText>{type?'용돈':'카드'}</InputMoneyTypeText>
+                            </InputCardTypeBtn>
+                        </InputMoneyTypeWrapper>
                         <InputLabelAmountWrapper>
                             <InputLabel ref={labelRef} placeholder="Label" required></InputLabel>
                             <InputAmount ref={amountRef} onBlur={checkAmountType} placeholder="Amount" required></InputAmount>
-                            <DoneButton active={type} type="submit">Done</DoneButton>
+                            <DoneButton active={type} value='submit' type="submit">Done</DoneButton>
                         </InputLabelAmountWrapper>
                     </form>
             </Wrapper>
         </>
     );
 }
+
+const InputMoneyTypeWrapper = styled.div`
+    width:250px;
+    height:50px;
+    display:flex;
+    justify-content:space-between;
+    margin:0 auto;
+`;
+
+const InputCashTypeBtn = styled.div`
+    height:40px;
+    width:100px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:${props=>props.active==='현금'||props.active==='월급'?'#424242':'#f5f5f5'};
+    color:${props=>props.active==='현금'||props.active==='월급'?'white':'black'};
+    border-radius:10px;
+    font-weight:700;
+    &:hover{
+        cursor:pointer;
+    }
+`;
+
+const InputCardTypeBtn = styled.div`
+    height:40px;
+    width:100px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:${props=>props.active==='카드'||props.active==='용돈'?'#424242':'#f5f5f5'};
+    color:${props=>props.active==='카드'||props.active==='용돈'?'white':'black'};
+    border-radius:10px;
+    font-weight:700;
+    &:hover{
+        cursor:pointer;
+    }
+`;
+
+const InputMoneyTypeText = styled.div`
+    font-size:20px;
+    height:20px;
+`;
 
 export default AddHistory;
