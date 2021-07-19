@@ -3,7 +3,7 @@ import styled from 'styled-components'
 const Header = styled.div`
     display : grid;
     grid-template-columns: repeat(7,1fr);
-    grid-row-gap: 4px;
+    grid-row-gap: 6px;
     height : 15%;
 `
 const DayOfWeek = styled.div`

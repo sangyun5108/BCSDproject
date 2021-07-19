@@ -3,45 +3,46 @@ import styled from 'styled-components'
 import {useSelector} from 'react-redux'
 const Wrap = styled.div`
     display : grid;
-    grid-template-rows: repeat(6,1fr);
-    grid-row-gap: 4px;
-    height : 100%;
-`
-const Week = styled.div`
-    display : grid;
-    grid-template-columns: repeat(7,1fr);
-    grid-column-gap: 4px;
+    grid-template-columns: repeat(7,6fr);
+    grid-column-gap: 6px;
+    grid-row-gap: 6px;
+    height : 85%;
 `
 const Day = styled.div`
     background : ${day => day.show ? '#f5f5f7':'#FCFCFD'};
     color : ${day => day.show ? 'black': 'gray'};
     display : flex;
-    flex-direction : column;
     justify-content : space-between;
+    flex-direction : column;
     border-radius : 4px;
-    height : 100%;
     min-width: 100%;
-    font-weight: 600;
-    font-size: 16px;
+    height : 8.5vw;
+    max-height : 90px;
     line-height: 16px;
+    font-weight: 600;
+`   
+const Dates = styled.div`  
+    font-size : min(1vw, 16px);
+`
+const Money = styled.div`
+    display : flex;
+    flex-direction : column;
 `
 const Income = styled.div`
     display : ${day => day.day.IN_total > 0 ? 'block' : 'None'};
     color : blue;
     text-align : right;
-    min-width: 100%;
+    height : min(2.7vw, 16px);
     font-size : min(1.8vw, 16px);
 `
 const Expediture = styled.div`
     display : ${day => day.day.EX_total < 0 ? 'block' : 'None'};
     color : red;
-    font-size: 16px;
     text-align : right;
-    min-width: 100%;
+    height : min(2.7vw, 16px);
     font-size : min(1.8vw, 16px);
-    font-weight : 600;
-    `
-const useWeekArray = (today, lists) => {
+`
+const useMonthArray = (today, lists) => {
     let thisMonth = new Date(today.getFullYear(), today.getMonth(),1)
     let dayOfFirstDate = thisMonth.getDay()
     let startDate = new Date(thisMonth)
@@ -53,7 +54,7 @@ const useWeekArray = (today, lists) => {
     }else{
         thisMonth.setDate(thisMonth.getDate()-1)
     }
-    const weekArray = Array.from({length : 6}, () => Array.from({length : 7},() => {
+    const weekArray = Array.from({length : 42}, ()=> {
         thisMonth.setDate(thisMonth.getDate()+1)
         return (thisMonth.getTime() >= startDateTime && thisMonth.getTime() < endDateTime)?
         {
@@ -77,7 +78,7 @@ const useWeekArray = (today, lists) => {
             show : false
 
         }
-    }))
+    })
     return weekArray
 }
 
@@ -103,20 +104,20 @@ function MainCalendar(){
             account.month === today.getMonth())
     }
 
-    const weekArray = useWeekArray(today, accountList)
+    const weekArray = useMonthArray(today, accountList)
+    console.log(weekArray)
     return (
         <Wrap>
-            {weekArray.map((week,index) =>
-            <Week key={index}>
-                {week.map((day,index) =>
-                    <Day show = {day.show} key={index}>
-                        <div>{day.date}</div>
-                        <div>
-                            <Income day = {day}>+{day.IN_total}</Income>
-                            <Expediture day = {day}>{day.EX_total}</Expediture>
-                        </div>
-                    </Day>)}
-            </Week>)}
+            {weekArray.map((day,index) =>
+                <Day show = {day.show} key={index}>
+                    <Dates>
+                        {day.date}
+                    </Dates>
+                    <Money>
+                        <Income day = {day}>+{day.IN_total}</Income>
+                        <Expediture day = {day}>{day.EX_total}</Expediture>
+                    </Money>
+                </Day>)}
         </Wrap>
     )
 }

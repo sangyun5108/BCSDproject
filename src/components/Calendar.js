@@ -1,32 +1,8 @@
 import React  from 'react'
 import styled from'styled-components'
 import MainCalendar from './MainCalendar'
-import DateViewer from './DateViewer'
 import CalendarHeader from './CalendarHeader'
-import TotalAmounts from './TotalAmounts'
-const Wrap = styled.div`
-    display : flex;
-    flex-direction : column;
-    width : 100vw;
-    height : 100vh;
-    align-items : center;
-`
-const Header = styled.div`
-    display : flex;
-    flex-direction : column;
-    align-items : center;
-    justify-content : center;
-    font-size: 100%;
-    width : 100%;
-    max-width : 960px;
-`
-const ContentContainer = styled.div`
-    width ; 100%;
-    display : flex;
-    flex-direction : column;
-    align-items : center;
-    justify-content : center;
-`
+
 const CalendarWrap = styled.div`
     padding-bottom: 36px;
     margin-top : 49px;
@@ -43,19 +19,10 @@ const CalendarWrap = styled.div`
 `
 function Calendar(){
     return (
-        <Wrap>
-            <Header>
-                {/* <DateViewer/> */}
-            </Header>
-            <ContentContainer>
-                {/* <TotalAmounts/> */}
-                <CalendarWrap>
-                    <CalendarHeader/>
-                    <MainCalendar/>
-                </CalendarWrap>
-            </ContentContainer>
-        </Wrap>
-
+        <CalendarWrap>
+            <CalendarHeader/>
+            <MainCalendar/>
+        </CalendarWrap>
     )
 }
 
