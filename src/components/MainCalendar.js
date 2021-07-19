@@ -1,6 +1,8 @@
-import React from 'react'
+import React,{useEffect, useState, useRef} from 'react'
 import styled from 'styled-components'
 import {useSelector} from 'react-redux'
+import transformation from '../utils/transformation'
+import { current } from '@reduxjs/toolkit'
 const Wrap = styled.div`
     display : grid;
     grid-template-columns: repeat(7,6fr);
@@ -18,13 +20,15 @@ const Day = styled.div`
     min-width: 100%;
     height : 8.5vw;
     max-height : 90px;
-    line-height: 16px;
+    line-height: 10px;
     font-weight: 600;
 `   
-const Dates = styled.div`  
-    font-size : min(1vw, 16px);
+const Dates = styled.div`
+    margin : 4px;
+    font-size : min(1.8vw, 16px);
 `
 const Money = styled.div`
+    margin : 4px;
     display : flex;
     flex-direction : column;
 `
@@ -32,14 +36,14 @@ const Income = styled.div`
     display : ${day => day.day.IN_total > 0 ? 'block' : 'None'};
     color : blue;
     text-align : right;
-    height : min(2.7vw, 16px);
+    height : min(1.8vw, 16px);
     font-size : min(1.8vw, 16px);
 `
 const Expediture = styled.div`
     display : ${day => day.day.EX_total < 0 ? 'block' : 'None'};
     color : red;
     text-align : right;
-    height : min(2.7vw, 16px);
+    height : min(1.8vw, 16px);
     font-size : min(1.8vw, 16px);
 `
 const useMonthArray = (today, lists) => {
@@ -76,7 +80,6 @@ const useMonthArray = (today, lists) => {
             IN_total : 0,
             EX_total : 0,
             show : false
-
         }
     })
     return weekArray
@@ -84,11 +87,15 @@ const useMonthArray = (today, lists) => {
 
 function MainCalendar(){
     const list = useSelector((state)=> (state.incomeExpeditureReducer).list)
-    const {blueBtn, redBtn} = useSelector((state) => state.showListReducer)
-    const {year,month} = useSelector((state => ({
-        year : (state.showListReducer).year,
-        month : (state.showListReducer).month
-    })))
+    const {blueBtn, redBtn, year, month} = useSelector((state) => state.showListReducer)
+    const [windowSize, setSize] = useState(window.innerWidth)
+    const setWindowSize = () => {
+        setSize(window.innerWidth)
+    }
+    useEffect(() => {
+        window.addEventListener('resize',setWindowSize)
+    },[])
+    console.log(current.e)
     let today = new Date(year,month)
     let accountList = []
     if(blueBtn && !redBtn){
@@ -103,9 +110,7 @@ function MainCalendar(){
         accountList = list.filter(account => account.year === today.getFullYear() &&
             account.month === today.getMonth())
     }
-
     const weekArray = useMonthArray(today, accountList)
-    console.log(weekArray)
     return (
         <Wrap>
             {weekArray.map((day,index) =>
@@ -114,8 +119,8 @@ function MainCalendar(){
                         {day.date}
                     </Dates>
                     <Money>
-                        <Income day = {day}>+{day.IN_total}</Income>
-                        <Expediture day = {day}>{day.EX_total}</Expediture>
+                        <Income day = {day}>{windowSize >= 600? '+' + transformation(day.IN_total):'$'}</Income>
+                        <Expediture day = {day}>{windowSize >= 600? transformation(day.EX_total) : '$'}</Expediture>
                     </Money>
                 </Day>)}
         </Wrap>

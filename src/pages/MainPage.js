@@ -3,7 +3,7 @@ import AccountBook from './AccountBook';
 import { Route,useHistory } from 'react-router';
 import styled from 'styled-components';
 import AddHistory from '../components/AddHistory';
-import Calendar from '../components/Calendar';
+import Calendar from './Calendar';
 import SelectBar from '../components/SelectBar';
 
 const Wrapper = styled.div`
