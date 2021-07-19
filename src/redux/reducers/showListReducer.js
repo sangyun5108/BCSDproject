@@ -7,7 +7,8 @@ const showListReducer = createSlice({
         month:new Date().getMonth(),
         year:new Date().getFullYear(),
         blueBtn:false,
-        redBtn:false
+        redBtn:false,
+        moneyType:''
     },
     reducers :{
         Type(state,action){
@@ -37,5 +38,5 @@ const showListReducer = createSlice({
     }
 })
 
-export const {Type,DateSet,Btn} = showListReducer.actions
+export const {Type,DateSet,Btn,MoneyType} = showListReducer.actions
 export default showListReducer.reducer

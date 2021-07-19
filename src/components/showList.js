@@ -18,8 +18,8 @@ const UlWrapper = styled.ul`
 const ListWrapper = styled.div`
     width:550px;
     padding:0px 10px 0px 10px;
-    height:75px;
-    border-radius:15px;
+    height:80px;
+    border-radius:20px;
     background:#f5f5f5;
     margin-bottom:15px;
     display:flex;
@@ -29,8 +29,8 @@ const ListWrapper = styled.div`
 
 const List = styled.li`
     list-style:none;
-    width:95%;
-    height:75px;
+    width:600px;
+    height:px;
     display:flex;
     align-items:center;
     justify-content:space-between;
@@ -38,7 +38,6 @@ const List = styled.li`
 
 const Label = styled.div`
     font-weight:700;
-    margin-left:20px;
     font-size:20px;
 `;
 
@@ -70,6 +69,17 @@ const DeleteBtn = styled.button`
     &:hover{
         cursor:pointer;
     }
+`;
+
+const MoneyTypeAndLabel =styled.div`
+    margin-left:20px;
+`;
+
+const MoneyType = styled.div`
+    font-size:15px;
+    font-weight:600;
+    margin-bottom:5px;
+    color:grey;
 `;
 
 const ShowList = () => {
@@ -123,7 +133,10 @@ const ShowList = () => {
                                     ):''}
                             <ListWrapper> 
                                 <List>
-                                    <Label>{list.label}</Label>
+                                    <MoneyTypeAndLabel>
+                                        <MoneyType>{list.moneyType}</MoneyType>
+                                        <Label>{list.label}</Label>
+                                    </MoneyTypeAndLabel>
                                     <Amount active={list.amount}>{list.amount>0?`+${transformation(list.amount)}`:transformation(list.amount)}</Amount>
                                     <DeleteBtn onClick={()=>deleteList(list.id)}>X</DeleteBtn>
                                 </List>
