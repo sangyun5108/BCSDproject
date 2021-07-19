@@ -161,6 +161,7 @@ const nowyear = date.getFullYear();
 const nowmonth = date.getMonth()<10?`0${date.getMonth()+1}`:`${date.getMonth()}`;
 const nowdate = date.getDate()<10?`0${date.getDate()}`:`${date.getDate()}`;
 const WEEK = ['SUN','MON','TUE','WEN','THU','FRI','SAT'];
+const MONTH = [31,29,31,30,31,30,31,31,30,31,30,31];
 
 const AddHistory = () => {
 
@@ -186,7 +187,7 @@ const AddHistory = () => {
 
     const checkYearType = () => {
         const value = Number(yearRef.current.value);
-        if(isNaN(value)){
+        if(isNaN(value)||value<2000){
             yearRef.current.value = nowyear;
         }else{
             yearRef.current.value = value;
@@ -195,9 +196,9 @@ const AddHistory = () => {
 
     const checkMonthType = () => {
         let value = Number(monthRef.current.value);
-        if(isNaN(value)){
+        if(isNaN(value)||value>12){
             monthRef.current.value = nowmonth;
-        }else{
+        }else {
             value = value<10?`0${value}`:value;
             monthRef.current.value = value;
         }
@@ -205,7 +206,7 @@ const AddHistory = () => {
 
     const checkDateType = () => {
         let value = Number(dateRef.current.value);
-        if(isNaN(value)){
+        if(isNaN(value)||value>MONTH[Number(monthRef.current.value)]){
             dateRef.current.value = nowdate;
         }else{
             value = value<10?`0${value}`:value;
@@ -223,9 +224,14 @@ const AddHistory = () => {
         }
     }
 
-    const getLabel = () => {
+    const checkLabelType = () => {
         const value = labelRef.current.value;
-        labelRef.current.value = value;
+        if(!isNaN(Number(value))){
+            labelRef.current.value='';
+            labelRef.current.focus();
+        }else{
+            labelRef.current.value = value;
+        }
     }
 
     const onSubmit = (e) =>{
@@ -276,7 +282,7 @@ const AddHistory = () => {
                             <InputDay ref={dateRef} defaultValue={nowdate} maxLength="2" onBlur={checkDateType}></InputDay>
                         </InputDayWrapper>
                         <InputLabelAmountWrapper>
-                            <InputLabel ref={labelRef} onBlur={getLabel} placeholder="Label" required></InputLabel>
+                            <InputLabel ref={labelRef} onBlur={checkLabelType} placeholder="Label" required></InputLabel>
                             <InputAmount ref={amountRef} onBlur={checkAmountType} placeholder="Amount" required></InputAmount>
                             <DoneButton active={type} type="submit">Done</DoneButton>
                         </InputLabelAmountWrapper>
