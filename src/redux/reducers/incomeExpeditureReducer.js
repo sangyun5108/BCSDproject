@@ -53,9 +53,14 @@ export const incomeExpeditureReducer = createSlice({
                 incomeId,
                 expeditureId
             }
+        },
+        editlist:(state,action)=>{
+            const {list} = action.payload;
+            return {
+                list
+            }
         }
-        
     }
 })
 
-export const {init,income,expediture,deletelist} = incomeExpeditureReducer.actions;
+export const {init,income,expediture,deletelist,editlist} = incomeExpeditureReducer.actions;

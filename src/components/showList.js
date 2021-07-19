@@ -5,6 +5,7 @@ import transformation from '../utils/transformation';
 import useFilterList from '../hooks/useFilterList';
 import { getId } from '../utils/getId';
 import { deletelist } from '../redux/reducers/incomeExpeditureReducer';
+import { Link } from 'react-router-dom';
 
 const UlWrapper = styled.ul`
     padding-left:0px;
@@ -17,7 +18,6 @@ const UlWrapper = styled.ul`
 
 const ListWrapper = styled.div`
     width:550px;
-    padding:0px 10px 0px 10px;
     height:80px;
     border-radius:20px;
     background:#f5f5f5;
@@ -30,7 +30,7 @@ const ListWrapper = styled.div`
 const List = styled.li`
     list-style:none;
     width:600px;
-    height:px;
+    height:80px;
     display:flex;
     align-items:center;
     justify-content:space-between;
@@ -56,10 +56,28 @@ const Datelist = styled.div`
 `;
 
 const DeleteBtn = styled.button`
+    color:white;
     position:absolute;
-    width:30px;
+    width:50px;
     height:30px;
-    top:0px;
+    top:7px;
+    right:0px;
+    border-radius:50%;
+    outline:none;
+    text-align:center;
+    border:none;
+    background:none;
+    &:hover{
+        cursor:pointer;
+    }
+`;
+
+const EditBtn = styled.button`
+    color:white;
+    position:absolute;
+    width:50px;
+    height:30px;
+    bottom:7px;
     right:0px;
     border-radius:50%;
     outline:none;
@@ -80,7 +98,15 @@ const MoneyType = styled.div`
     font-weight:600;
     margin-bottom:5px;
     color:grey;
-`;
+`
+
+const DeleteAndEditBox = styled.div`
+    background:grey;
+    width:50px;
+    height:80px;
+    border-radius:0 20px 20px 0px;
+`
+;
 
 const ShowList = () => {
 
@@ -138,8 +164,22 @@ const ShowList = () => {
                                         <Label>{list.label}</Label>
                                     </MoneyTypeAndLabel>
                                     <Amount active={list.amount}>{list.amount>0?`+${transformation(list.amount)}`:transformation(list.amount)}</Amount>
-                                    <DeleteBtn onClick={()=>deleteList(list.id)}>X</DeleteBtn>
                                 </List>
+                                <DeleteAndEditBox>
+                                    <DeleteBtn onClick={()=>deleteList(list.id,list)}>삭제</DeleteBtn>
+                                    <Link to={{
+                                        pathname:`/addHistory/edit`,
+                                        state:{
+                                            inputType:list.type,
+                                            label:list.label,
+                                            amount:list.amount,
+                                            moneytype:list.moneyType,
+                                            id:list.id
+                                        }
+                                    }}>
+                                        <EditBtn>수정</EditBtn>
+                                    </Link>
+                                </DeleteAndEditBox>
                             </ListWrapper>
                         </div>
                     );

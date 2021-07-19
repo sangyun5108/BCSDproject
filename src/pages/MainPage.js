@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import AddHistory from '../components/AddHistory';
 import Calendar from './Calendar';
 import SelectBar from '../components/SelectBar';
+import AddHistoryEdit from '../components/AddHistoryEdit';
 
 const Wrapper = styled.div`
     width:100%;
@@ -67,15 +68,10 @@ const MainPage = () => {
                 </BtnWrapper>
             </Wrapper>
             <SelectBar/>
-            <Route exact path='/'>
-                <AccountBook/>
-            </Route>
-            <Route path='/calendar'>
-                <Calendar/>
-            </Route>
-            <Route path='/addHistory'>
-                <AddHistory/>
-            </Route>
+            <Route path='/' component={AccountBook}/>
+            <Route path='/calendar' component={Calendar}/>
+            <Route path='/addHistory' component={AddHistory}/>
+            <Route path='/addHistory/edit' component={AddHistoryEdit}/>
         </>
     );
 }

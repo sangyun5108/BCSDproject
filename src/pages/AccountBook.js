@@ -50,7 +50,7 @@ const AccountBook = () => {
     list,
     incomeId,
     expeditureId}));
-  },[dispatch]);
+  });
 
 
     return (
