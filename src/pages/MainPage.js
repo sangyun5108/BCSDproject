@@ -67,14 +67,14 @@ const MainPage = () => {
                 </BtnWrapper>
             </Wrapper>
             <SelectBar/>
-            <Route exact path={'/'}>
+            <Route exact path='/'>
                 <AccountBook/>
             </Route>
             <Route path='/calendar'>
                 <Calendar/>
             </Route>
             <Route path='/addHistory'>
-                    <AddHistory/>
+                <AddHistory/>
             </Route>
         </>
     );

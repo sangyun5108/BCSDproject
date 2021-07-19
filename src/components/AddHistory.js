@@ -189,28 +189,24 @@ const AddHistory = () => {
         const value = Number(yearRef.current.value);
         if(isNaN(value)||value<2000){
             yearRef.current.value = nowyear;
-        }else{
-            yearRef.current.value = value;
         }
     }//연도가 올바르게 입력되었는지 체크해주는 함수
 
     const checkMonthType = () => {
         let value = Number(monthRef.current.value);
-        if(isNaN(value)||value>12){
+        if(isNaN(value)||value>12||value<=0){
             monthRef.current.value = nowmonth;
         }else {
             value = value<10?`0${value}`:value;
-            monthRef.current.value = value;
         }
     }//month가 올바르게 입력되었는지 체크해주는 함수
 
     const checkDateType = () => {
         let value = Number(dateRef.current.value);
-        if(isNaN(value)||value>MONTH[Number(monthRef.current.value)]){
+        if(isNaN(value)||value>MONTH[Number(monthRef.current.value)-1]||value<=0){
             dateRef.current.value = nowdate;
         }else{
             value = value<10?`0${value}`:value;
-            dateRef.current.value = value;
         }
     }//date가 올바르게 입력되었는지 체크하는 함수
 
@@ -218,19 +214,6 @@ const AddHistory = () => {
         const value = amountRef.current.value;
         if(isNaN(Number(value))){
             amountRef.current.value = '';
-            amountRef.current.focus();
-        }else{
-            amountRef.current.value = value;
-        }
-    }
-
-    const checkLabelType = () => {
-        const value = labelRef.current.value;
-        if(!isNaN(Number(value))){
-            labelRef.current.value='';
-            labelRef.current.focus();
-        }else{
-            labelRef.current.value = value;
         }
     }
 
@@ -282,7 +265,7 @@ const AddHistory = () => {
                             <InputDay ref={dateRef} defaultValue={nowdate} maxLength="2" onBlur={checkDateType}></InputDay>
                         </InputDayWrapper>
                         <InputLabelAmountWrapper>
-                            <InputLabel ref={labelRef} onBlur={checkLabelType} placeholder="Label" required></InputLabel>
+                            <InputLabel ref={labelRef} placeholder="Label" required></InputLabel>
                             <InputAmount ref={amountRef} onBlur={checkAmountType} placeholder="Amount" required></InputAmount>
                             <DoneButton active={type} type="submit">Done</DoneButton>
                         </InputLabelAmountWrapper>
