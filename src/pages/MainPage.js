@@ -68,7 +68,7 @@ const MainPage = () => {
                 </BtnWrapper>
             </Wrapper>
             <SelectBar/>
-            <Route path='/' component={AccountBook}/>
+            <Route exact path='/'component={AccountBook}/>
             <Route path='/calendar' component={Calendar}/>
             <Route path='/addHistory' component={AddHistory}/>
             <Route path='/addHistory/edit' component={AddHistoryEdit}/>
