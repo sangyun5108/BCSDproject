@@ -56,7 +56,6 @@ const Datelist = styled.div`
 `;
 
 const DeleteBtn = styled.button`
-    color:white;
     position:absolute;
     width:50px;
     height:30px;
@@ -73,7 +72,6 @@ const DeleteBtn = styled.button`
 `;
 
 const EditBtn = styled.button`
-    color:white;
     position:absolute;
     width:50px;
     height:30px;
@@ -101,7 +99,7 @@ const MoneyType = styled.div`
 `
 
 const DeleteAndEditBox = styled.div`
-    background:grey;
+    background:none;
     width:50px;
     height:80px;
     border-radius:0 20px 20px 0px;
@@ -166,7 +164,9 @@ const ShowList = () => {
                                     <Amount active={list.amount}>{list.amount>0?`+${transformation(list.amount)}`:transformation(list.amount)}</Amount>
                                 </List>
                                 <DeleteAndEditBox>
-                                    <DeleteBtn onClick={()=>deleteList(list.id,list)}>삭제</DeleteBtn>
+                                    <DeleteBtn onClick={()=>deleteList(list.id,list)}>
+                                        <i className="fas fa-trash-alt"></i>
+                                    </DeleteBtn>
                                     <Link to={{
                                         pathname:`/addHistory/edit`,
                                         state:{
@@ -177,7 +177,9 @@ const ShowList = () => {
                                             id:list.id
                                         }
                                     }}>
-                                        <EditBtn>수정</EditBtn>
+                                        <EditBtn>
+                                            <i className="far fa-edit"></i>
+                                        </EditBtn>
                                     </Link>
                                 </DeleteAndEditBox>
                             </ListWrapper>

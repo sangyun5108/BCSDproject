@@ -223,14 +223,6 @@ const AddHistoryEdit = (props) => {
     const dispatch = useDispatch();
     const {list:lists} = useSelector((state)=>state.incomeExpeditureReducer);
 
-    const onClickIncome = (e) => {
-        setType(true);
-    }
-
-    const onClickExpediture = (e) => {
-        setType(false);
-    }
-
     const checkYearType = () => {
         const value = Number(yearRef.current.value);
         if(isNaN(value)||value<2000){
@@ -278,7 +270,7 @@ const AddHistoryEdit = (props) => {
         const dayOfWeek = WEEK[new Date(`${yearRef.current.value}-${monthRef.current.value}-${dateRef.current.value}`).getDay()];
         const newlist = {
             type:inputType,
-            amount:Number(amountRef.current.value),
+            amount:inputType==='income'?Number(amountRef.current.value):-1*Number(amountRef.current.value),
             label:labelRef.current.value,
             year:Number(yearRef.current.value),
             month:monthIndex,
@@ -315,8 +307,8 @@ const AddHistoryEdit = (props) => {
         <>   
             <Wrapper>
                     <BtnWrapper>
-                        <IncomeBtn active={type} onClick={onClickIncome}>Income</IncomeBtn>
-                        <ExpeditureBtn active={type} onClick={onClickExpediture}>Expediture</ExpeditureBtn>
+                        <IncomeBtn active={type}>Income</IncomeBtn>
+                        <ExpeditureBtn active={type}>Expediture</ExpeditureBtn>
                     </BtnWrapper>
                         <Xbutton onClick={onClickXbutton}>X</Xbutton>
                     <form onSubmit={onSubmit}>
@@ -335,7 +327,7 @@ const AddHistoryEdit = (props) => {
                         </InputMoneyTypeWrapper>
                         <InputLabelAmountWrapper>
                             <InputLabel ref={labelRef} defaultValue={label} placeholder="Label" required></InputLabel>
-                            <InputAmount ref={amountRef} defaultValue={amount} onBlur={checkAmountType} placeholder="Amount" required></InputAmount>
+                            <InputAmount ref={amountRef} defaultValue={amount>0?amount:-1*amount} onBlur={checkAmountType} placeholder="Amount" required></InputAmount>
                             <DoneButton active={type} value='submit' type="submit">Done</DoneButton>
                         </InputLabelAmountWrapper>
                     </form>
