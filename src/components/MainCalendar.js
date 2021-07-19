@@ -1,8 +1,7 @@
-import React,{useEffect, useState, useRef} from 'react'
+import React,{useEffect, useState} from 'react'
 import styled from 'styled-components'
 import {useSelector} from 'react-redux'
 import transformation from '../utils/transformation'
-import { current } from '@reduxjs/toolkit'
 const Wrap = styled.div`
     display : grid;
     grid-template-columns: repeat(7,6fr);
@@ -95,7 +94,6 @@ function MainCalendar(){
     useEffect(() => {
         window.addEventListener('resize',setWindowSize)
     },[])
-    console.log(current.e)
     let today = new Date(year,month)
     let accountList = []
     if(blueBtn && !redBtn){
