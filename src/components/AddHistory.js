@@ -154,7 +154,50 @@ const Xbutton = styled.button`
   &:hover{
     cursor:pointer;
   }
+`
+const InputMoneyTypeWrapper = styled.div`
+    width:250px;
+    height:50px;
+    display:flex;
+    justify-content:space-between;
+    margin:0 auto;
 `;
+
+const InputCashTypeBtn = styled.div`
+    height:40px;
+    width:100px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:${props=>props.active==='현금'||props.active==='월급'?'#424242':'#f5f5f5'};
+    color:${props=>props.active==='현금'||props.active==='월급'?'white':'black'};
+    border-radius:10px;
+    font-weight:700;
+    &:hover{
+        cursor:pointer;
+    }
+`;
+
+const InputCardTypeBtn = styled.div`
+    height:40px;
+    width:100px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:${props=>props.active==='카드'||props.active==='용돈'?'#424242':'#f5f5f5'};
+    color:${props=>props.active==='카드'||props.active==='용돈'?'white':'black'};
+    border-radius:10px;
+    font-weight:700;
+    &:hover{
+        cursor:pointer;
+    }
+`;
+
+const InputMoneyTypeText = styled.div`
+    font-size:20px;
+    height:20px;
+`;
+
 
 const date = new Date();
 const nowyear = date.getFullYear();
@@ -167,7 +210,7 @@ const AddHistory = () => {
 
     const [type,setType] = useState(true); //income,Expediture 선택
     const [close,setClose] = useState(false);
-    const [moneyType,setMoneyType] = useState('카드');
+    const [moneyType,setMoneyType] = useState('');
     const yearRef = useRef(null);
     const monthRef = useRef(null);
     const dateRef = useRef(null);
@@ -224,6 +267,10 @@ const AddHistory = () => {
 
     const onSubmit = (e) =>{
         e.preventDefault();
+        if(moneyType===''){
+            alert('유형체크를 해주세요');
+            return;
+        }
         history.push('/');
         const monthIndex = Number(monthRef.current.value)-1;
         const dayOfWeek = WEEK[new Date(`${yearRef.current.value}-${monthRef.current.value}-${dateRef.current.value}`).getDay()];
@@ -291,48 +338,5 @@ const AddHistory = () => {
         </>
     );
 }
-
-const InputMoneyTypeWrapper = styled.div`
-    width:250px;
-    height:50px;
-    display:flex;
-    justify-content:space-between;
-    margin:0 auto;
-`;
-
-const InputCashTypeBtn = styled.div`
-    height:40px;
-    width:100px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:${props=>props.active==='현금'||props.active==='월급'?'#424242':'#f5f5f5'};
-    color:${props=>props.active==='현금'||props.active==='월급'?'white':'black'};
-    border-radius:10px;
-    font-weight:700;
-    &:hover{
-        cursor:pointer;
-    }
-`;
-
-const InputCardTypeBtn = styled.div`
-    height:40px;
-    width:100px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:${props=>props.active==='카드'||props.active==='용돈'?'#424242':'#f5f5f5'};
-    color:${props=>props.active==='카드'||props.active==='용돈'?'white':'black'};
-    border-radius:10px;
-    font-weight:700;
-    &:hover{
-        cursor:pointer;
-    }
-`;
-
-const InputMoneyTypeText = styled.div`
-    font-size:20px;
-    height:20px;
-`;
 
 export default AddHistory;
