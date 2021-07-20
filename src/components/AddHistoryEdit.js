@@ -3,8 +3,19 @@ import {useDispatch, useSelector} from 'react-redux';
 import {useRef, useState} from 'react';
 import { editlist } from '../redux/reducers/incomeExpeditureReducer';
 import {useHistory} from 'react-router-dom';
-import styled,{keyframes} from 'styled-components';
+import styled,{keyframes,css} from 'styled-components';
 import store from '../redux/store';
+
+const retranslate = keyframes`
+    0% {
+        height:750px;
+    }
+
+    100% {
+        height:0px;
+        opacity:0px;
+    }
+`
 
 const translate = keyframes`
     0% {
@@ -29,7 +40,7 @@ const Wrapper = styled.div`
     flex-direction:column;
     align-items:center;
     box-shadow:0px 0px 20px grey;
-    animation:${translate} 0.5s ease-in-out;
+    animation:${props=>props.active?css`${retranslate} 0.5s ease-in-out`:css`${translate} 0.5s ease-in-out`}
 `;
 
 const BtnWrapper = styled.div`  
@@ -51,9 +62,6 @@ const IncomeBtn = styled.button`
     border:none;
     background:${props => props.active===true?'#424242':''};
     color:${props => props.active===true?'white':''};
-    &:hover{
-        cursor:pointer;
-    }
 `;
 
 const ExpeditureBtn = styled.button`
@@ -66,9 +74,6 @@ const ExpeditureBtn = styled.button`
     border:none;
     background:${props => props.active===false?'#424242':''};
     color:${props => props.active===false?'white':''};
-    &:hover{
-        cursor:pointer;
-    }
 `;
 
 const InputDayWrapper = styled.div`
@@ -225,7 +230,7 @@ const AddHistoryEdit = (props) => {
     let {inputType,label,amount,moneytype,id}=props.location.state;
 
     const type = inputType==='income'?true:false;
-    const [close,setClose] = useState(false);
+    const [closeBtn,setCloseBtn] = useState(false);
     const [moneyType,setMoneyType] = useState(moneytype);
     const yearRef = useRef(null);
     const monthRef = useRef(null);
@@ -309,9 +314,11 @@ const AddHistoryEdit = (props) => {
         localStorage.setItem('lists',JSON.stringify(store.getState().incomeExpeditureReducer.list));
     }
 
-    const onClickXbutton = () => {
-        setClose(!close);
-        history.push('/accountbook');
+    const onClickCloseBtn = () => {
+        setCloseBtn(true);
+        setTimeout(()=>{
+            history.push('/accountbook');
+        },400);
     }
 
 
@@ -319,12 +326,12 @@ const AddHistoryEdit = (props) => {
 
     return(
         <>   
-            <Wrapper>
+            <Wrapper active={closeBtn}>
                     <BtnWrapper>
                         <IncomeBtn active={type}>Income</IncomeBtn>
                         <ExpeditureBtn active={type}>Expediture</ExpeditureBtn>
                     </BtnWrapper>
-                        <Xbutton onClick={onClickXbutton}>X</Xbutton>
+                        <Xbutton onClick={onClickCloseBtn}>X</Xbutton>
                     <form onSubmit={onSubmit}>
                         <InputDayWrapper>
                             <InputYear ref={yearRef} defaultValue={nowyear} maxLength="4" onBlur={checkYearType}></InputYear>

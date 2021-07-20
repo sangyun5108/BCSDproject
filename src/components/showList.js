@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 const UlWrapper = styled.ul`
     padding-left:0px;
     height:300px;
-    width:100%;
+    width:660px;
     display:flex;
     flex-direction:column;
     align-items:center;

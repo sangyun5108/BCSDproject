@@ -3,8 +3,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {useRef, useState} from 'react';
 import { income,expediture } from '../redux/reducers/incomeExpeditureReducer';
 import {useHistory} from 'react-router-dom';
-import styled,{keyframes} from 'styled-components';
-import { Link } from 'react-router-dom';
+import styled,{keyframes,css} from 'styled-components';
 import store from '../redux/store';
 
 const translate = keyframes`
@@ -14,6 +13,17 @@ const translate = keyframes`
     }
     100% {
         height:750px;
+    }
+`
+
+const retranslate = keyframes`
+    0% {
+        height:750px;
+    }
+
+    100% {
+        height:0px;
+        opacity:0px;
     }
 `
 
@@ -30,7 +40,7 @@ const Wrapper = styled.div`
     flex-direction:column;
     align-items:center;
     box-shadow:0px 0px 20px grey;
-    animation:${translate} 0.5s ease-in-out;
+    animation:${props=>props.active?css`${retranslate} 0.5s ease-in-out`:css`${translate} 0.5s ease-in-out`}
 `;
 
 const BtnWrapper = styled.div`  
@@ -225,6 +235,7 @@ const AddHistory = () => {
 
     const [type,setType] = useState(true); //income,Expediture 선택
     const [moneyType,setMoneyType] = useState('');
+    const [closeBtn,setCloseBtn] = useState(false);
     const yearRef = useRef(null);
     const monthRef = useRef(null);
     const dateRef = useRef(null);
@@ -285,7 +296,7 @@ const AddHistory = () => {
             alert('유형체크를 해주세요');
             return;
         }
-        history.push('/accountbook');
+        onClickCloseBtn();
         const monthIndex = Number(monthRef.current.value)-1;
         const dayOfWeek = WEEK[new Date(`${yearRef.current.value}-${monthRef.current.value}-${dateRef.current.value}`).getDay()];
 
@@ -315,14 +326,21 @@ const AddHistory = () => {
             localStorage.setItem('lists',JSON.stringify(store.getState().incomeExpeditureReducer.list));
     }
 
+    const onClickCloseBtn = () => {
+        setCloseBtn(true);
+        setTimeout(()=>{
+            history.push('/accountbook');
+        },400);
+    }
+
     return(
         <>   
-            <Wrapper>
+            <Wrapper active={closeBtn}>
                     <BtnWrapper>
                         <IncomeBtn active={type} onClick={onClickIncome}>Income</IncomeBtn>
                         <ExpeditureBtn active={type} onClick={onClickExpediture}>Expediture</ExpeditureBtn>
                     </BtnWrapper>
-                        <Link to={'/accountbook'}><Xbutton>X</Xbutton></Link>
+                        <Xbutton onClick={onClickCloseBtn}>X</Xbutton>
                     <form onSubmit={onSubmit}>
                         <InputDayWrapper>
                             <InputYear ref={yearRef} defaultValue={nowyear} maxLength="4" onBlur={checkYearType}></InputYear>
