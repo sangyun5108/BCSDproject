@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector,useDispatch } from 'react-redux';
 import useGiveSum from '../hooks/useGiveSum';
 import { DateSet,Btn,Type } from '../redux/reducers/showListReducer';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 const Wrapper = styled.div`
     width:100%;
@@ -53,7 +53,26 @@ const Button = styled.button`
         color:black;
     }
 `;
-
+const WhiteToBlue = keyframes`
+    0%{
+        background : white;
+        color : #166ff3;
+    }
+    100%{
+        background : #166ff3;
+        color : white;
+    }
+`
+const WhiteToRed = keyframes`
+    0%{
+        background : white;
+        color : #f8123b;
+    }
+    100%{
+        background : #f8123b;
+        color : white;
+    }
+`
 const BlueButton = styled.button`
     border:2px solid #166ff3;
     font-size:25px;
@@ -64,11 +83,12 @@ const BlueButton = styled.button`
     margin-right:15px;
     background:${props=>props.active==='income'?"#166ff3":"white"};
     color:${props=>props.active==='income'?"white":"#166ff3"};
+    transition : all 0.3s;
     &:hover{
         cursor:pointer;
+        animation : ${WhiteToBlue}
     }
-`;
-
+`
 const RedButton = styled.button`
     border:2px solid red;
     font-size:25px;
@@ -78,8 +98,10 @@ const RedButton = styled.button`
     height:55px;
     background:${props=>props.active==='expediture'?"#f8123b":"white"};
     color:${props=>props.active==='expediture'?"white":"#f8123b"};
+    transition : all 0.3s;
     &:hover{
         cursor:pointer;
+        animation : ${WhiteToRed}
     }
 `;
 
@@ -167,8 +189,8 @@ const SelectBar = () => {
                 </MonthWrapper>   
             </MWrapper>
             <Wrapper>
-                <BlueButton active={type} value={'income'} onClick={clickBtn}>+{incomeSum}</BlueButton>
-                <RedButton active={type} value={'expediture'} onClick={clickBtn}>-{expeditureSum}</RedButton>
+                <BlueButton active={type} value={'income'} onClick={(e)=>clickBtn(e)}>+{incomeSum}</BlueButton>
+                <RedButton active={type} value={'expediture'} onClick={(e)=>clickBtn(e)}>-{expeditureSum}</RedButton>
             </Wrapper>
         </>
     )
