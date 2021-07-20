@@ -3,13 +3,24 @@ import {useDispatch, useSelector} from 'react-redux';
 import {useRef, useState} from 'react';
 import { income,expediture } from '../redux/reducers/incomeExpeditureReducer';
 import {useHistory} from 'react-router-dom';
-import styled from 'styled-components';
+import styled,{keyframes} from 'styled-components';
+import { Link } from 'react-router-dom';
 import store from '../redux/store';
+
+const translate = keyframes`
+    0% {
+        height:0px;
+        opacity:0;
+    }
+    100% {
+        height:750px;
+    }
+`
 
 const Wrapper = styled.div`
     border-bottom:0px;
     position:absolute;
-    bottom:0;
+    bottom:0px;
     width:600px;
     height:750px;
     background-color:white;
@@ -19,6 +30,7 @@ const Wrapper = styled.div`
     flex-direction:column;
     align-items:center;
     box-shadow:0px 0px 20px grey;
+    animation:${translate} 0.5s ease-in-out;
 `;
 
 const BtnWrapper = styled.div`  
@@ -120,17 +132,15 @@ const InputLabelAmountWrapper = styled.div`
     flex-direction:column;
     align-items:center;
     justify-content:flex-end;
-    margin-top:7%;
+    margin-top:30px;
 `;
 
 const DoneButton = styled.button`
-    width:85%;
-    height:8vh;
+    width:500px;
+    height:65px;
     border-radius:10px;
+    margin-top:100px;
     outline:none;
-    position:absolute;
-    bottom:0;
-    margin-bottom:10%;
     border:none;
     background-color:${props=>props.active?'#166ff3':'#f8123b'};
     color:white;
@@ -214,7 +224,6 @@ const MONTH = [31,29,31,30,31,30,31,31,30,31,30,31];
 const AddHistory = () => {
 
     const [type,setType] = useState(true); //income,Expediture 선택
-    const [close,setClose] = useState(false);
     const [moneyType,setMoneyType] = useState('');
     const yearRef = useRef(null);
     const monthRef = useRef(null);
@@ -276,7 +285,7 @@ const AddHistory = () => {
             alert('유형체크를 해주세요');
             return;
         }
-        history.push('/');
+        history.push('/accountbook');
         const monthIndex = Number(monthRef.current.value)-1;
         const dayOfWeek = WEEK[new Date(`${yearRef.current.value}-${monthRef.current.value}-${dateRef.current.value}`).getDay()];
 
@@ -306,11 +315,6 @@ const AddHistory = () => {
             localStorage.setItem('lists',JSON.stringify(store.getState().incomeExpeditureReducer.list));
     }
 
-    const onClickXbutton = () => {
-        setClose(!close);
-        history.push('/');
-    }
-
     return(
         <>   
             <Wrapper>
@@ -318,7 +322,7 @@ const AddHistory = () => {
                         <IncomeBtn active={type} onClick={onClickIncome}>Income</IncomeBtn>
                         <ExpeditureBtn active={type} onClick={onClickExpediture}>Expediture</ExpeditureBtn>
                     </BtnWrapper>
-                        <Xbutton onClick={onClickXbutton}>X</Xbutton>
+                        <Link to={'/accountbook'}><Xbutton>X</Xbutton></Link>
                     <form onSubmit={onSubmit}>
                         <InputDayWrapper>
                             <InputYear ref={yearRef} defaultValue={nowyear} maxLength="4" onBlur={checkYearType}></InputYear>

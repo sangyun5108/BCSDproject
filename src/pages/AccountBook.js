@@ -32,7 +32,7 @@ const AccountBook = () => {
   const history = useHistory();
 
   const onClickAdd = () => {
-    history.push('/addHistory');
+    history.push('/accountbook/addHistory');
   }
 
   useEffect(()=>{

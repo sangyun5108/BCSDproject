@@ -265,7 +265,7 @@ const AddHistoryEdit = (props) => {
             alert('유형체크를 해주세요');
             return;
         }
-        history.push('/');
+        history.push('/accountbook');
         const monthIndex = Number(monthRef.current.value)-1;
         const dayOfWeek = WEEK[new Date(`${yearRef.current.value}-${monthRef.current.value}-${dateRef.current.value}`).getDay()];
         const newlist = {
@@ -297,7 +297,7 @@ const AddHistoryEdit = (props) => {
 
     const onClickXbutton = () => {
         setClose(!close);
-        history.push('/');
+        history.push('/accountbook');
     }
 
 

@@ -49,7 +49,7 @@ const MainPage = () => {
     const onClickBtn = (e) => {
         const value = e.target.parentNode.value;
         if(value==='account'){
-            history.push('/');
+            history.push('/accountbook');
         }else{
             history.push('/calendar');
         }
@@ -69,10 +69,12 @@ const MainPage = () => {
                 </BtnWrapper>
             </Wrapper>
             <SelectBar/>
-            <Route exact path='/'component={AccountBook}/>
-            <Route path='/calendar' component={Calendar}/>
-            <Route path='/addHistory' component={AddHistory}/>
-            <Route path='/addHistory/edit' component={AddHistoryEdit}/>
+            
+            <Route exact path='/' component={AccountBook}/>
+            <Route exact path='/calendar' component={Calendar}/>
+            <Route path='/accountbook'component={AccountBook}/>
+            <Route path='/accountbook/addHistory' component={AddHistory}/>
+            <Route path='/accountbook/addHistory/edit' component={AddHistoryEdit}/>
         </>
     );
 }
