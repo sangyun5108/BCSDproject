@@ -20,27 +20,7 @@ const MWrapper = styled.header`
     margin:72px 0px 0px 0;
 `;
 
-const MonthWrapper1 = styled.div`
-    display:flex;
-    font-size:60px;
-    padding-bottom:2px;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    width:33.3333%;
-`;
-
-const MonthWrapper2= styled.div`
-    display:flex;
-    font-size:60px;
-    padding-bottom:2px;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    width:33.3333%;
-`;
-
-const MonthWrapper3 = styled.div`
+const MonthWrapper = styled.div`
     display:flex;
     font-size:60px;
     padding-bottom:2px;
@@ -169,22 +149,22 @@ const SelectBar = () => {
     return (
         <>
             <MWrapper>
-                <MonthWrapper1>
+                <MonthWrapper>
                     <Button onClick={showMonth} value='left'>
                         <Years>{newMonth===0?year-1:year}</Years>
                         <Months>{MONTHS[newLeftMonth]}</Months>
                     </Button>
-                </MonthWrapper1>
-                <MonthWrapper2>
+                </MonthWrapper>
+                <MonthWrapper>
                     <Years>{year}</Years>
                     <Months>{MONTHS[newMonth]}</Months>
-                </MonthWrapper2>    
-                <MonthWrapper3>
+                </MonthWrapper>    
+                <MonthWrapper>
                     <Button onClick={showMonth} value='right'>
                         <Years>{newMonth===11?year+1:year}</Years>
                         <Months>{MONTHS[newRightMonth]}</Months>
                     </Button>
-                </MonthWrapper3>   
+                </MonthWrapper>   
             </MWrapper>
             <Wrapper>
                 <BlueButton active={type} value={'income'} onClick={clickBtn}>+{incomeSum}</BlueButton>
