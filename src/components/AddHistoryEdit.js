@@ -3,15 +3,25 @@ import {useDispatch, useSelector} from 'react-redux';
 import {useRef, useState} from 'react';
 import { editlist } from '../redux/reducers/incomeExpeditureReducer';
 import {useHistory} from 'react-router-dom';
-import styled from 'styled-components';
+import styled,{keyframes} from 'styled-components';
 import store from '../redux/store';
+
+const translate = keyframes`
+    0% {
+        height:0px;
+        opacity:0;
+    }
+    100% {
+        height:750px;
+    }
+`
 
 const Wrapper = styled.div`
     border-bottom:0px;
-    position:fixed;
-    bottom:0;
+    position:absolute;
+    bottom:0px;
     width:600px;
-    height:94vh;
+    height:750px;
     background-color:white;
     z-index:0;
     border-radius:25px 25px 0px 0px;
@@ -19,6 +29,7 @@ const Wrapper = styled.div`
     flex-direction:column;
     align-items:center;
     box-shadow:0px 0px 20px grey;
+    animation:${translate} 0.5s ease-in-out;
 `;
 
 const BtnWrapper = styled.div`  
@@ -32,7 +43,7 @@ const BtnWrapper = styled.div`
 const IncomeBtn = styled.button`
     width:210px;
     height:50px;
-    margin-right:5%;
+    margin-right:30px;
     text-align:center;
     font-size:25px;
     font-weight:bold;
@@ -40,7 +51,9 @@ const IncomeBtn = styled.button`
     border:none;
     background:${props => props.active===true?'#424242':''};
     color:${props => props.active===true?'white':''};
-
+    &:hover{
+        cursor:pointer;
+    }
 `;
 
 const ExpeditureBtn = styled.button`
@@ -53,6 +66,9 @@ const ExpeditureBtn = styled.button`
     border:none;
     background:${props => props.active===false?'#424242':''};
     color:${props => props.active===false?'white':''};
+    &:hover{
+        cursor:pointer;
+    }
 `;
 
 const InputDayWrapper = styled.div`
@@ -115,17 +131,15 @@ const InputLabelAmountWrapper = styled.div`
     flex-direction:column;
     align-items:center;
     justify-content:flex-end;
-    margin-top:7%;
+    margin-top:30px;
 `;
 
 const DoneButton = styled.button`
-    width:85%;
-    height:8vh;
+    width:500px;
+    height:65px;
     border-radius:10px;
+    margin-top:100px;
     outline:none;
-    position:absolute;
-    bottom:0;
-    margin-bottom:10%;
     border:none;
     background-color:${props=>props.active?'#166ff3':'#f8123b'};
     color:white;

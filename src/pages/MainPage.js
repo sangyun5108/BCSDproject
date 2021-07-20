@@ -1,6 +1,7 @@
 import React from 'react';
 import AccountBook from './AccountBook';
-import { Route,useHistory } from 'react-router';
+import { Route } from 'react-router';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import AddHistory from '../components/AddHistory';
 import Calendar from './Calendar';
@@ -44,28 +45,21 @@ const Stick = styled.div`
 
 const MainPage = () => {
 
-    const history = useHistory();
-
-    const onClickBtn = (e) => {
-        const value = e.target.parentNode.value;
-        if(value==='account'){
-            history.push('/accountbook');
-        }else{
-            history.push('/calendar');
-        }
-    }
-
     return(
         <>
             <Wrapper>
                 <BtnWrapper>
-                    <Btn onClick={onClickBtn} value='account'>
-                        <i className="fas fa-coins"></i>
-                    </Btn>
+                    <Link to={'/accountbook'}>
+                        <Btn value='account'>
+                            <i className="fas fa-coins"></i>
+                        </Btn>
+                    </Link>
                     <Stick></Stick>
-                    <Btn onClick={onClickBtn} value='calendar'>
-                        <i className="fas fa-calendar-alt"></i>
-                    </Btn>
+                    <Link to={'/calendar'}>
+                        <Btn value='calendar'>
+                            <i className="fas fa-calendar-alt"></i>
+                        </Btn>
+                    </Link>
                 </BtnWrapper>
             </Wrapper>
             <SelectBar/>
@@ -73,7 +67,7 @@ const MainPage = () => {
             <Route exact path='/' component={AccountBook}/>
             <Route exact path='/calendar' component={Calendar}/>
             <Route path='/accountbook'component={AccountBook}/>
-            <Route path='/accountbook/addHistory' component={AddHistory}/>
+            <Route exact path='/accountbook/addHistory' component={AddHistory}/>
             <Route path='/accountbook/addHistory/edit' component={AddHistoryEdit}/>
         </>
     );

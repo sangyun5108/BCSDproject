@@ -9,11 +9,13 @@ import { Link } from 'react-router-dom';
 
 const UlWrapper = styled.ul`
     padding-left:0px;
+    height:300px;
     width:100%;
     display:flex;
     flex-direction:column;
     align-items:center;
     justify-conten:center;
+    overflow:scroll;
 `;
 
 const ListWrapper = styled.div`
@@ -180,7 +182,7 @@ const ShowList = () => {
                                         <i className="fas fa-trash-alt"></i>
                                     </DeleteBtn>
                                     <Link to={{
-                                        pathname:`/addHistory/edit`,
+                                        pathname:`/accountbook/addHistory/edit`,
                                         state:{
                                             inputType:list.type,
                                             label:list.label,
