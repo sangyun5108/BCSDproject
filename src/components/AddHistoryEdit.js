@@ -246,6 +246,8 @@ const AddHistoryEdit = (props) => {
         const value = Number(yearRef.current.value);
         if(isNaN(value)||value<2000){
             yearRef.current.value = nowyear;
+        }else {
+            yearRef.current.value = value;
         }
     }//연도가 올바르게 입력되었는지 체크해주는 함수
 
@@ -255,6 +257,7 @@ const AddHistoryEdit = (props) => {
             monthRef.current.value = nowmonth;
         }else {
             value = value<10?`0${value}`:value;
+            monthRef.current.value = value;
         }
     }//month가 올바르게 입력되었는지 체크해주는 함수
 
@@ -264,6 +267,7 @@ const AddHistoryEdit = (props) => {
             dateRef.current.value = nowdate;
         }else{
             value = value<10?`0${value}`:value;
+            dateRef.current.value = value;
         }
     }//date가 올바르게 입력되었는지 체크하는 함수
 
@@ -344,8 +348,8 @@ const AddHistoryEdit = (props) => {
                             </InputCardTypeBtn>
                         </InputMoneyTypeWrapper>
                         <InputLabelAmountWrapper>
-                            <InputLabel ref={labelRef} defaultValue={label} placeholder="Label" required></InputLabel>
-                            <InputAmount ref={amountRef} defaultValue={amount>0?amount:-1*amount} onBlur={checkAmountType} placeholder="Amount" required></InputAmount>
+                            <InputLabel ref={labelRef} maxLength="15" defaultValue={label} placeholder="Label" required></InputLabel>
+                            <InputAmount ref={amountRef} maxLength="15" defaultValue={amount>0?amount:-1*amount} onBlur={checkAmountType} placeholder="Amount" required></InputAmount>
                             <DoneButton active={type} value='submit' type="submit">Done</DoneButton>
                         </InputLabelAmountWrapper>
                     </form>

@@ -15,7 +15,7 @@ const UlWrapper = styled.ul`
     flex-direction:column;
     align-items:center;
     justify-conten:center;
-    overflow:scroll;
+    overflow:auto;
 `;
 
 const ListWrapper = styled.div`
