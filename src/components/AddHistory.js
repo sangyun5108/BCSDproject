@@ -290,6 +290,14 @@ const AddHistory = () => {
         setMoneyType(e.target.innerText);
     }
 
+
+    const onClickCloseBtn = () => {
+        setCloseBtn(true);
+        setTimeout(()=>{
+            history.push('/accountbook');
+        },400);
+    }
+
     const onSubmit = (e) =>{
         e.preventDefault();
         if(moneyType===''){
@@ -324,13 +332,6 @@ const AddHistory = () => {
                 }));
             }
             localStorage.setItem('lists',JSON.stringify(store.getState().incomeExpeditureReducer.list));
-    }
-
-    const onClickCloseBtn = () => {
-        setCloseBtn(true);
-        setTimeout(()=>{
-            history.push('/accountbook');
-        },400);
     }
 
     return(

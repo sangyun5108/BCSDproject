@@ -278,13 +278,20 @@ const AddHistoryEdit = (props) => {
         setMoneyType(e.target.innerText);
     }
 
+    const onClickCloseBtn = () => {
+        setCloseBtn(true);
+        setTimeout(()=>{
+            history.push('/accountbook');
+        },400);
+    }
+
     const onSubmit = (e) =>{
         e.preventDefault();
         if(moneyType===''){
             alert('유형체크를 해주세요');
             return;
         }
-        history.push('/accountbook');
+        onClickCloseBtn();
         const monthIndex = Number(monthRef.current.value)-1;
         const dayOfWeek = WEEK[new Date(`${yearRef.current.value}-${monthRef.current.value}-${dateRef.current.value}`).getDay()];
         const newlist = {
@@ -313,16 +320,6 @@ const AddHistoryEdit = (props) => {
         }));
         localStorage.setItem('lists',JSON.stringify(store.getState().incomeExpeditureReducer.list));
     }
-
-    const onClickCloseBtn = () => {
-        setCloseBtn(true);
-        setTimeout(()=>{
-            history.push('/accountbook');
-        },400);
-    }
-
-
-    
 
     return(
         <>   
