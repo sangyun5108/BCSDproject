@@ -1,4 +1,4 @@
-import React,{useEffect, useState} from 'react'
+import React,{useEffect, useRef, useState} from 'react'
 import styled from 'styled-components'
 import {useSelector} from 'react-redux'
 import transformation from '../utils/transformation'
@@ -36,14 +36,14 @@ const Income = styled.div`
     color : blue;
     text-align : right;
     height : min(1.8vw, 16px);
-    font-size : min(1.8vw, 16px);
+    font-size : min(1.5vw, 16px);
 `
 const Expediture = styled.div`
     display : ${day => day.day.EX_total < 0 ? 'block' : 'None'};
     color : red;
     text-align : right;
     height : min(1.8vw, 16px);
-    font-size : min(1.8vw, 16px);
+    font-size : min(1.5vw, 16px);
 `
 const useMonthArray = (today, lists) => {
     let thisMonth = new Date(today.getFullYear(), today.getMonth(),1)
@@ -87,9 +87,15 @@ const useMonthArray = (today, lists) => {
 function MainCalendar(){
     const list = useSelector((state)=> (state.incomeExpeditureReducer).list)
     const {blueBtn, redBtn, year, month} = useSelector((state) => state.showListReducer)
-    const [windowSize, setSize] = useState(window.innerWidth)
+    const [size, setWidth] = useState(0)
+    const target = useRef()
+    useEffect(()=>{
+        if(target.current){
+            setWidth(target.current.offsetWidth)
+        }
+    },[])
     const setWindowSize = () => {
-        setSize(window.innerWidth)
+        setWidth(target.current.offsetWidth)
     }
     useEffect(() => {
         window.addEventListener('resize',setWindowSize)
@@ -109,16 +115,17 @@ function MainCalendar(){
             account.month === today.getMonth())
     }
     const weekArray = useMonthArray(today, accountList)
+    console.log(size)
     return (
         <Wrap>
             {weekArray.map((day,index) =>
-                <Day show = {day.show} key={index}>
+                <Day show = {day.show} key={index} ref={target}>
                     <Dates>
                         {day.date}
                     </Dates>
                     <Money>
-                        <Income day = {day}>{windowSize >= 600? '+' + transformation(day.IN_total):'$'}</Income>
-                        <Expediture day = {day}>{windowSize >= 600? transformation(day.EX_total) : '$'}</Expediture>
+                        <Income day = {day}>{ String(day.IN_total).length*9 <= size? '+' + transformation(day.IN_total):'$'}</Income>
+                        <Expediture day = {day}>{String(day.EX_total).length*9 <= size? transformation(day.EX_total) : '$'}</Expediture>
                     </Money>
                 </Day>)}
         </Wrap>
