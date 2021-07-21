@@ -300,7 +300,7 @@ const AddHistory = () => {
         setCloseBtn(true);
         setTimeout(()=>{
             history.push('/accountbook');
-        },490);
+        },450);
     }
 
     const onSubmit = (e) =>{
