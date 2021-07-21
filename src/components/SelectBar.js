@@ -15,6 +15,7 @@ const Wrapper = styled.div`
 const MWrapper = styled.header`
     width:80%;
     height:100%;
+    font-weight:600;
     display:flex;
     align-items:center;
     margin:72px 0px 0px 0;
@@ -38,7 +39,6 @@ const Years = styled.div`
 
 const Months = styled.div`
     text-align:center;
-    font-weight:800;
 `;
 
 const Button = styled.button`
@@ -54,7 +54,7 @@ const Button = styled.button`
         color:black;
     }
     &:hover{
-        transform : ${props=>props.value==='left'||props.value==='right'?'translateY(-10%)':''};
+        transform : translateY(-10%);
     }
 `
 const WhiteToBlue = keyframes`
