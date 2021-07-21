@@ -53,7 +53,10 @@ const Button = styled.button`
         cursor:pointer;
         color:black;
     }
-`;
+    &:hover{
+        transform : ${props=>props.value==='left'||props.value==='right'?'translateY(-10%)':''};
+    }
+`
 const WhiteToBlue = keyframes`
     0%{
         background : white;
