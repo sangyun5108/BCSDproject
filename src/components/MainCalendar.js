@@ -89,11 +89,6 @@ function MainCalendar(){
     const {blueBtn, redBtn, year, month} = useSelector((state) => state.showListReducer)
     const [size, setWidth] = useState(0)
     const target = useRef()
-    useEffect(()=>{
-        if(target.current){
-            setWidth(target.current.offsetWidth)
-        }
-    },[])
     const setWindowSize = () => {
         setWidth(target.current.offsetWidth)
     }
@@ -115,7 +110,6 @@ function MainCalendar(){
             account.month === today.getMonth())
     }
     const weekArray = useMonthArray(today, accountList)
-    console.log(size)
     return (
         <Wrap>
             {weekArray.map((day,index) =>

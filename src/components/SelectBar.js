@@ -48,6 +48,7 @@ const Button = styled.button`
     border:none;
     background-color:white;
     color:#979797;
+    transition : all .3s;
     &:hover{
         cursor:pointer;
         color:black;
@@ -83,7 +84,7 @@ const BlueButton = styled.button`
     margin-right:15px;
     background:${props=>props.active==='income'?"#166ff3":"white"};
     color:${props=>props.active==='income'?"white":"#166ff3"};
-    transition : all 0.3s;
+    transition : all .3s;
     &:hover{
         cursor:pointer;
         animation : ${WhiteToBlue}
