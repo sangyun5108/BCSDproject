@@ -87,7 +87,7 @@ const useMonthArray = (today, lists) => {
 function MainCalendar(){
     const list = useSelector((state)=> (state.incomeExpeditureReducer).list)
     const {blueBtn, redBtn, year, month} = useSelector((state) => state.showListReducer)
-    const [size, setWidth] = useState(0)
+    const [size, setWidth] = useState(500)
     const target = useRef()
     const setWindowSize = () => {
         if(target.current){
@@ -120,8 +120,8 @@ function MainCalendar(){
                         {day.date}
                     </Dates>
                     <Money>
-                        <Income day = {day}>{ String(day.IN_total).length*9 <= size? '+' + transformation(day.IN_total):'$'}</Income>
-                        <Expediture day = {day}>{String(day.EX_total).length*9 <= size? transformation(day.EX_total) : '$'}</Expediture>
+                        <Income day = {day}>{ String(day.IN_total).length*10 <= size? '+' + transformation(day.IN_total):'$'}</Income>
+                        <Expediture day = {day}>{String(day.EX_total).length*10 <= size? transformation(day.EX_total) : '$'}</Expediture>
                     </Money>
                 </Day>)}
         </Wrap>
