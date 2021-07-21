@@ -90,7 +90,9 @@ function MainCalendar(){
     const [size, setWidth] = useState(0)
     const target = useRef()
     const setWindowSize = () => {
-        setWidth(target.current.offsetWidth)
+        if(target.current){
+            setWidth(target.current.offsetWidth)
+        }
     }
     useEffect(() => {
         window.addEventListener('resize',setWindowSize)
