@@ -348,8 +348,8 @@ const AddHistoryEdit = (props) => {
                             </InputCardTypeBtn>
                         </InputMoneyTypeWrapper>
                         <InputLabelAmountWrapper>
-                            <InputLabel ref={labelRef} maxLength="15" defaultValue={label} placeholder="Label" required></InputLabel>
-                            <InputAmount ref={amountRef} maxLength="15" defaultValue={amount>0?amount:-1*amount} onBlur={checkAmountType} placeholder="Amount" required></InputAmount>
+                            <InputLabel ref={labelRef} maxLength="10" defaultValue={label} placeholder="Label" required></InputLabel>
+                            <InputAmount ref={amountRef} maxLength="10" defaultValue={amount>0?amount:-1*amount} onBlur={checkAmountType} placeholder="Amount" required></InputAmount>
                             <DoneButton active={type} value='submit' type="submit">Done</DoneButton>
                         </InputLabelAmountWrapper>
                     </form>
