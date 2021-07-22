@@ -8,21 +8,21 @@ import store from '../redux/store';
 
 const translate = keyframes`
     0% {
-        height:0px;
+        transform:translateY(750px);
         opacity:0;
     }
     100% {
-        height:750px;
+        transform:translateY(0px);
     }
 `
 
 const retranslate = keyframes`
     0% {
-        height:750px;
+        transform:translateY(0px);
     }
 
     100% {
-        height:0px;
+        transform:translateY(750px);
         opacity:0px;
     }
 `

@@ -15,7 +15,7 @@ const Wrapper = styled.div`
 const MWrapper = styled.header`
     width:80%;
     height:100%;
-    font-weight:600;
+    font-weight:800;
     display:flex;
     align-items:center;
     margin:72px 0px 0px 0;
@@ -34,7 +34,7 @@ const MonthWrapper = styled.div`
 const Years = styled.div`
     font-size:18px;
     color:#979797;
-    font-weight:500;
+    font-weight:600;
 `;
 
 const Months = styled.div`
@@ -45,6 +45,7 @@ const Button = styled.button`
     padding:0px;
     outline:none;
     font-size:55px;
+    font-weight:800;
     border:none;
     background-color:white;
     color:#979797;
