@@ -228,7 +228,7 @@ const MONTH = [31,29,31,30,31,30,31,31,30,31,30,31];
 
 const AddHistoryEdit = (props) => {
 
-    let {inputType,label,amount,moneytype,id}=props.location.state;
+    let {inputType,label,amount,moneytype,id,year,month,date}=props.location.state;
 
     const type = inputType==='income'?true:false;
     const [closeBtn,setCloseBtn] = useState(false);
@@ -336,9 +336,9 @@ const AddHistoryEdit = (props) => {
                         <Xbutton onClick={onClickCloseBtn}>X</Xbutton>
                     <form onSubmit={onSubmit}>
                         <InputDayWrapper>
-                            <InputYear ref={yearRef} defaultValue={nowyear} maxLength="4" onBlur={checkYearType}></InputYear>
-                            <InputDay ref={monthRef} defaultValue={nowmonth} maxLength="2" onBlur={checkMonthType}></InputDay>
-                            <InputDay ref={dateRef} defaultValue={nowdate} maxLength="2" onBlur={checkDateType}></InputDay>
+                            <InputYear ref={yearRef} defaultValue={year} maxLength="4" onBlur={checkYearType}></InputYear>
+                            <InputDay ref={monthRef} defaultValue={month<10?'0'+month:month} maxLength="2" onBlur={checkMonthType}></InputDay>
+                            <InputDay ref={dateRef} defaultValue={date<10?'0'+date:date} maxLength="2" onBlur={checkDateType}></InputDay>
                         </InputDayWrapper>
                         <InputMoneyTypeWrapper>
                             <InputCashTypeBtn active={moneyType} onClick={onClickMoneyType}>

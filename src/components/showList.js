@@ -188,7 +188,10 @@ const ShowList = () => {
                                             label:list.label,
                                             amount:list.amount,
                                             moneytype:list.moneyType,
-                                            id:list.id
+                                            id:list.id,
+                                            year:list.year,
+                                            month:list.month+1,
+                                            date:list.date
                                         }
                                     }}>
                                         <EditBtn>
