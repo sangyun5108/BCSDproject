@@ -6,6 +6,7 @@ import useFilterList from '../hooks/useFilterList';
 import { getId } from '../utils/getId';
 import { deletelist } from '../redux/reducers/incomeExpeditureReducer';
 import { Link } from 'react-router-dom';
+import { Fragment } from 'react';
 
 const UlWrapper = styled.ul`
     padding-left:0px;
@@ -163,7 +164,7 @@ const ShowList = () => {
             <UlWrapper>
                 {newLists.map((list)=>{
                     return(
-                        <div key={list.id}>
+                        <Fragment key={list.id}>
                                     {checkDate(list.date)?(
                                         <Datelist>
                                             {list.day}, {list.date}th
@@ -200,7 +201,7 @@ const ShowList = () => {
                                     </Link>
                                 </DeleteAndEditBox>
                             </ListWrapper>
-                        </div>
+                        </Fragment>
                     );
                 })}
             </UlWrapper>
