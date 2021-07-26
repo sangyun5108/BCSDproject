@@ -243,6 +243,11 @@ const AddHistory = () => {
     const labelRef = useRef(null);
     let {incomeId,expeditureId} = useSelector((state)=>state.incomeExpeditureReducer);
 
+    const [inputYear,setInputYear] = useState(nowyear);
+    const [inputMonth,setInputMonth] = useState(nowmonth<0?`0${nowmonth}`:nowmonth);
+    const [inputDate,setInputDate] = useState(nowdate<0?`0${nowdate}`:nowdate);
+    const [inputAmount,setInputAmount] = useState('');
+
     const history = useHistory();
     const dispatch = useDispatch();
 
@@ -257,9 +262,9 @@ const AddHistory = () => {
     const checkYearType = () => {
         const value = Number(yearRef.current.value);
         if(isNaN(value)||value<2000){
-            yearRef.current.value = nowyear;
+            setInputYear(nowyear);
         }else{
-            yearRef.current.value = value;
+            setInputYear(value);
         }
         
     }//연도가 올바르게 입력되었는지 체크해주는 함수
@@ -267,27 +272,30 @@ const AddHistory = () => {
     const checkMonthType = () => {
         let value = Number(monthRef.current.value);
         if(isNaN(value)||value>12||value<=0){
-            monthRef.current.value = nowmonth;
+            setInputMonth(nowmonth);
         }else {
             value = value<10?`0${value}`:value;
-            monthRef.current.value = value;
+            setInputMonth(value);
         }
     }//month가 올바르게 입력되었는지 체크해주는 함수
 
     const checkDateType = () => {
         let value = Number(dateRef.current.value);
         if(isNaN(value)||value>MONTH[Number(monthRef.current.value)-1]||value<=0){
-            dateRef.current.value = nowdate;
+            setInputDate(nowdate);
         }else{
             value = value<10?`0${value}`:value;
-            dateRef.current.value = value;
+            setInputDate(value);
         }
     }//date가 올바르게 입력되었는지 체크하는 함수
 
     const checkAmountType = () => {
         const value = amountRef.current.value;
         if(isNaN(Number(value))){
-            amountRef.current.value = '';
+            setInputAmount('');
+            return;
+        }else{
+            setInputAmount(value);
         }
     }
 
@@ -349,9 +357,9 @@ const AddHistory = () => {
                         <Xbutton onClick={onClickCloseBtn}>X</Xbutton>
                     <form onSubmit={onSubmit}>
                         <InputDayWrapper>
-                            <InputYear ref={yearRef} defaultValue={nowyear} maxLength="4" onBlur={checkYearType}></InputYear>
-                            <InputDay ref={monthRef} defaultValue={nowmonth} maxLength="2" onBlur={checkMonthType}></InputDay>
-                            <InputDay ref={dateRef} defaultValue={nowdate} maxLength="2" onBlur={checkDateType}></InputDay>
+                            <InputYear ref={yearRef} onChange={(e)=>setInputYear(e.target.value)} value={inputYear} maxLength="4" onBlur={checkYearType}></InputYear>
+                            <InputDay ref={monthRef} onChange={(e)=>setInputMonth(e.target.value)} value={inputMonth} maxLength="2" onBlur={checkMonthType}></InputDay>
+                            <InputDay ref={dateRef} onChange={(e)=>setInputDate(e.target.value)} value={inputDate} maxLength="2" onBlur={checkDateType}></InputDay>
                         </InputDayWrapper>
                         <InputMoneyTypeWrapper>
                             <InputCashTypeBtn active={moneyType} onClick={onClickMoneyType}>
@@ -363,7 +371,7 @@ const AddHistory = () => {
                         </InputMoneyTypeWrapper>
                         <InputLabelAmountWrapper>
                             <InputLabel ref={labelRef} maxLength="10" placeholder="Label" required></InputLabel>
-                            <InputAmount ref={amountRef} maxLength="10" onBlur={checkAmountType} placeholder="Amount" required></InputAmount>
+                            <InputAmount ref={amountRef} onChange={(e)=>setInputAmount(e.target.value)} value={inputAmount} maxLength="10" onBlur={checkAmountType} placeholder="Amount" required></InputAmount>
                             <DoneButton active={type} value='submit' type="submit">Done</DoneButton>
                         </InputLabelAmountWrapper>
                     </form>

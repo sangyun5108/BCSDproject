@@ -218,11 +218,6 @@ const InputMoneyTypeText = styled.div`
     height:20px;
 `;
 
-
-const date = new Date();
-const nowyear = date.getFullYear();
-const nowmonth = date.getMonth()<10?`0${date.getMonth()+1}`:`${date.getMonth()}`;
-const nowdate = date.getDate()<10?`0${date.getDate()}`:`${date.getDate()}`;
 const WEEK = ['SUN','MON','TUE','WEN','THU','FRI','SAT'];
 const MONTH = [31,29,31,30,31,30,31,31,30,31,30,31];
 
@@ -239,6 +234,11 @@ const AddHistoryEdit = (props) => {
     const amountRef = useRef(null);
     const labelRef = useRef(null);
 
+    const [inputYear,setInputYear] = useState(year);
+    const [inputMonth,setInputMonth] = useState(month<10?`0${month}`:month);
+    const [inputDate,setInputDate] = useState(date<10?`0${date}`:date);
+    const [inputAmount,setInputAmount] = useState(amount);
+
     const history = useHistory();
     const dispatch = useDispatch();
     const {list:lists} = useSelector((state)=>state.incomeExpeditureReducer);
@@ -246,36 +246,38 @@ const AddHistoryEdit = (props) => {
     const checkYearType = () => {
         const value = Number(yearRef.current.value);
         if(isNaN(value)||value<2000){
-            yearRef.current.value = nowyear;
+            setInputYear(year);
         }else {
-            yearRef.current.value = value;
+            setInputYear(yearRef.current.value);
         }
     }//연도가 올바르게 입력되었는지 체크해주는 함수
 
     const checkMonthType = () => {
         let value = Number(monthRef.current.value);
         if(isNaN(value)||value>12||value<=0){
-            monthRef.current.value = nowmonth;
+            setInputMonth(month);
         }else {
             value = value<10?`0${value}`:value;
-            monthRef.current.value = value;
+            setInputMonth(value);
         }
     }//month가 올바르게 입력되었는지 체크해주는 함수
 
     const checkDateType = () => {
         let value = Number(dateRef.current.value);
         if(isNaN(value)||value>MONTH[Number(monthRef.current.value)-1]||value<=0){
-            dateRef.current.value = nowdate;
+            setInputDate(date);
         }else{
             value = value<10?`0${value}`:value;
-            dateRef.current.value = value;
+            setInputDate(value);
         }
     }//date가 올바르게 입력되었는지 체크하는 함수
 
     const checkAmountType = () => {
         const value = amountRef.current.value;
         if(isNaN(Number(value))){
-            amountRef.current.value = '';
+            setInputAmount('');
+        }else{
+            setInputAmount(value);
         }
     }
 
@@ -336,9 +338,9 @@ const AddHistoryEdit = (props) => {
                         <Xbutton onClick={onClickCloseBtn}>X</Xbutton>
                     <form onSubmit={onSubmit}>
                         <InputDayWrapper>
-                            <InputYear ref={yearRef} defaultValue={year} maxLength="4" onBlur={checkYearType}></InputYear>
-                            <InputDay ref={monthRef} defaultValue={month<10?'0'+month:month} maxLength="2" onBlur={checkMonthType}></InputDay>
-                            <InputDay ref={dateRef} defaultValue={date<10?'0'+date:date} maxLength="2" onBlur={checkDateType}></InputDay>
+                            <InputYear ref={yearRef} maxLength="4" onBlur={checkYearType} onChange={(e)=>setInputYear(e.target.value)} value={inputYear}></InputYear>
+                            <InputDay ref={monthRef} maxLength="2" onBlur={checkMonthType} onChange={(e)=>setInputMonth(e.target.value<0?'0'+e.target.value:e.target.value)} value={inputMonth}></InputDay>
+                            <InputDay ref={dateRef} maxLength="2" onBlur={checkDateType} onChange={(e)=>setInputDate(e.target.value<0?'0'+e.target.value:e.target.value)} value={inputDate}></InputDay>
                         </InputDayWrapper>
                         <InputMoneyTypeWrapper>
                             <InputCashTypeBtn active={moneyType} onClick={onClickMoneyType}>
@@ -350,7 +352,7 @@ const AddHistoryEdit = (props) => {
                         </InputMoneyTypeWrapper>
                         <InputLabelAmountWrapper>
                             <InputLabel ref={labelRef} maxLength="10" defaultValue={label} placeholder="Label" required></InputLabel>
-                            <InputAmount ref={amountRef} maxLength="10" defaultValue={amount>0?amount:-1*amount} onBlur={checkAmountType} placeholder="Amount" required></InputAmount>
+                            <InputAmount ref={amountRef} maxLength="10" onChange={(e)=>setInputAmount(e.target.value)} value={inputAmount} onBlur={checkAmountType} placeholder="Amount" required></InputAmount>
                             <DoneButton active={type} value='submit' type="submit">Done</DoneButton>
                         </InputLabelAmountWrapper>
                     </form>
