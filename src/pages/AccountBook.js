@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import ShowList from '../components/showList';
+import ShowList from '../components/ShowList';
 import {useEffect} from 'react';
 import { useDispatch} from 'react-redux';
 import {init} from '../redux/reducers/incomeExpeditureReducer';
@@ -37,20 +37,24 @@ const AccountBook = () => {
   }
 
   useEffect(()=>{
-    const getlist = JSON.parse(localStorage.getItem('lists'));
-    const list = getlist?getlist:[];
     let incomeId = 0;
     let expeditureId = 0;
-
-    if(checkLocal()){
-      incomeId = getId('income',0);
-      expeditureId = getId('expediture',100);
+  
+    try {
+      const getlist = JSON.parse(localStorage.getItem('lists'));
+      const list = getlist?getlist:[];
+      if(checkLocal()){
+        incomeId = getId('income',0);
+        expeditureId = getId('expediture',100);
+      }
+      dispatch(init({
+        list,
+        incomeId,
+        expeditureId}));
+    } catch(err) {
+      console.log(err.name);
     }
-
-    dispatch(init({
-    list,
-    incomeId,
-    expeditureId}));
+    
   });
 
 

@@ -1,10 +1,14 @@
 export const getId = (type,value) => {
     let id = value;
-    const lists = JSON.parse(localStorage.getItem('lists'))
-    .filter((list)=> list.type===type)
+    try {
+        const lists = JSON.parse(localStorage.getItem('lists'))
+        .filter((list)=> list.type===type)
 
-    if(lists.length!==0){
-        id = ++lists[lists.length-1].id;
+        if(lists.length!==0){
+            id = ++lists[lists.length-1].id;
+        }
+    } catch (err){
+        console.log(err.name);
     }
     return id;
 } 
