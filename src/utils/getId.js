@@ -8,6 +8,7 @@ export const getId = (type,value) => {
             id = ++lists[lists.length-1].id;
         }
     } catch (err){
+        localStorage.clear();
         console.log(err.name);
     }
     return id;

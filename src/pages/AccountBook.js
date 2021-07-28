@@ -52,6 +52,7 @@ const AccountBook = () => {
         incomeId,
         expeditureId}));
     } catch(err) {
+      localStorage.clear();
       console.log(err.name);
     }
     

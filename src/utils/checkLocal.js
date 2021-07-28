@@ -6,6 +6,7 @@ export const checkLocal  = () => {
             return false;
         }
     } catch (err) {
+        localStorage.clear();
         console.log(err.name);
     }
 }
