@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import ShowList from '../components/ShowList';
+import ShowList from '../components/showList';
 import {useEffect} from 'react';
 import { useDispatch} from 'react-redux';
 import {init} from '../redux/reducers/incomeExpeditureReducer';
