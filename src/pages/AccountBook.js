@@ -4,7 +4,7 @@ import ShowList from '../components/showList';
 import {useEffect} from 'react';
 import { useDispatch} from 'react-redux';
 import {init} from '../redux/reducers/incomeExpeditureReducer';
-import {useHistory} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import { checkLocal } from '../utils/checkLocal';
 import { getId } from '../utils/getId';
 
@@ -30,10 +30,10 @@ const AddHistoryBtn = styled.button`
 const AccountBook = () => {
 
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const onClickAdd = () => {
-    history.push('/accountbook/addHistory');
+    navigate('/accountbook/addhistory');
   }
 
   useEffect(()=>{

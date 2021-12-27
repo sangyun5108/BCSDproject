@@ -1,12 +1,7 @@
 import React from 'react';
-import AccountBook from './AccountBook';
-import { Route } from 'react-router';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import AddHistory from '../components/AddHistory';
-import Calendar from './Calendar';
 import SelectBar from '../components/SelectBar';
-import AddHistoryEdit from '../components/AddHistoryEdit';
 
 const Wrapper = styled.div`
     width:100%;
@@ -63,12 +58,6 @@ const MainPage = () => {
                 </BtnWrapper>
             </Wrapper>
             <SelectBar/>
-            
-            <Route exact path='/' component={AccountBook}/>
-            <Route exact path='/calendar' component={Calendar}/>
-            <Route path='/accountbook'component={AccountBook}/>
-            <Route exact path='/accountbook/addHistory' component={AddHistory}/>
-            <Route path='/accountbook/addHistory/edit' component={AddHistoryEdit}/>
         </>
     );
 }

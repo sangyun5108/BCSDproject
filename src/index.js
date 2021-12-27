@@ -1,24 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import styled from 'styled-components';
-import {BrowserRouter} from 'react-router-dom';
-
-const Container = styled.div`
-  width:100%;
-  height:100%;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  min-height:80vh;
-  margin-top:30px;
-`;
+import { Provider } from 'react-redux';
+import store from './redux/store';
+import { BrowserRouter } from 'react-router-dom';
 
 ReactDOM.render(
-  <BrowserRouter>
-    <Container>
-      <App/>
-    </Container>
-  </BrowserRouter>,
+  <Provider store={store}>
+      <BrowserRouter>
+        <App/>
+      </BrowserRouter>
+  </Provider>,
   document.getElementById('root')
 );

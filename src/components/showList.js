@@ -1,12 +1,12 @@
-import React from 'react';
+import React,{useState,useCallback} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import styled,{keyframes} from 'styled-components';
 import transformation from '../utils/transformation';
 import useFilterList from '../hooks/useFilterList';
 import { getId } from '../utils/getId';
 import { deletelist } from '../redux/reducers/incomeExpeditureReducer';
-import { Link } from 'react-router-dom';
 import { Fragment } from 'react';
+import { Navigate } from 'react-router-dom';
 
 const UlWrapper = styled.ul`
     padding-left:0px;
@@ -159,6 +159,11 @@ const ShowList = () => {
         }));
     }
     
+
+    const onClickEditBtn = useCallback((id)=>{
+        
+    },[]);
+
     return(
         <>
             <UlWrapper>
@@ -182,23 +187,9 @@ const ShowList = () => {
                                     <DeleteBtn onClick={()=>deleteList(list.id,list)}>
                                         <i className="fas fa-trash-alt"></i>
                                     </DeleteBtn>
-                                    <Link to={{
-                                        pathname:`/accountbook/addHistory/edit`,
-                                        state:{
-                                            inputType:list.type,
-                                            label:list.label,
-                                            amount:list.amount,
-                                            moneytype:list.moneyType,
-                                            id:list.id,
-                                            year:list.year,
-                                            month:list.month+1,
-                                            date:list.date
-                                        }
-                                    }}>
-                                        <EditBtn>
-                                            <i className="far fa-edit"></i>
-                                        </EditBtn>
-                                    </Link>
+                                    <EditBtn onClick={()=>onClickEditBtn(list.id)}>
+                                        <i className="far fa-edit"></i>
+                                    </EditBtn>
                                 </DeleteAndEditBox>
                             </ListWrapper>
                         </Fragment>

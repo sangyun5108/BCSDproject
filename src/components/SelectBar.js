@@ -156,9 +156,9 @@ const SelectBar = () => {
             newBlueBtn = true;
             newRedBtn = false;
         }else if(value==='expediture'&&newRedBtn===false){
-           newType = 'expediture';
-           newRedBtn = true;
-           newBlueBtn = false;
+            newType = 'expediture';
+            newRedBtn = true;
+            newBlueBtn = false;
         }else if(value==='income'&&newBlueBtn===true){
             newType = 'incomeExpediture';
             newBlueBtn = false;

@@ -2,7 +2,7 @@ import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {useRef, useState} from 'react';
 import { income,expediture } from '../redux/reducers/incomeExpeditureReducer';
-import {useHistory} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import styled,{keyframes,css} from 'styled-components';
 import store from '../redux/store';
 
@@ -162,23 +162,23 @@ const DoneButton = styled.button`
 `;
 
 const Xbutton = styled.button`
-  position:absolute;
-  top:2%;
-  right:3%;
-  z-index:1;
-  width:30px;
-  height:30px;
-  text-align:center;
-  border-radius:50%;
-  font-size:15px;
-  background-color:#424242;
-  outline:none;
-  border:none;
-  color:white;
-  font-weight:700;
-  &:hover{
-    cursor:pointer;
-  }
+    position:absolute;
+    top:2%;
+    right:3%;
+    z-index:1;
+    width:30px;
+    height:30px;
+    text-align:center;
+    border-radius:50%;
+    font-size:15px;
+    background-color:#424242;
+    outline:none;
+    border:none;
+    color:white;
+    font-weight:700;
+    &:hover{
+        cursor:pointer;
+    }
 `
 const InputMoneyTypeWrapper = styled.div`
     width:250px;
@@ -233,6 +233,8 @@ const MONTH = [31,29,31,30,31,30,31,31,30,31,30,31];
 
 const AddHistory = () => {
 
+    console.log('AddHistory');
+
     const [type,setType] = useState(true); //income,Expediture 선택
     const [moneyType,setMoneyType] = useState('');
     const [closeBtn,setCloseBtn] = useState(false);
@@ -248,7 +250,7 @@ const AddHistory = () => {
     const [inputDate,setInputDate] = useState(nowdate<0?`0${nowdate}`:nowdate);
     const [inputAmount,setInputAmount] = useState('');
 
-    const history = useHistory();
+    const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const onClickIncome = (e) => {
@@ -307,7 +309,7 @@ const AddHistory = () => {
     const onClickCloseBtn = () => {
         setCloseBtn(true);
         setTimeout(()=>{
-            history.push('/accountbook');
+            navigate('/accountbook');
         },450);
     }
 

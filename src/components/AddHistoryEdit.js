@@ -2,7 +2,7 @@ import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {useRef, useState} from 'react';
 import { editlist } from '../redux/reducers/incomeExpeditureReducer';
-import {useHistory} from 'react-router-dom';
+import {useNavigate } from 'react-router-dom';
 import styled,{keyframes,css} from 'styled-components';
 import store from '../redux/store';
 
@@ -157,23 +157,23 @@ const DoneButton = styled.button`
 `;
 
 const Xbutton = styled.button`
-  position:absolute;
-  top:2%;
-  right:3%;
-  z-index:1;
-  width:30px;
-  height:30px;
-  text-align:center;
-  border-radius:50%;
-  font-size:15px;
-  background-color:#424242;
-  outline:none;
-  border:none;
-  color:white;
-  font-weight:700;
-  &:hover{
-    cursor:pointer;
-  }
+    position:absolute;
+    top:2%;
+    right:3%;
+    z-index:1;
+    width:30px;
+    height:30px;
+    text-align:center;
+    border-radius:50%;
+    font-size:15px;
+    background-color:#424242;
+    outline:none;
+    border:none;
+    color:white;
+    font-weight:700;
+    &:hover{
+        cursor:pointer;
+    }
 `
 const InputMoneyTypeWrapper = styled.div`
     width:250px;
@@ -223,8 +223,10 @@ const MONTH = [31,29,31,30,31,30,31,31,30,31,30,31];
 
 const AddHistoryEdit = (props) => {
 
-    let {inputType,label,amount,moneytype,id,year,month,date}=props.location.state;
+    console.log("AddHistory");
 
+    let {inputType,label,amount,moneytype,id,year,month,date}=props.list;
+    
     const type = inputType==='income'?true:false;
     const [closeBtn,setCloseBtn] = useState(false);
     const [moneyType,setMoneyType] = useState(moneytype);
@@ -239,9 +241,13 @@ const AddHistoryEdit = (props) => {
     const [inputDate,setInputDate] = useState(date<10?`0${date}`:date);
     const [inputAmount,setInputAmount] = useState(amount);
 
-    const history = useHistory();
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const {list:lists} = useSelector((state)=>state.incomeExpeditureReducer);
+
+    if(props.list){
+        setCloseBtn(true);
+    }
 
     const checkYearType = () => {
         const value = Number(yearRef.current.value);
@@ -288,7 +294,7 @@ const AddHistoryEdit = (props) => {
     const onClickCloseBtn = () => {
         setCloseBtn(true);
         setTimeout(()=>{
-            history.push('/accountbook');
+            navigate('/accountbook');
         },450);
     }
 
