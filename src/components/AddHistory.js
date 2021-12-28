@@ -1,8 +1,8 @@
 import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {useRef, useState} from 'react';
-import { income,expediture } from '../redux/reducers/incomeExpeditureReducer';
-import { useNavigate } from 'react-router-dom';
+import { income,expediture, editlist } from '../redux/reducers/incomeExpeditureReducer';
+import { useNavigate,useLocation } from 'react-router-dom';
 import styled,{keyframes,css} from 'styled-components';
 import store from '../redux/store';
 
@@ -233,8 +233,10 @@ const MONTH = [31,29,31,30,31,30,31,31,30,31,30,31];
 
 const AddHistory = () => {
 
+    const {state:editList} = useLocation();
+
     const [type,setType] = useState(true); //income,Expediture 선택
-    const [moneyType,setMoneyType] = useState('');
+    const [moneyType,setMoneyType] = useState(editList?editList.moneyType:'');
     const [closeBtn,setCloseBtn] = useState(false);
     const yearRef = useRef(null);
     const monthRef = useRef(null);
@@ -243,10 +245,11 @@ const AddHistory = () => {
     const labelRef = useRef(null);
     let {incomeId,expeditureId} = useSelector((state)=>state.incomeExpeditureReducer);
 
-    const [inputYear,setInputYear] = useState(nowyear);
-    const [inputMonth,setInputMonth] = useState(nowmonth<0?`0${nowmonth}`:nowmonth);
-    const [inputDate,setInputDate] = useState(nowdate<0?`0${nowdate}`:nowdate);
-    const [inputAmount,setInputAmount] = useState('');
+    const [inputYear,setInputYear] = useState(editList?editList.year:nowyear);
+    const [inputMonth,setInputMonth] = useState(editList?editList.month:nowmonth<0?`0${nowmonth}`:nowmonth);
+    const [inputDate,setInputDate] = useState(editList?editList.date:nowdate<0?`0${nowdate}`:nowdate);
+    const [inputAmount,setInputAmount] = useState(editList?editList.amount:'');
+    const [inputLabel,setInputLabel] = useState(editList?editList.label:'');
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -314,14 +317,41 @@ const AddHistory = () => {
     const onSubmit = (e) =>{
         e.preventDefault();
         if(moneyType===''){
-            alert('유형체크를 해주세요');
+            alert('유형체크를 해주세요'); 
             return;
         }
         onClickCloseBtn();
         const monthIndex = Number(monthRef.current.value)-1;
         const dayOfWeek = WEEK[new Date(`${yearRef.current.value}-${monthRef.current.value}-${dateRef.current.value}`).getDay()];
 
-        if(type===true){
+        if(editList){
+            const {incomeExpeditureReducer:{list:lists}} = store.getState();
+            const {id} = editList;
+
+            console.log(id);
+
+            let editlists = lists.map((list)=>{
+                if(list.id === id){
+                    
+                    const editList = {
+                        amount : inputAmount,
+                        date : inputDate,
+                        day : dayOfWeek,
+                        label : inputLabel,
+                        moneyType : moneyType,
+                        month : inputMonth,
+                        type : type,
+                        year : inputYear
+                    }
+                    return editList;
+                }else {
+                    return list;
+                }
+            });
+
+            dispatch(editlist({list:editlists}));
+        }
+        else if(type){
             dispatch(income({
                 amount:amountRef.current.value,
                 label:labelRef.current.value,
@@ -332,7 +362,7 @@ const AddHistory = () => {
                 id:incomeId++,
                 moneyType:moneyType,
             }));
-            }else{
+        }else{
                 dispatch(expediture({
                     amount:amountRef.current.value,
                     label:labelRef.current.value,
@@ -343,12 +373,12 @@ const AddHistory = () => {
                     id:expeditureId++,
                     moneyType:moneyType,
                 }));
-            }
-            localStorage.setItem('lists',JSON.stringify(store.getState().incomeExpeditureReducer.list));
+        }
+        localStorage.setItem('lists',JSON.stringify(store.getState().incomeExpeditureReducer.list));
     }
 
     return(
-        <>   
+        <>  
             <Wrapper active={closeBtn}>
                     <BtnWrapper>
                         <IncomeBtn active={type} onClick={onClickIncome}>Income</IncomeBtn>
@@ -370,7 +400,7 @@ const AddHistory = () => {
                             </InputCardTypeBtn>
                         </InputMoneyTypeWrapper>
                         <InputLabelAmountWrapper>
-                            <InputLabel ref={labelRef} maxLength="10" placeholder="Label" required></InputLabel>
+                            <InputLabel ref={labelRef} onChange={(e)=>setInputLabel(e.target.value)} value={inputLabel} maxLength="10" placeholder="Label" required></InputLabel>
                             <InputAmount ref={amountRef} onChange={(e)=>setInputAmount(e.target.value)} value={inputAmount} maxLength="10" onBlur={checkAmountType} placeholder="Amount" required></InputAmount>
                             <DoneButton active={type} value='submit' type="submit">Done</DoneButton>
                         </InputLabelAmountWrapper>

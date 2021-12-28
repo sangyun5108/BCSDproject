@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import transformation from '../utils/transformation';
 
-const useGiveSum = (type,month,year) => {
+const useGiveSum = (type,month,year) => {   
     const {list:lists} = useSelector((state)=>(state.incomeExpeditureReducer));
     let sum = lists.filter((list)=>list.type===type&&list.month===month&&Number(list.year)===year)
     .map((list)=>{

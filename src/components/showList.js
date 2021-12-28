@@ -161,9 +161,9 @@ const ShowList = () => {
     }
     
 
-    const onClickEditBtn = useCallback((id)=>{
-        navigate('/addhistory');
-    },[]);
+    const onClickEditBtn = useCallback((list)=>{
+        navigate('/addhistory',{state:list});
+    },[navigate]);
 
     return(
         <>
@@ -188,7 +188,7 @@ const ShowList = () => {
                                     <DeleteBtn onClick={()=>deleteList(list.id,list)}>
                                         <i className="fas fa-trash-alt"></i>
                                     </DeleteBtn>
-                                    <EditBtn onClick={()=>onClickEditBtn(list.id)}>
+                                    <EditBtn onClick={()=>onClickEditBtn(list)}>
                                         <i className="far fa-edit"></i>
                                     </EditBtn>
                                 </DeleteAndEditBox>
