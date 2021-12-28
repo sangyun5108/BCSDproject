@@ -21,9 +21,9 @@ const App = () => {
       <MainPage/>
       <Routes>
           <Route path='/' element={<AccountBook/>}/>
-          <Route path='/calendar' element={<Calendar/>}/>
-          <Route path='/accountbook' element={<AccountBook/>}/>
-          <Route path='/accountbook/addhistory' element={<AddHistory/>}/>
+          <Route path='calendar' element={<Calendar/>}/>
+          <Route path='addhistory' element={<AddHistory/>}/>
+          
       </Routes>
     </Container>
   );

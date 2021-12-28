@@ -233,8 +233,6 @@ const MONTH = [31,29,31,30,31,30,31,31,30,31,30,31];
 
 const AddHistory = () => {
 
-    console.log('AddHistory');
-
     const [type,setType] = useState(true); //income,Expediture 선택
     const [moneyType,setMoneyType] = useState('');
     const [closeBtn,setCloseBtn] = useState(false);
@@ -309,7 +307,7 @@ const AddHistory = () => {
     const onClickCloseBtn = () => {
         setCloseBtn(true);
         setTimeout(()=>{
-            navigate('/accountbook');
+            navigate('/');
         },450);
     }
 

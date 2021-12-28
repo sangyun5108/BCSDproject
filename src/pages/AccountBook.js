@@ -33,7 +33,7 @@ const AccountBook = () => {
   const navigate = useNavigate();
 
   const onClickAdd = () => {
-    navigate('/accountbook/addhistory');
+    navigate('/addhistory');
   }
 
   useEffect(()=>{
@@ -53,7 +53,6 @@ const AccountBook = () => {
         expeditureId}));
     } catch(err) {
       localStorage.clear();
-      console.log(err.name);
     }
     
   });

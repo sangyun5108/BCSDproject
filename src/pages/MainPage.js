@@ -44,7 +44,7 @@ const MainPage = () => {
         <>
             <Wrapper>
                 <BtnWrapper>
-                    <Link to={'/accountbook'}>
+                    <Link to={'/'}>
                         <Btn value='account'>
                             <i className="fas fa-coins"></i>
                         </Btn>
