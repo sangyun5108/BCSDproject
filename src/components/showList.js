@@ -1,4 +1,4 @@
-import React,{useState,useCallback} from 'react';
+import React,{useCallback} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import styled,{keyframes} from 'styled-components';
 import transformation from '../utils/transformation';
@@ -6,7 +6,7 @@ import useFilterList from '../hooks/useFilterList';
 import { getId } from '../utils/getId';
 import { deletelist } from '../redux/reducers/incomeExpeditureReducer';
 import { Fragment } from 'react';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const UlWrapper = styled.ul`
     padding-left:0px;
@@ -128,6 +128,7 @@ const ShowList = () => {
 
     const {list:lists} = useSelector((state)=>state.incomeExpeditureReducer);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     let {type,month,year} = useSelector((state)=>state.showListReducer);
 
     newLists = useFilterList(type,month,year);
@@ -161,7 +162,7 @@ const ShowList = () => {
     
 
     const onClickEditBtn = useCallback((id)=>{
-        
+        navigate('/addhistory');
     },[]);
 
     return(

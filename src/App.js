@@ -23,7 +23,6 @@ const App = () => {
           <Route path='/' element={<AccountBook/>}/>
           <Route path='calendar' element={<Calendar/>}/>
           <Route path='addhistory' element={<AddHistory/>}/>
-          
       </Routes>
     </Container>
   );
