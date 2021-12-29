@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import transformation from '../../utils/transformation';
 import useFilterList from '../../hooks/useFilterList';
 import { getId } from '../../utils/getId';
-import { deletelist } from '../../redux/reducers/incomeExpeditureReducer';
+import { deletelist } from '../../store/incomeExpeditureReducer';
 import { Fragment } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as s from './styles';

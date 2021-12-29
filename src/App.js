@@ -1,7 +1,7 @@
 import { Route,Routes } from 'react-router-dom';
 import MainPage from './pages/mainPage';
 import Calendar from './pages/calendar';
-import AccountBook from './pages/accountBook';
+import AccountBook from './pages/account';
 import AddHistory from './components/addHistory';
 import styled from 'styled-components';
 

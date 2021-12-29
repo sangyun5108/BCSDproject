@@ -2,7 +2,7 @@ import React from 'react';
 import {useEffect} from 'react';
 import ShowList from '../../components/showList';
 import { useDispatch} from 'react-redux';
-import {init} from '../../redux/reducers/incomeExpeditureReducer';
+import {init} from '../../store/incomeExpeditureReducer';
 import {useNavigate} from 'react-router-dom';
 import { checkLocal } from '../../utils/checkLocal';
 import { getId } from '../../utils/getId';
