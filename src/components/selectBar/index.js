@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector,useDispatch } from 'react-redux';
 import useGiveSum from '../../hooks/useGiveSum';
-import { DateSet,Btn,Type } from '../../redux/reducers/showListReducer';
+import { DateSet,Btn,Type } from '../../store/showListReducer';
 import * as s from './styles';
 
 const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];

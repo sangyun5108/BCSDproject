@@ -1,5 +1,5 @@
-import {incomeExpeditureReducer} from './reducers/incomeExpeditureReducer';
-import  showListReducer  from './reducers/showListReducer';
+import {incomeExpeditureReducer} from './incomeExpeditureReducer';
+import  showListReducer  from './showListReducer';
 import { configureStore } from '@reduxjs/toolkit';
 
 const store = configureStore({
