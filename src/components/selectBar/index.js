@@ -2,9 +2,8 @@ import React from 'react';
 import { useSelector,useDispatch } from 'react-redux';
 import useGiveSum from '../../hooks/useGiveSum';
 import { DateSet,Btn,Type } from '../../store/showListReducer';
+import {MONTHS} from '../../shared/const';
 import * as s from './styles';
-
-const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 
 const SelectBar = () => {
     const {blueBtn,redBtn} = useSelector((state)=>state.showListReducer);
