@@ -18,7 +18,7 @@ export const retranslate = keyframes`
 
     100% {
         transform:translateY(750px);
-        opacity:0px;
+        opacity:0;
     }
 `
 
