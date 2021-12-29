@@ -4,6 +4,7 @@ import {useRef, useState} from 'react';
 import { income,expediture, editlist } from '../../store/incomeExpeditureReducer';
 import MainPage from '../../pages/mainPage';
 import { useNavigate,useLocation } from 'react-router-dom';
+import useInput from '../../hooks/useInput';
 import store from '../../store';
 import * as s  from './styles';
 
@@ -17,7 +18,6 @@ const MONTH = [31,29,31,30,31,30,31,31,30,31,30,31];
 const AddHistory = () => {
 
     const {state:editList} = useLocation();
-
     const [type,setType] = useState(true); //income,Expediture 선택
     const [moneyType,setMoneyType] = useState(editList?editList.moneyType:'');
     const [closeBtn,setCloseBtn] = useState(false);
@@ -28,11 +28,11 @@ const AddHistory = () => {
     const labelRef = useRef(null);
     let {incomeId,expeditureId} = useSelector((state)=>state.incomeExpeditureReducer);
 
-    const [inputYear,setInputYear] = useState(editList?editList.year:nowyear);
-    const [inputMonth,setInputMonth] = useState(editList?editList.month:nowmonth<0?`0${nowmonth}`:nowmonth);
-    const [inputDate,setInputDate] = useState(editList?editList.date:nowdate<0?`0${nowdate}`:nowdate);
-    const [inputAmount,setInputAmount] = useState(editList?editList.amount:'');
-    const [inputLabel,setInputLabel] = useState(editList?editList.label:'');
+    const [inputYear,onChangeYear,setInputYear] = useInput(editList?editList.year:nowyear);
+    const [inputMonth,onChangeMonth,setInputMonth] = useInput(nowmonth<0?`0${nowmonth}`:nowmonth);
+    const [inputDate,onChangeDate,setInputDate] = useInput(nowdate<0?`0${nowdate}`:nowdate);
+    const [inputAmount,onChangeAmount,setInputAmount] = useInput(editList?editList.amount:'');
+    const [inputLabel,onChangeLabel] = useInput(editList?editList.label:'');
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -124,7 +124,6 @@ const AddHistory = () => {
                         type : type?'income':'expediture',
                         year : inputYear
                     }
-                    console.log(editList.type);
                     return editList;
                 }else {
                     return list;
@@ -170,9 +169,9 @@ const AddHistory = () => {
                         <s.Xbutton onClick={onClickCloseBtn}>X</s.Xbutton>
                     <form onSubmit={onSubmit}>
                         <s.InputDayWrapper>
-                            <s.InputYear ref={yearRef} onChange={(e)=>setInputYear(e.target.value)} value={inputYear} maxLength="4" onBlur={checkYearType}></s.InputYear>
-                            <s.InputDay ref={monthRef} onChange={(e)=>setInputMonth(e.target.value)} value={inputMonth} maxLength="2" onBlur={checkMonthType}></s.InputDay>
-                            <s.InputDay ref={dateRef} onChange={(e)=>setInputDate(e.target.value)} value={inputDate} maxLength="2" onBlur={checkDateType}></s.InputDay>
+                            <s.InputYear ref={yearRef} onChange={(e)=>onChangeYear(e)} value={inputYear} maxLength="4" onBlur={checkYearType}></s.InputYear>
+                            <s.InputDay ref={monthRef} onChange={(e)=>onChangeMonth(e)} value={inputMonth} maxLength="2" onBlur={checkMonthType}></s.InputDay>
+                            <s.InputDay ref={dateRef} onChange={(e)=>onChangeDate(e)} value={inputDate} maxLength="2" onBlur={checkDateType}></s.InputDay>
                         </s.InputDayWrapper>
                         <s.InputMoneyTypeWrapper>
                             <s.InputCashTypeBtn active={moneyType} onClick={onClickMoneyType}>
@@ -183,8 +182,8 @@ const AddHistory = () => {
                             </s.InputCardTypeBtn>
                         </s.InputMoneyTypeWrapper>
                         <s.InputLabelAmountWrapper>
-                            <s.InputLabel ref={labelRef} onChange={(e)=>setInputLabel(e.target.value)} value={inputLabel} maxLength="10" placeholder="Label" required></s.InputLabel>
-                            <s.InputAmount ref={amountRef} onChange={(e)=>setInputAmount(e.target.value)} value={inputAmount} maxLength="10" onBlur={checkAmountType} placeholder="Amount" required></s.InputAmount>
+                            <s.InputLabel ref={labelRef} onChange={(e)=>onChangeLabel(e)} value={inputLabel} maxLength="10" placeholder="Label" required></s.InputLabel>
+                            <s.InputAmount ref={amountRef} onChange={(e)=>onChangeAmount(e)} value={inputAmount} maxLength="10" onBlur={checkAmountType} placeholder="Amount" required></s.InputAmount>
                             <s.DoneButton active={type} value='submit' type="submit">Done</s.DoneButton>
                         </s.InputLabelAmountWrapper>
                     </form>
