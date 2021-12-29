@@ -114,15 +114,16 @@ const AddHistory = () => {
                 if(list.id === id){
                     
                     const editList = {
-                        amount : inputAmount,
+                        amount : parseInt(inputAmount),
                         date : inputDate,
                         day : dayOfWeek,
                         label : inputLabel,
                         moneyType : moneyType,
                         month : inputMonth,
-                        type : type,
+                        type : type?'income':'expediture',
                         year : inputYear
                     }
+                    console.log(editList.type);
                     return editList;
                 }else {
                     return list;

@@ -56,7 +56,6 @@ export const incomeExpeditureReducer = createSlice({
         },
         editlist:(state,action)=>{
             const {list} = action.payload;
-            console.log(list);
             return {
                 list
             }
