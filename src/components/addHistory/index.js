@@ -8,7 +8,7 @@ import * as s  from './styles';
 
 const date = new Date();
 const nowyear = date.getFullYear();
-const nowmonth = date.getMonth()<10?`0${date.getMonth()+1}`:`${date.getMonth()}`;
+const nowmonth = date.getMonth()<10?`0${date.getMonth()+1}`:`${date.getMonth()+1}`;
 const nowdate = date.getDate()<10?`0${date.getDate()}`:`${date.getDate()}`;
 const WEEK = ['SUN','MON','TUE','WEN','THU','FRI','SAT'];
 const MONTH = [31,29,31,30,31,30,31,31,30,31,30,31];
