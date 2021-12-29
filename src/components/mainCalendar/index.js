@@ -1,50 +1,8 @@
 import React,{useEffect, useRef, useState} from 'react'
-import styled from 'styled-components'
+import * as s from './styles';
 import {useSelector} from 'react-redux'
-import transformation from '../utils/transformation'
-const Wrap = styled.div`
-    display : grid;
-    grid-template-columns: repeat(7,6fr);
-    grid-column-gap: 6px;
-    grid-row-gap: 6px;
-    height : 85%;
-`
-const Day = styled.div`
-    background : ${day => day.show ? '#f5f5f7':'#FCFCFD'};
-    color : ${day => day.show ? 'black': 'gray'};
-    display : flex;
-    justify-content : space-between;
-    flex-direction : column;
-    border-radius : 4px;
-    min-width: 100%;
-    height : 8.5vw;
-    max-height : 90px;
-    line-height: 10px;
-    font-weight: 600;
-`   
-const Dates = styled.div`
-    margin : 4px;
-    font-size : min(1.8vw, 16px);
-`
-const Money = styled.div`
-    margin : 4px;
-    display : flex;
-    flex-direction : column;
-`
-const Income = styled.div`
-    display : ${day => day.day.IN_total > 0 ? 'block' : 'None'};
-    color : blue;
-    text-align : right;
-    height : min(1.8vw, 16px);
-    font-size : min(1.5vw, 16px);
-`
-const Expediture = styled.div`
-    display : ${day => day.day.EX_total < 0 ? 'block' : 'None'};
-    color : red;
-    text-align : right;
-    height : min(1.8vw, 16px);
-    font-size : min(1.5vw, 16px);
-`
+import transformation from '../../utils/transformation'
+
 const useMonthArray = (today, lists) => {
     let thisMonth = new Date(today.getFullYear(), today.getMonth(),1)
     let dayOfFirstDate = thisMonth.getDay()
@@ -113,18 +71,18 @@ function MainCalendar(){
     }
     const weekArray = useMonthArray(today, accountList)
     return (
-        <Wrap>
+        <s.Wrap>
             {weekArray.map((day,index) =>
-                <Day show = {day.show} key={index} ref={target}>
-                    <Dates>
+                <s.Day show = {day.show} key={index} ref={target}>
+                    <s.Dates>
                         {day.date}
-                    </Dates>
-                    <Money>
-                        <Income day = {day}>{ String(day.IN_total).length*10 <= size? '+' + transformation(day.IN_total):'$'}</Income>
-                        <Expediture day = {day}>{String(day.EX_total).length*10 <= size? transformation(day.EX_total) : '$'}</Expediture>
-                    </Money>
-                </Day>)}
-        </Wrap>
+                    </s.Dates>
+                    <s.Money>
+                        <s.Income day = {day}>{ String(day.IN_total).length*10 <= size? '+' + transformation(day.IN_total):'$'}</s.Income>
+                        <s.Expediture day = {day}>{String(day.EX_total).length*10 <= size? transformation(day.EX_total) : '$'}</s.Expediture>
+                    </s.Money>
+                </s.Day>)}
+        </s.Wrap>
     )
 }
 

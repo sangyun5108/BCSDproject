@@ -1,31 +1,12 @@
 import React from 'react';
-import styled from 'styled-components';
-import ShowList from '../components/showList';
 import {useEffect} from 'react';
+import ShowList from '../../components/showList';
 import { useDispatch} from 'react-redux';
-import {init} from '../redux/reducers/incomeExpeditureReducer';
+import {init} from '../../redux/reducers/incomeExpeditureReducer';
 import {useNavigate} from 'react-router-dom';
-import { checkLocal } from '../utils/checkLocal';
-import { getId } from '../utils/getId';
-
-
-const AddHistoryBtn = styled.button`
-  position:fixed;
-  bottom:7%;
-  width:200px;
-  height:40px;
-  border-radius:10px;
-  outline:none;
-  border:none;
-  background:#424242;
-  color:white;
-  font-size:20px;
-  font-weight:bold;
-  &:hover{
-    cursor:pointer;
-  }
-  box-shadow:0px 0px 10px 5px lightgrey;
-`;
+import { checkLocal } from '../../utils/checkLocal';
+import { getId } from '../../utils/getId';
+import * as s from './styles';
 
 const AccountBook = () => {
 
@@ -61,7 +42,7 @@ const AccountBook = () => {
     return (
         <>
             <ShowList/>
-            <AddHistoryBtn onClick={onClickAdd}>Add History</AddHistoryBtn>
+            <s.AddHistoryBtn onClick={onClickAdd}>Add History</s.AddHistoryBtn>
         </>     
     );
 }

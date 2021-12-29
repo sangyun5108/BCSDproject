@@ -1,8 +1,8 @@
 import { Route,Routes } from 'react-router-dom';
-import MainPage from '../src/pages/MainPage';
-import Calendar from './pages/Calendar';
-import AccountBook from './pages/AccountBook';
-import AddHistory from './components/AddHistory';
+import MainPage from './pages/mainPage';
+import Calendar from './pages/calendar';
+import AccountBook from './pages/accountBook';
+import AddHistory from './components/addHistory';
 import styled from 'styled-components';
 
 const Container = styled.div`
