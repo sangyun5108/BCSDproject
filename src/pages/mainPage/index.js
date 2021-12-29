@@ -1,9 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 import SelectBar from '../../components/selectBar';
+import AccountBook from '../account';
 import * as s from './styles';
 
-const MainPage = () => {
+const MainPage = ({calendar}) => {
 
     return(
         <>
@@ -23,6 +24,7 @@ const MainPage = () => {
                 </s.BtnWrapper>
             </s.Wrapper>
             <SelectBar/>
+            {calendar?<></>:<AccountBook/>}
         </>
     );
 }

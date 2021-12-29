@@ -2,6 +2,7 @@ import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {useRef, useState} from 'react';
 import { income,expediture, editlist } from '../../store/incomeExpeditureReducer';
+import MainPage from '../../pages/mainPage';
 import { useNavigate,useLocation } from 'react-router-dom';
 import store from '../../store';
 import * as s  from './styles';
@@ -160,6 +161,7 @@ const AddHistory = () => {
 
     return(
         <>  
+            <MainPage/>
             <s.Wrapper active={closeBtn}>
                     <s.BtnWrapper>
                         <s.IncomeBtn active={type} onClick={onClickIncome}>Income</s.IncomeBtn>

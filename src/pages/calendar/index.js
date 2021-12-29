@@ -1,14 +1,18 @@
 import React  from 'react'
 import MainCalendar from '../../components/mainCalendar'
 import CalendarHeader from '../../components/calendarHeader'
+import MainPage from '../mainPage';
 import * as s from './styles';
 
 function Calendar(){
     return (
-        <s.CalendarWrap>
-            <CalendarHeader/>
-            <MainCalendar/>
-        </s.CalendarWrap>
+        <>
+            <MainPage calendar={true}/>
+            <s.CalendarWrap>
+                <CalendarHeader/>
+                <MainCalendar/>
+            </s.CalendarWrap>
+        </>
     )
 }
 

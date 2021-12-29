@@ -36,7 +36,7 @@ const AccountBook = () => {
       localStorage.clear();
     }
     
-  });
+  },[dispatch]);
 
 
     return (
