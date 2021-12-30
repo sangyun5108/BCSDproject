@@ -116,7 +116,8 @@ const AddHistory = () => {
                         moneyType : moneyType,
                         month : inputMonth-1,
                         type : type?'income':'expediture',
-                        year : inputYear
+                        year : inputYear,
+                        id : list.id
                     }
                     return editList;
                 }else {

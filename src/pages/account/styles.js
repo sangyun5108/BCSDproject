@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const AddHistoryBtn = styled.button`
   position:absolute;
-  bottom:100px;
+  top:90vh;
   width:200px;
   height:40px;
   border-radius:10px;
