@@ -3,7 +3,7 @@ import styled,{keyframes,css} from "styled-components";
 export const translate = keyframes`
     0% {
         transform:translateY(750px);
-        opacity:0;
+        opacity:1;
     }
     100% {
         transform:translateY(0px);
@@ -18,7 +18,7 @@ export const retranslate = keyframes`
 
     100% {
         transform:translateY(750px);
-        opacity:0;
+        opacity:1;
     }
 `
 
@@ -30,17 +30,16 @@ export const Wrapper = styled.div`
     width:600px;
     height:750px;
     background-color:white;
-    z-index:0;
     border-radius:25px 25px 0px 0px;
     display:flex;
     flex-direction:column;
     align-items:center;
     box-shadow:0px 0px 20px grey;
-    animation:${props=>props.active?css`${retranslate} 0.5s ease-in-out`:css`${translate} 0.5s ease-in-out`}
+    animation:${props=>props.active?css`${retranslate} 0.5s ease-in-out`:css`${translate} 0.5s ease-in-out`};
 `;
 
 
-export const BtnWrapper = styled.div`  
+export const BtnWrapper = styled.div`
     width:100%;
     height:6vh;
     display:flex;

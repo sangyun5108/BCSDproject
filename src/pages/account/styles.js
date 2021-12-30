@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const AddHistoryBtn = styled.button`
-  position:fixed;
-  bottom:7%;
+  position:absolute;
+  top:800px;
   width:200px;
   height:40px;
   border-radius:10px;
