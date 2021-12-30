@@ -23,7 +23,7 @@ const AddHistory = () => {
     let {incomeId,expeditureId} = useSelector((state)=>state.incomeExpeditureReducer);
 
     const [inputYear,onChangeYear,setInputYear] = useInput(editList?editList.year:nowyear);
-    const [inputMonth,onChangeMonth,setInputMonth] = useInput(nowmonth<0?`0${nowmonth}`:nowmonth);
+    const [inputMonth,onChangeMonth,setInputMonth] = useInput(editList?editList.month+1:`${nowmonth<0?`0${nowmonth}`:nowmonth}`);
     const [inputDate,onChangeDate,setInputDate] = useInput(nowdate<0?`0${nowdate}`:nowdate);
     const [inputAmount,onChangeAmount,setInputAmount] = useInput(editList?editList.amount:'');
     const [inputLabel,onChangeLabel] = useInput(editList?editList.label:'');
@@ -114,7 +114,7 @@ const AddHistory = () => {
                         day : dayOfWeek,
                         label : inputLabel,
                         moneyType : moneyType,
-                        month : inputMonth,
+                        month : inputMonth-1,
                         type : type?'income':'expediture',
                         year : inputYear
                     }
