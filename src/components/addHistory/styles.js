@@ -2,7 +2,7 @@ import styled,{keyframes,css} from "styled-components";
 
 export const translate = keyframes`
     0% {
-        transform:translateY(750px);
+        transform:translateY(740px);
         opacity:1;
     }
     100% {
@@ -17,7 +17,7 @@ export const retranslate = keyframes`
     }
 
     100% {
-        transform:translateY(750px);
+        transform:translateY(740px);
         opacity:1;
     }
 `

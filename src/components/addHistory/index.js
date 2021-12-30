@@ -109,7 +109,7 @@ const AddHistory = () => {
                 if(list.id === id){
                     
                     const editList = {
-                        amount : parseInt(inputAmount),
+                        amount : type?parseInt(inputAmount):-1*parseInt(inputAmount),
                         date : inputDate,
                         day : dayOfWeek,
                         label : inputLabel,
