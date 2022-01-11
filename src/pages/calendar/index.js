@@ -7,7 +7,7 @@ import * as s from './styles';
 function Calendar(){
     return (
         <>
-            <MainPage calendar={true}/>
+            <MainPage hideAccount/>
             <s.CalendarWrap>
                 <CalendarHeader/>
                 <MainCalendar/>

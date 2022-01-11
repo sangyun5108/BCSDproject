@@ -164,9 +164,9 @@ const AddHistory = () => {
                         <s.Xbutton onClick={onClickCloseBtn}>X</s.Xbutton>
                     <form onSubmit={onSubmit}>
                         <s.InputDayWrapper>
-                            <s.InputYear ref={yearRef} onChange={(e)=>onChangeYear(e)} value={inputYear} maxLength="4" onBlur={checkYearType}></s.InputYear>
-                            <s.InputDay ref={monthRef} onChange={(e)=>onChangeMonth(e)} value={inputMonth} maxLength="2" onBlur={checkMonthType}></s.InputDay>
-                            <s.InputDay ref={dateRef} onChange={(e)=>onChangeDate(e)} value={inputDate} maxLength="2" onBlur={checkDateType}></s.InputDay>
+                            <s.InputYear ref={yearRef} onChange={onChangeYear} value={inputYear} maxLength="4" onBlur={checkYearType}></s.InputYear>
+                            <s.InputDay ref={monthRef} onChange={onChangeMonth} value={inputMonth} maxLength="2" onBlur={checkMonthType}></s.InputDay>
+                            <s.InputDay ref={dateRef} onChange={onChangeDate} value={inputDate} maxLength="2" onBlur={checkDateType}></s.InputDay>
                         </s.InputDayWrapper>
                         <s.InputMoneyTypeWrapper>
                             <s.InputCashTypeBtn active={moneyType} onClick={onClickMoneyType}>
@@ -177,8 +177,8 @@ const AddHistory = () => {
                             </s.InputCardTypeBtn>
                         </s.InputMoneyTypeWrapper>
                         <s.InputLabelAmountWrapper>
-                            <s.InputLabel ref={labelRef} onChange={(e)=>onChangeLabel(e)} value={inputLabel} maxLength="10" placeholder="Label" required></s.InputLabel>
-                            <s.InputAmount ref={amountRef} onChange={(e)=>onChangeAmount(e)} value={inputAmount} maxLength="10" onBlur={checkAmountType} placeholder="Amount" required></s.InputAmount>
+                            <s.InputLabel ref={labelRef} onChange={onChangeLabel} value={inputLabel} maxLength="10" placeholder="Label" required></s.InputLabel>
+                            <s.InputAmount ref={amountRef} onChange={onChangeAmount} value={inputAmount} maxLength="10" onBlur={checkAmountType} placeholder="Amount" required></s.InputAmount>
                             <s.DoneButton active={type} value='submit' type="submit">Done</s.DoneButton>
                         </s.InputLabelAmountWrapper>
                     </form>

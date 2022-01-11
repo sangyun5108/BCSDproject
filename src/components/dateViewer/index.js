@@ -1,6 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { DateSet } from '../../redux/reducers/showListReducer'
+import { MONTH } from '../../shared/const';
 import * as s from './styles';
 
 function DateViewer(){//날짜 출력
@@ -25,19 +26,19 @@ function DateViewer(){//날짜 출력
                     <s.Years>
                     {new Date(date.getFullYear(),month-1).getFullYear()}
                     </s.Years>
-                    {monthList[new Date(date.getFullYear(),month-1).getMonth()]}
+                    {MONTH[new Date(date.getFullYear(),month-1).getMonth()]}
                 </s.Monthselector>
                 <s.Now>
                     <s.Years>
                         {date.getFullYear()}
                     </s.Years>
-                    {monthList[month]}
+                    {MONTH[month]}
                 </s.Now>
                 <s.Monthselector onClick={()=>onIncrease()}>
                     <s.Years>
                         {new Date(date.getFullYear(),month+1).getFullYear()}
                     </s.Years>
-                    {monthList[month+1]}
+                    {MONTH[month+1]}
                 </s.Monthselector>
             </s.Controler> 
         </s.DateSetContainer>

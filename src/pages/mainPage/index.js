@@ -4,7 +4,7 @@ import SelectBar from '../../components/selectBar';
 import AccountBook from '../account';
 import * as s from './styles';
 
-const MainPage = ({calendar}) => {
+const MainPage = ({hideAccount}) => {
 
     return(
         <>
@@ -15,16 +15,22 @@ const MainPage = ({calendar}) => {
                             <i className="fas fa-coins"></i>
                         </s.Btn>
                     </Link>
-                    <s.Stick></s.Stick>
+                    <s.Divide></s.Divide>
                     <Link to={'/calendar'}>
                         <s.Btn value='calendar'>
                             <i className="fas fa-calendar-alt"></i>
                         </s.Btn>
                     </Link>
+                    <s.Divide></s.Divide>
+                    <Link to={'/chart'}>
+                        <s.Btn value='chart'>
+                            <i class="fas fa-chart-pie"></i>
+                        </s.Btn>
+                    </Link>
                 </s.BtnWrapper>
             </s.Wrapper>
             <SelectBar/>
-            {calendar?<></>:<AccountBook/>}
+            {!hideAccount&&<AccountBook/>}
         </>
     );
 }

@@ -9,7 +9,7 @@ export const incomeExpeditureReducer = createSlice({
     name:'incomeExpediture',
     initialState,
     reducers:{
-        init:(state,action)=>{
+        init:(action)=>{
             const {list,date,incomeId,expeditureId} = action.payload;
             return {
                 list,
@@ -46,7 +46,7 @@ export const incomeExpeditureReducer = createSlice({
                 moneyType
             })
         },
-        deletelist:(state,action)=>{
+        deletelist:(action)=>{
             const {list, incomeId, expeditureId} = action.payload;
             return {
                 list,
@@ -54,7 +54,7 @@ export const incomeExpeditureReducer = createSlice({
                 expeditureId
             }
         },
-        editlist:(state,action)=>{
+        editlist:(action)=>{
             const {list} = action.payload;
             return {
                 list

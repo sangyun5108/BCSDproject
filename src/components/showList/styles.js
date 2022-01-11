@@ -2,8 +2,8 @@ import styled,{keyframes} from 'styled-components';
 
 export const UlWrapper = styled.ul`
     padding-left:0px;
-    height:300px;
-    width:660px;
+    height:600px;
+    min-width:660px;
     display:flex;
     flex-direction:column;
     align-items:center;

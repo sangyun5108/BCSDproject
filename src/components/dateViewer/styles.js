@@ -2,10 +2,8 @@ import styled from 'styled-components'
 
 export const Controler = styled.div`
     display : flex;
-    justify-content : center;
 `
 export const DateSetContainer = styled.div`
-    width : 100%;
     background : white;
     text-align : center;
     font-weight : 600;
@@ -16,7 +14,7 @@ export const Years = styled.div`
     color : gray;
 `
 export const Monthselector = styled.div`
-    width : 33.33333%;
+    min-width : 33.33333%;
     margin : 72px 0;
     color : gray;
     &:hover{
@@ -25,9 +23,6 @@ export const Monthselector = styled.div`
     }
 `
 export const Now = styled.div`
-    width : 33.33333%;
+    min-width : 33.33333%;
     margin: 72px 0;
 `
-export const monthList = [
-    'Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan'
-]

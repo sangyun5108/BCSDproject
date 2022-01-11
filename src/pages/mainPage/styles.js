@@ -29,7 +29,7 @@ export const Btn = styled.button`
     }
 `;
 
-export const Stick = styled.div`
+export const Divide = styled.div`
     width:2px;
     height:32px;
     background:black;
