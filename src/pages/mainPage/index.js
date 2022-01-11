@@ -24,7 +24,7 @@ const MainPage = ({hideAccount}) => {
                     <s.Divide></s.Divide>
                     <Link to={'/chart'}>
                         <s.Btn value='chart'>
-                            <i class="fas fa-chart-pie"></i>
+                            <i className="fas fa-chart-pie"></i>
                         </s.Btn>
                     </Link>
                 </s.BtnWrapper>

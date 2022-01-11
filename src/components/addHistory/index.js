@@ -92,6 +92,7 @@ const AddHistory = () => {
     }
 
     const onSubmit = (e) =>{
+
         e.preventDefault();
         if(moneyType===''){
             alert('유형체크를 해주세요'); 
@@ -107,7 +108,6 @@ const AddHistory = () => {
 
             let editlists = lists.map((list)=>{
                 if(list.id === id){
-                    
                     const editList = {
                         amount : type?parseInt(inputAmount):-1*parseInt(inputAmount),
                         date : inputDate,
