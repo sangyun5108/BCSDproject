@@ -36,6 +36,12 @@ https://user-images.githubusercontent.com/69062776/147718405-d6fa3082-a995-4796-
 
 https://user-images.githubusercontent.com/69062776/147718504-7b272770-d4a3-4c15-941a-ab1006b65c09.mov
 
+4. 가계부 - 달력 데이터 연동(수입,지출)
+
+https://user-images.githubusercontent.com/69062776/148885378-380958da-4f42-4f0a-a725-24990e53df03.mov
+
+
+
 ## Getting Started
 ```javascript
 npm start
