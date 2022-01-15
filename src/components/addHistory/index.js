@@ -8,6 +8,7 @@ import useInput from '../../hooks/useInput';
 import store from '../../store';
 import * as s  from './styles';
 import {nowyear,nowmonth,nowdate,WEEK,MONTH} from '../../shared/const';
+import { writeUserData } from '../../utils/writeUserData';
 
 const AddHistory = () => {
 
@@ -150,7 +151,20 @@ const AddHistory = () => {
                     moneyType:moneyType,
                 }));
         }
-        localStorage.setItem('lists',JSON.stringify(store.getState().incomeExpeditureReducer.list));
+
+        const object = {
+            amount:amountRef.current.value,
+            label:labelRef.current.value,
+            year:Number(yearRef.current.value),
+            month:monthIndex,
+            date:Number(dateRef.current.value),
+            day:dayOfWeek,
+            id:incomeId++,
+            moneyType:moneyType,
+        };
+
+        writeUserData([object],'income');
+        
     }
 
     return(

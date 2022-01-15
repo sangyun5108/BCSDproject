@@ -6,6 +6,7 @@ import {init} from '../../store/incomeExpeditureReducer';
 import {useNavigate} from 'react-router-dom';
 import { checkLocal } from '../../utils/checkLocal';
 import { getId } from '../../utils/getId';
+import store from '../../store';
 import * as s from './styles';
 
 const AccountBook = () => {
@@ -38,6 +39,7 @@ const AccountBook = () => {
     
   },[dispatch]);
 
+  console.log(store.getState());  
 
     return (
         <>
