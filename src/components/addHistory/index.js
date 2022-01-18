@@ -103,6 +103,16 @@ const AddHistory = () => {
         const monthIndex = Number(monthRef.current.value)-1;
         const dayOfWeek = WEEK[new Date(`${yearRef.current.value}-${monthRef.current.value}-${dateRef.current.value}`).getDay()];
 
+        const object = {
+            amount:amountRef.current.value,
+            label:labelRef.current.value,
+            year:Number(yearRef.current.value),
+            month:monthIndex,
+            date:Number(dateRef.current.value),
+            day:dayOfWeek,
+            moneyType:moneyType,
+        };
+
         if(editList){
             const {incomeExpeditureReducer:{list:lists}} = store.getState();
             const {id} = editList;
@@ -139,6 +149,9 @@ const AddHistory = () => {
                 id:incomeId++,
                 moneyType:moneyType,
             }));
+
+            writeUserData(object,'income');
+            
         }else{
                 dispatch(expediture({
                     amount:amountRef.current.value,
@@ -149,22 +162,10 @@ const AddHistory = () => {
                     day:dayOfWeek,
                     id:expeditureId++,
                     moneyType:moneyType,
-                }));
+            }));
+
+            writeUserData(object,'expediture');
         }
-
-        const object = {
-            amount:amountRef.current.value,
-            label:labelRef.current.value,
-            year:Number(yearRef.current.value),
-            month:monthIndex,
-            date:Number(dateRef.current.value),
-            day:dayOfWeek,
-            id:incomeId++,
-            moneyType:moneyType,
-        };
-
-        writeUserData([object],'income');
-        
     }
 
     return(

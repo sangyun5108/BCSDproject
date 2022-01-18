@@ -1,17 +1,12 @@
-import { ref,set } from "firebase/database";
+import { ref,push } from "firebase/database";
 import { database } from "../firebase";
 
 export const writeUserData = (list,type) => {
     const db = database;
 
-
     if(type === 'income'){
-        set(ref(db,'/income'),{
-            list
-        });
+        push(ref(db,'/income'),list);
     }else{
-        set(ref(db,'/expediture'),{
-            list
-        });
+        push(ref(db,'/expediture'),list);
     }
 }
