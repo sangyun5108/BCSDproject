@@ -3,6 +3,8 @@ const data = JSON.parse(localStorage.getItem('lists'));
 const list = data?data:[];
 const initialState={
     list,
+    incomeId:0,
+    expeditureId:1000000
 }
 
 export const incomeExpeditureReducer = createSlice({
@@ -19,7 +21,7 @@ export const incomeExpeditureReducer = createSlice({
             }
         },
         income:(state,action)=>{
-            const {amount,label,year,month,date,day,moneyType} = action.payload;
+            const {amount,label,year,month,date,day,moneyType,incomeId} = action.payload;
             (state.list).push({
                 type:'income',
                 amount:Number(amount),
@@ -28,11 +30,12 @@ export const incomeExpeditureReducer = createSlice({
                 month,
                 date,
                 day,
-                moneyType
+                moneyType,
+                incomeId
             })
         },
         expediture:(state,action)=>{
-            const {amount,label,year,month,date,day,moneyType} = action.payload;
+            const {amount,label,year,month,date,day,moneyType,expeditureId} = action.payload;
             (state.list).push({
                 type:'expediture',
                 amount:-1*Number(amount),
@@ -41,7 +44,8 @@ export const incomeExpeditureReducer = createSlice({
                 month,
                 date,
                 day,
-                moneyType
+                moneyType,
+                expeditureId
             })
         },
         deletelist:(action)=>{

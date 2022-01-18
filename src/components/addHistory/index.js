@@ -111,6 +111,7 @@ const AddHistory = () => {
             date:Number(dateRef.current.value),
             day:dayOfWeek,
             moneyType:moneyType,
+            id:type?incomeId:expeditureId
         };
 
         if(editList){
@@ -146,22 +147,22 @@ const AddHistory = () => {
                 month:monthIndex,
                 date:Number(dateRef.current.value),
                 day:dayOfWeek,
-                id:incomeId++,
+                incomeId:incomeId++,
                 moneyType:moneyType,
             }));
 
             writeUserData(object,'income');
             
         }else{
-                dispatch(expediture({
-                    amount:amountRef.current.value,
-                    label:labelRef.current.value,
-                    year:Number(yearRef.current.value),
-                    month:monthIndex,
-                    date:Number(dateRef.current.value),
-                    day:dayOfWeek,
-                    id:expeditureId++,
-                    moneyType:moneyType,
+            dispatch(expediture({
+                amount:amountRef.current.value,
+                label:labelRef.current.value,
+                year:Number(yearRef.current.value),
+                month:monthIndex,
+                date:Number(dateRef.current.value),
+                day:dayOfWeek,
+                expeditureId:expeditureId++,
+                moneyType:moneyType,
             }));
 
             writeUserData(object,'expediture');

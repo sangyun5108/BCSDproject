@@ -4,7 +4,7 @@ import ShowList from '../../components/showList';
 import { useDispatch} from 'react-redux';
 import {init} from '../../store/incomeExpeditureReducer';
 import {useNavigate} from 'react-router-dom';
-import { checkLocal } from '../../utils/checkLocal';
+import { getUserData } from '../../utils/getUserData';
 import * as s from './styles';
 
 const AccountBook = () => {
@@ -17,23 +17,21 @@ const AccountBook = () => {
   }
 
   useEffect(()=>{
-    let incomeId = 0;
-    let expeditureId = 0;
-  
+
+    const incomeId = 1;
+    const expeditureId = 10000000000;
+
     try {
-      const getlist = JSON.parse(localStorage.getItem('lists'));
-      
-      const list = getlist?getlist:[];
-      if(checkLocal()){
-        incomeId = 0;
-        expeditureId = 100;
-      }
+      const list = [...getUserData()];
+      console.log(list);
+
       dispatch(init({
         list,
         incomeId,
-        expeditureId}));
+        expeditureId
+      }));
     } catch(err) {
-      localStorage.clear();
+      console.dir(err);
     }
     
   },[dispatch]);

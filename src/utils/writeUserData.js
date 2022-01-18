@@ -1,12 +1,13 @@
-import { ref,push } from "firebase/database";
+import {collection,addDoc} from "firebase/firestore";
 import { database } from "../firebase";
 
-export const writeUserData = (list,type) => {
+export const writeUserData = async(list,type) => {
     const db = database;
 
-    if(type === 'income'){
-        push(ref(db,'/income'),list);
-    }else{
-        push(ref(db,'/expediture'),list);
+    try {
+        const docRef = await addDoc(collection(db,type==="income"?"income":"expediture"),list);
+        console.log("Document written with ID: ", docRef.id);
+    } catch(e){
+        console.error("Error adding document: ", e);
     }
 }

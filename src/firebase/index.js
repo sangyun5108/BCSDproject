@@ -1,16 +1,19 @@
 import { initializeApp } from "firebase/app";
-import {getDatabase} from "firebase/database";
+import { getFirestore } from "firebase/firestore";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const firebaseConfig = {
-    apiKey: "AIzaSyADB2MSV-MK_yvRHOVE0ee7x3kVzE6bwtQ",
-    authDomain: "moneydiary-8b5fd.firebaseapp.com",
-    projectId: "moneydiary-8b5fd",
-    storageBucket: "moneydiary-8b5fd.appspot.com",
-    messagingSenderId: "277630567776",
-    appId: "1:277630567776:web:c000e306e33b98f9524a05",
-    measurementId: "G-JMVLQ6SY9D"
+    apiKey: process.env.REACT_APP_API_KEY,
+    authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+    projectId: process.env.REACT_APP_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+    messagingSenderId: process.env.REACT_APP_MESSAGINGSENDER_ID,
+    appId:process.env.REACT_APP_APP_ID,
+    measurementId:process.env.REACT_APP_MEASUREMENT_ID
 };
   
 const app = initializeApp(firebaseConfig);
-export const database = getDatabase(app);
+export const database = getFirestore(app);
 
