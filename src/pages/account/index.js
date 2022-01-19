@@ -2,10 +2,11 @@ import React from 'react';
 import {useEffect} from 'react';
 import ShowList from '../../components/showList';
 import { useDispatch} from 'react-redux';
-import {init} from '../../store/incomeExpeditureReducer';
 import {useNavigate} from 'react-router-dom';
-import { getUserData } from '../../utils/getUserData';
 import * as s from './styles';
+import { getUserData } from '../../utils/getUserData';
+import { init } from '../../store/incomeExpeditureReducer';
+import store from '../../store';
 
 const AccountBook = () => {
 
@@ -17,23 +18,20 @@ const AccountBook = () => {
   }
 
   useEffect(()=>{
+   
+    let data = [];
 
-    const incomeId = 1;
-    const expeditureId = 10000000000;
+    (async function(){
+      try{
+        data = await getUserData();
+        console.log(data);
+        dispatch(init,{list:data});
+        console.log(store.getState());
+      }catch(e){
+        console.log(e);
+      }
+    })();
 
-    try {
-      const list = [...getUserData()];
-      console.log(list);
-
-      dispatch(init({
-        list,
-        incomeId,
-        expeditureId
-      }));
-    } catch(err) {
-      console.dir(err);
-    }
-    
   },[dispatch]);
 
     return (

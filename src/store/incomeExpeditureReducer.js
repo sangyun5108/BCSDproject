@@ -1,25 +1,19 @@
 import {createSlice} from '@reduxjs/toolkit';
-const data = JSON.parse(localStorage.getItem('lists'));
-const list = data?data:[];
+
+const list = []
 const initialState={
     list,
-    incomeId:0,
-    expeditureId:1000000
 }
 
 export const incomeExpeditureReducer = createSlice({
     name:'incomeExpediture',
     initialState,
     reducers:{
-        init:(action)=>{
-            const {list,date,incomeId,expeditureId} = action.payload;
-            return {
-                list,
-                date,
-                incomeId,
-                expeditureId
-            }
+        init:(state,action)=>{
+            const {list} = action.payload;
+            state.list = list;
         },
+
         income:(state,action)=>{
             const {amount,label,year,month,date,day,moneyType,incomeId} = action.payload;
             (state.list).push({
