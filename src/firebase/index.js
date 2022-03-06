@@ -1,19 +1,15 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
-import dotenv from "dotenv";
-
-dotenv.config();
+import { getAnalytics } from "firebase/analytics";
 
 const firebaseConfig = {
-    apiKey: process.env.REACT_APP_API_KEY,
-    authDomain: process.env.REACT_APP_AUTH_DOMAIN,
-    projectId: process.env.REACT_APP_PROJECT_ID,
-    storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
-    messagingSenderId: process.env.REACT_APP_MESSAGINGSENDER_ID,
-    appId:process.env.REACT_APP_APP_ID,
-    measurementId:process.env.REACT_APP_MEASUREMENT_ID
+  apiKey: "AIzaSyCML1nFiyb3nXdndChKZNrlf2eU-rdIa5U",
+  authDomain: "moneydiary-bef4e.firebaseapp.com",
+  projectId: "moneydiary-bef4e",
+  storageBucket: "moneydiary-bef4e.appspot.com",
+  messagingSenderId: "698360298941",
+  appId: "1:698360298941:web:0dfe0588b9ef0c6a0ee6d4",
+  measurementId: "G-BH9WTWK00W",
 };
-  
-const app = initializeApp(firebaseConfig);
-export const database = getFirestore(app);
 
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);

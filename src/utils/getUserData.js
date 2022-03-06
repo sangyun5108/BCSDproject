@@ -1,16 +1,14 @@
-import { collection,getDocs } from 'firebase/firestore';
-import { database } from '../firebase';
+import { db } from "../firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 
-export const getUserData = async() => {
-    const db = database;
-    const snapShot = await getDocs(collection(db,"income"));
-    const data = [];
-    snapShot.forEach((doc)=>{
-      
-      const object = doc.data();
-      object.id = doc.id;
-      data.push(object);
-    });
+const getUserData = async () => {
+  const querySnapshot = await getDocs(collection(db, "income"));
+  let data = [];
+  querySnapshot.forEach((doc) => {
+    data.push(doc.data());
+  });
 
-    return data;
-}
+  return data;
+};
+
+export default getUserData;
