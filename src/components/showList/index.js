@@ -53,9 +53,9 @@ const ShowList = () => {
   return (
     <>
       <s.UlWrapper>
-        {newLists.map((list) => {
+        {newLists.map((list, index) => {
           return (
-            <Fragment key={list.id}>
+            <Fragment key={index}>
               {checkDate(list.date) ? (
                 <s.Datelist>
                   {list.day}, {list.date}
