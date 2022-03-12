@@ -7,6 +7,7 @@ import Chart from "./pages/chart";
 import getUserData from "./utils/getUserData";
 import { init } from "./store/incomeExpeditureReducer";
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 const Container = styled.div`
   width: 100vw;
@@ -18,10 +19,12 @@ const Container = styled.div`
 `;
 
 const App = () => {
+  const dispatch = useDispatch();
+
   useEffect(() => {
     (async function getData() {
       const list = await getUserData();
-      init(list);
+      dispatch(init({ list }));
     })();
   }, []);
 

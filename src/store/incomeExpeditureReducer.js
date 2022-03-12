@@ -8,7 +8,7 @@ export const incomeExpeditureReducer = createSlice({
   reducers: {
     init: (state, action) => {
       const { list } = action.payload;
-      state.list = list;
+      state.list.push(list);
     },
 
     income: (state, action) => {
